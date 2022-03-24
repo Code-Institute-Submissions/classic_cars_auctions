@@ -26,10 +26,10 @@
     {% block corejs %}
     <script src="https://kit.fontawesome.com/d3a55e8efe.js" crossorigin="anonymous"></script>
     <link
-      href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:ital,wght@0,400;0,700;1,100;1,300;1,400;1,500;1,700&display=swap"
-      rel="stylesheet">
+        href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:ital,wght@0,400;0,700;1,100;1,300;1,400;1,500;1,700&display=swap"
+        rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
@@ -106,6 +106,74 @@
 
     {% block content %}
     {% endblock %}
+
+    <footer>
+        <div class="footer-wrapper mb-sm-5">
+            <div class="footer-container py-4">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="footer-header"><a href="{% url 'home' %}">CCA<span><small>Classic Cars
+                                        Auctions</small></span></a></h5>
+                        <p class="text-justify">Classic Car Auction brings you the energy and excitement of a live
+                            classic car auction! We
+                            assemble some of the finest collector cars for sale for you to bid on and take home to your
+                            garage. See how
+                            easy it is to register and buy with us! </p>
+                    </div>
+                </div>
+                <div class="row mb-5 mb-sm-1">
+                    <img class="footer-img" src="{% static 'images/footer-img.png' %}" alt="logo">
+                    <div class="col col-10 offset-sm-2">
+                        <ul class="row offset-1 list-unstyled">
+                            <li class="col col-12 col-sm-2 mr-sm-2"><a class="text-danger"
+                                    href="{% url 'home' %}"><strong>Home</strong> </a></li>
+                            <li class="col col-12 col-sm-2 mr-sm-2"><a class="text-danger"
+                                    href="#"><strong>Auctions</strong> </a></li>
+                            {% if request.user.is_authenticated %}
+                            <li class="col-12 col-sm-2 mr-sm-2"><a class="text-danger"
+                                href="#"><strong>Profile</strong></a></li>
+                            <li class="col-12 col-sm-2 mr-sm-2"><a class="text-danger"
+                                    href="#"><strong>Logout</strong></a></li>
+                            {% else %}
+                            <li class="col col-12 col-sm-2 mr-sm-2"><a class="text-danger"
+                                    href="#"><strong>Register</strong></a></li>
+                            <li class="col col-12 col-sm-2 mr-sm-2"><a class="text-danger"
+                                    href="#"><strong>Login</strong></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                    <div class="col col-10 offset-1 offset-sm-0">
+                        <ul class="row list-unstyled">
+                            <li class="col col-12 col-sm-5 col-lg-3"><i class="fas fa-phone-alt"></i> 001 000177</li>
+                            <li class="col col-12 col-sm-6 col-lg-4"><i class="fas fa-paper-plane"></i>
+                                classic_cars@cca.com</li>
+                            <li class="col col-12 col-sm-8 ofsset-sm-1 col-lg-5 offset-lg-0 mt-2 mt-lg-0"><i
+                                    class="fas fa-map-marker-alt"></i> 9 Mount Julia Avenue Dublin 16</li>
+                        </ul>
+
+                    </div>
+                    <div class="col col-10 offset-2 col-sm-4 offset-sm-5 mr-4 mb-3">
+                        <ul class="row list-unstyled">
+                            <li class="col-2 col-sm-1"><a href="#"><i
+                                        class="fab fa-facebook-f text-danger fs-4"></i></a></li>
+                            <li class="col-2 col-sm-1"><a href="#"><i class="fab fa-twitter text-danger fs-4"></i></a>
+                            </li>
+                            <li class="col-2 col-sm-1"><a href="#"><i class="fab fa-youtube text-danger fs-1"></i></a>
+                            </li>
+                            <li class="col-2 col-sm-1"><a href="#"><i
+                                        class="fab fa-instagram-square text-danger fs-4"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-10 offset-1 ">
+                        <p class="mb-0 copy-right">&copy; Copyrights. All rights reserved.<a href="#">Classic Car
+                                Auctions</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     {% block postloadjs %}
     {% endblock %}
