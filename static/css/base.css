@@ -1,0 +1,70 @@
+body {
+    
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    color: #000;
+}
+
+a:hover {
+    color: #fff;
+}
+
+.no-margin {
+    margin: 0px !important;
+}
+
+.header{
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.block {
+    display: block;
+}
+
+/* font-family: 'Lobster', cursive;
+font-family: 'Roboto', sans-serif; */
+
+/* main header */
+.main-header {
+    background-color: rgb(201, 40, 40);
+    text-align: left;
+    line-height: 1;
+}
+
+
+.logo-abbreviation {
+    font-size: 70px !important;
+    font-weight: 700;
+    color: #fff;
+    font-weight: 600;
+    display: block;
+    margin: 0;
+
+}
+
+.logo-text {
+    color: #fff;
+    font-family: 'Lobster', sans-serif;
+    font-weight: 400;
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin: 0;
+    margin-left: 5px;
+}
+
+.main-header a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+
+@media (min-width: 768px) {
+
+    /* main header */
+
+    .main-header {
+        text-align: center;
+        padding-bottom: 15px;
+    }
+}
