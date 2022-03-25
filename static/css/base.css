@@ -4,6 +4,7 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     color: #000;
+    background-color: #f5f3f4;
 }
 
 a:hover {
@@ -106,10 +107,50 @@ font-family: 'Roboto', sans-serif; */
     letter-spacing: 2px;
 }
 
+/* banner */
+
+/* header-image */
+
+.banner {
+    background: -webkit-linear-gradient(#6e6c6d, #41494d), url("/static/images/home-img.jpg");
+    background-blend-mode: multiply;
+    background-position: left;
+    background-size: cover;
+    width: 100%;
+    height: 350px;
+}
+
+.banner h1 {
+    top: 100px;
+    color: #fff;
+    padding: 0 20px;
+    
+}
+
+.banner h1 span {
+    font-family: 'Lobster', cursive;
+    display: block;
+}
+
+.banner p {
+    font-size: 16px;
+}
+
+/* welcome */
+
+.welcome-header h2, .how-to-bid-header h3, .guarantee-header h3 {
+    color: #cc3217;
+}
+
+#welcome p {
+    color: #212529;
+    margin-bottom: 10px;
+}
+
+
 /* footer */
 
 footer {
-    /* background: -webkit-linear-gradient(rgba(231, 133, 76, 0.8), rgba(19, 18, 18, 0.8)); */
     width: 100%;
 
 }
@@ -196,9 +237,13 @@ footer li i {
 
 /* media queries */
 
-
-
  @media (min-width: 320px) and (max-width: 568px)  {
+
+    /* banner */
+
+    .banner h1{
+        font-size: 32px;
+    }
 
     /* footer */
 
@@ -206,6 +251,8 @@ footer li i {
         display: block;
     }
 } 
+
+
 @media (min-width: 768px) {
 
     /* main header */
@@ -244,6 +291,18 @@ footer li i {
         width: 80%;
     }
 
+     /* welcome section */
+
+     /* .vert-img {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .hor-img {
+        display: none;
+    } */
+
      /* footer */
 
      .footer-wrapper {
@@ -254,4 +313,33 @@ footer li i {
         width: 90%;
     }
 }
+
+/* @media (min-width: 992px){
+
+    /* welcome section */
+
+    /* .vert-img {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .hor-img {
+        display: none;
+    }
+} */ 
+
+/* @media (min-width: 1171px) {
+
+     /* welcome section */
+     
+    /* .vert-img {
+        width: 100%;
+        display: block;
+    }
+    
+    .hor-img {
+        display: none;
+    }
+} */ 
 
