@@ -45,6 +45,10 @@
     {% block extra_js %}
     {% endblock %}
 
+    {% block core_favicon %}
+    <link rel=" shortcut icon" type="image.png" href="{% static 'images/favicon.ico' %}" />
+    {% endblock %}
+
     <title>Boutique Ado {% block extra_title %}{% endblock %}</title>
 </head>
 
@@ -113,7 +117,7 @@
                 <div class="row">
                     <div class="col">
                         <h5 class="footer-header"><a href="{% url 'home' %}">CCA<span>Classic Cars
-                                        Auctions</span></a></h5>
+                                    Auctions</span></a></h5>
                         <p class="text-justify">Classic Car Auction brings you the energy and excitement of a live
                             classic car auction! We
                             assemble some of the finest collector cars for sale for you to bid on and take home to your
@@ -131,7 +135,7 @@
                                     href="#"><strong>Auctions</strong> </a></li>
                             {% if request.user.is_authenticated %}
                             <li class="col-12 col-sm-2 mr-sm-2"><a class="text-danger"
-                                href="#"><strong>Profile</strong></a></li>
+                                    href="#"><strong>Profile</strong></a></li>
                             <li class="col-12 col-sm-2 mr-sm-2"><a class="text-danger"
                                     href="#"><strong>Logout</strong></a></li>
                             {% else %}
