@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+<section id="auctions" class="py-5">
+    {% for car in cars %}
+    <div class="car mb-5">
+        <div class="row mx-0 px-0">
+            <h2 class="col col-12  mt-3 text-uppercase"> {{ car.make }} <span>{{ car.model }}</span></h2>
+            <div class="col col-12">
+                <div class="row">
+                    <div class="col col-12  col-md-6 car-img-container">
+                        <img src="{{ car.image.url }}" alt="">
+                    </div>
+                    <div class="col col-12 col-sm-10 offset-sm-1 offset-md-0 col-md-6 my-3">
+                        <h5 class="footer-header"><a href="{% url 'home' %}">CCA<span>Classic Cars
+                                    Auctions</span></a></h5>
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="my-1">First Registred<span
+                                        class="text-info text-capitalize d-block">{{ car.firstRegistred }}</span></p>
+                            </div>
+                            <div class="col-6">
+                                <p class="my-1">Color<span
+                                        class="text-info text-capitalize d-block">{{ car.color }}</span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="my-1">Odometer<span class="text-info d-block">{{ car.odometer }} km</span></p>
+                            </div>
+                            <div class="col-6">
+                                <p class="my-1">Transmission<span
+                                        class="text-info text-capitalize d-block">{{ car.transmission }}</span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="my-1">Reserved Price<span
+                                        class="text-info d-block">{{ car.reservedPrice }}</span></p>
+                            </div>
+                            <div class="col-6">
+                                <p class="my-1">Fuel Type<span
+                                        class="text-info text-capitalize d-block">{{ car.fuelType }}</span></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="my-1">Auction Staring<span
+                                        class="text-info d-block">{{ car.timeStart }}</span></p>
+                            </div>
+                            <div class="col-6">
+                                <p class="my-1">Auction Ending<span class="text-info d-block">{{ car.timeEnd }}</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center w-100">
+                <a class="btn btn-lg red-background  my-4 text-light" href="{% url 'auction_detail' car.id %}">View This
+                    Auction</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</section>
+{% endblock %}

@@ -4,5 +4,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('auctions', views.all_cars, name='cars'),
+    path('all_auctions', views.all_auctions, name='all_auctions'),
+    path('<car_id>', views.auction_detail, name='auction_detail'),
 ]

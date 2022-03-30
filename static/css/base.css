@@ -4,7 +4,7 @@ body {
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
     color: #000;
-    background-color: #f5f3f4;
+    background-color: #f5f5f5;
     box-sizing: border-box;
 }
 
@@ -38,8 +38,8 @@ a:hover {
     border-left: 1px solid rgb(201, 40, 40); 
 }
 
-.ul-sm-d-none {
-    display: block;
+.romove-border {
+    border: none;
 }
 /* font-family: 'Lobster', cursive;
 font-family: 'Roboto', sans-serif; */
@@ -205,25 +205,28 @@ font-family: 'Roboto', sans-serif; */
     letter-spacing: 2px;
 }
 
-/* all cars */
+/*auctions */
 
 #all-cars {
+    width: 100%;
+}
+
+
+
+.car {
     width: 80%;
     margin: 0 auto;
-}
-
-.car-card {
     border: rgb(201, 40, 40) 2px solid;
     border-radius: 6px;
-    background-color:#f5f5f5;
+    background-color:#e9e7e7;
 }
 
-.car-card h2 {
+.car h2 {
     color: rgb(201, 40, 40);
     font-size: 24px;
 }
 
-.car-card p {
+.car p {
     font-size: 15px;
     font-family: 700;
     overflow-wrap: break-word;
@@ -242,12 +245,17 @@ font-family: 'Roboto', sans-serif; */
     border-radius: 6px;
 }
 
+/* auction detail */
+
+#auction-detail .car {
+    border: none;
+}
+
 
 /* footer */
 
 footer {
     width: 100%;
-
 }
 
 .footer-wrapper {
