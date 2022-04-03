@@ -9,7 +9,7 @@ class Car(models.Model):
     firstRegistred = models.IntegerField()
     fuelType = models.CharField(max_length=50)
     odometer = models.IntegerField(null=True, blank=True)
-    transmission = models.CharField(max_length=50, null=True, blank=True)
+    transmission = models.CharField(max_length=50)
     bodyType = models.CharField(max_length=50, null=True, blank=True)
     color = models.CharField(max_length=50, null=True, blank=True)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
@@ -20,7 +20,7 @@ class Car(models.Model):
     timeEnd = models.DateTimeField()
 
     def __str__(self):
-        return str(self.make + " " + self.model)
+        return str(self.make)
 
 
 class Bidder(models.Model):
