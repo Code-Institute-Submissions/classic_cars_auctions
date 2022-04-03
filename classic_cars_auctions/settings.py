@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'home',
     'auctions',
-    'django-filters',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

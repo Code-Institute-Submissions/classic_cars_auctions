@@ -3,10 +3,13 @@ from django.contrib import messages
 from .models import Car
 
 
+
 def all_auctions(request):
     """ A view to return all cars and for sorting cars """
 
     cars = Car.objects.all()
+    filter = Car
+
 
     context = {
         'cars': cars,
