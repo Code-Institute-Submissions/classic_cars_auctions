@@ -1,18 +1,21 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
+import datetime
 from .models import Car
-
+from .filters import CarFilter
 
 
 def all_auctions(request):
     """ A view to return all cars and for sorting cars """
 
     cars = Car.objects.all()
-    filter = Car
 
+    auctions_filter = CarFilter(request.GET, queryset=cars)
+    cars = auctions_filter.qs
 
     context = {
         'cars': cars,
+        'auctions_filter': auctions_filter,
     }
 
     return render(request, 'auctions/auctions.html', context)
@@ -21,6 +24,8 @@ def all_auctions(request):
 def auction_detail(request, car_id):
     """ A view to return car and auctions detail """
     car = get_object_or_404(Car, pk=car_id)
+
+    
 
     context = {
         'car': car,

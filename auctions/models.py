@@ -7,9 +7,17 @@ class Car(models.Model):
     make = models.CharField(max_length=100)
     model = models.CharField(max_length=100)
     firstRegistred = models.IntegerField()
+    # FUELTYPE = (
+    #     ('diesel', 'diesel')
+    #     ('petrol', 'petrol')
+    # )
     fuelType = models.CharField(max_length=50)
     odometer = models.IntegerField(null=True, blank=True)
     transmission = models.CharField(max_length=50)
+    TRANSMISSION = (
+        # ('automatic', 'automatic')
+        # ('manual', 'manual')
+    )
     bodyType = models.CharField(max_length=50, null=True, blank=True)
     color = models.CharField(max_length=50, null=True, blank=True)
     image_url = models.URLField(max_length=1024, null=True, blank=True)

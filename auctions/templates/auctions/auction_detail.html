@@ -53,11 +53,42 @@
           </div>
         </div>
       </div>
-      <div class="col col-10 offset-1 mb-3">
+      <div class="col col-10 offset-1">
         <p class="text-info mb-0 mt-4 mb-2 font-weight-bold">Description</p>
         <p class="text-justify">{{ car.description }}</p>
       </div>
     </div>
+    <div class="bidding-panel">
+      {% if request.user.is_authenticated %}
+      <h3 class="header text-center text-info">Bidding Panel</h3>
+      <div class="row">
+        <div class="col col-10 col-sm-6 col-lg-4 offset-1 offset-sm-3 offset-lg-4 bg-light mb-1 border border-dark">
+          <p>Time Staring : {{ car.timeStart }}</p>
+        </div>
+        <div class="col col-10 col-sm-6 col-lg-4 offset-1 offset-sm-3 offset-lg-4 bg-light mb-1 border border-dark">
+          <p>Time remaining : {{ car.timeStart }}</p>
+        </div>
+        <div class="col col-10 col-sm-6 col-lg-4 offset-1 offset-sm-3 offset-lg-4 bg-light mb-1 border border-dark">
+          <p>Closing Date: {{ car.timeStart }}</p>
+        </div>
+         <div class="col col-10 col-sm-6 col-lg-4 offset-1 offset-sm-3 offset-lg-4 bg-light mb-1 border border-dark">
+          <p>Number of bids: 4</p>
+        </div>
+          <div class="col col-10 col-sm-6 col-lg-4 offset-1 offset-sm-3 offset-lg-4 bg-light mb-1 border border-dark">
+          <form action="">
+            <label for="bid">Place Your Bid</label>
+            <input type="number" name="bid" id="bid" placeholder="">
+            <button class="" type="submit">Bid</button>
+          </form>
+        </div>
+        </div>
+
+      </div>
+
+      {% else %}
+      <h4 class="header text-center text-info"><a href=""> Please Sign in to Bid</a></h4>
+      {% endif %}
+      
   </div>
 </section>
 {% endblock %}

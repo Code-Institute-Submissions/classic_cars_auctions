@@ -27,7 +27,11 @@ a:hover {
 }
 
 .red-background {
-    background-color: rgb(201, 40, 40);;
+    background-color: rgb(201, 40, 40);
+}
+
+.text-red {
+    color: rgb(201, 40, 40);
 }
 
 .bottom-border {
@@ -40,6 +44,18 @@ a:hover {
 
 .romove-border {
     border: none;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }
 /* font-family: 'Lobster', cursive;
 font-family: 'Roboto', sans-serif; */
@@ -207,6 +223,17 @@ font-family: 'Roboto', sans-serif; */
 
 /*auctions */
 
+/* auction-search  */
+.auction-search {
+    width: 80%;
+    margin: 0 auto;
+    border: 2px solid #cc3217;
+    border-radius: 6px;
+}
+.auction-search input {
+    width: 70%;
+}
+
 #all-cars {
     width: 100%;
 }
@@ -356,9 +383,10 @@ footer li i {
 }
 
 @media (max-width: 330px) {
-    .ul-sm-d-none {
+    /* .ul-sm-d-none {
         display: none !important;
-    }
+    } */
+   
 }
 
 
@@ -370,6 +398,7 @@ footer li i {
         font-size: 32px;
     }
 
+    
     /* footer */
 
     .footer-img {
