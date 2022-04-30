@@ -25,4 +25,5 @@ class CarFilter(django_filters.FilterSet):
     class Meta:
         """Filter Meta class"""
         model = Car
-        fields = ['make', 'firstRegistred', 'fuelType', 'reservedPrice']
+        fields = ['make', 'firstRegistred', 'fuelType', 'reservedPrice',
+                  'description']

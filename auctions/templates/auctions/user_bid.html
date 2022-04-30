@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+<section id="add_bid" class="my-5">
+  <h1 class="header text-center pt-5">Place Your Bid</h1>
+  <div class="col col-10 offset-1 mt-3 legal-ingo">
+    <p class="text-justify"><span class="text-danger font-weight-bold mr-3">Please note:</span>If your bid is the
+      winning bid, you are legally committed to buying this item. Otherwise, you will be banned from <span
+        class="text-danger"> Classic Cars Auction</span>. A deposit of 10% of the total amount should be paid online
+      through our payment system within 24h of the auction's end.</p>
+  </div>
+  <div class="col col-10 col-sm-6 col-lg-4 offset-1 offset-sm-3 offset-lg-4 font-weight-bold mt-4 text-info">The next bid must be
+    at least €<span class="text-danger"> {{ min_bid }}</span>.</div>
+
+  <div id="biding-form" class="bid-form text-center pb-5">
+    <form action="get_user_bid" method="POST" class="mt-3">
+      {% csrf_token %}
+      {{ form }}
+      <button class="btn text-light red-background border border-dark mt-4" type="submit">Add</button>
+    </form>
+  </div>
+</section>
+
+{% endblock %}

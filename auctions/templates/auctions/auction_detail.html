@@ -11,7 +11,7 @@
       <div class="col col-12">
         <div class="row">
           <div class="col col-12  col-md-6 car-img-container">
-            <img src="{{ car.image.url }}" alt="">
+            <img src="{{ car.image.url }}" alt="car image">
           </div>
           <div class="col col-12 col-sm-10 offset-sm-1 offset-md-0 col-md-6 my-3">
             <h5 class="footer-header"><a href="{% url 'home' %}">CCA<span>Classic Cars
@@ -36,18 +36,10 @@
             </div>
             <div class="row">
               <div class="col-6">
-                <p class="my-1">Reserved Price<span class="text-info d-block">{{ car.reservedPrice }}</span></p>
+                <p class="my-1">Reserved Price<span class="text-info d-block">{{ car.reservedPrice }} €</span></p>
               </div>
               <div class="col-6">
                 <p class="my-1">Fuel Type<span class="text-info text-capitalize d-block">{{ car.fuelType }}</span></p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6">
-                <p class="my-1">Auction Staring<span class="text-info d-block">{{ car.timeStart }}</span></p>
-              </div>
-              <div class="col-6">
-                <p class="my-1">Auction Ending<span class="text-info d-block">{{ car.timeEnd }}</span></p>
               </div>
             </div>
           </div>
@@ -58,37 +50,44 @@
         <p class="text-justify">{{ car.description }}</p>
       </div>
     </div>
-    <div class="bidding-panel">
-      {% if request.user.is_authenticated %}
+    <div class="bidding-panel pb-4">
       <h3 class="header text-center text-info">Bidding Panel</h3>
       <div class="row">
-        <div class="col col-10 col-sm-6 col-lg-4 offset-1 offset-sm-3 offset-lg-4 bg-light mb-1 border border-dark">
-          <p>Time Staring : {{ car.timeStart }}</p>
+        {% if  auction_is_on %}
+        <div class="col col-10 col-sm-6  offset-1 offset-sm-3  bg-light mb-1 border border-dark panel-item">
+          <p class="text-center">Closing Date: <span class="text-danger font-weight-bold mx-1">{{ car.timeEnd|date:'G:i - D/m' }}</span></p>
         </div>
-        <div class="col col-10 col-sm-6 col-lg-4 offset-1 offset-sm-3 offset-lg-4 bg-light mb-1 border border-dark">
-          <p>Time remaining : {{ car.timeStart }}</p>
+          {% if request.user.is_authenticated %}
+          <div class="col col-10 col-sm-6  offset-1 offset-sm-3  min-bid bg-light mb-1 border border-dark text-center panel-item"><p> Minimum Bid<span class="text-danger font-weight-bold mx-1"> {{ min_bid }}</span>€</p></div>
+            <div class="col col-10 col-sm-6  offset-1 offset-sm-3  bg-light mb-1 border border-dark">
+                <h4 class="text-info font-weight-bold mt-3">Biding History</h4>
+                {% if bids|length > 0 %}
+                  {% for bid in bids %}
+                    <p class="border border-dark text-center"> <span class="text-danger mr-2">{{ bid.amount }}€</span> At {{bid.time|date:'G:i - D'}}</p>
+                  {% endfor %}
+                {% else %}
+                  <p>No Bids yet for this item</p>
+                {% endif %}
+          </div> 
+               <div class="col col-10 col-sm-6  offset-1 offset-sm-3 text-center my-3">
+               <a class="btn btn-lg red-background text-light border border-dark" href="{% url 'get_user_bid' %}"> Place a Bid</a>
+              </div>
+          {% else %}
+          <div class="col col-10 col-sm-6  offset-1 offset-sm-3  my-3">
+            <h4 class="header text-center text-info"><a href=""> Please Sign in to Bid</a></h4>
+            </div>
+          {% endif %}
         </div>
-        <div class="col col-10 col-sm-6 col-lg-4 offset-1 offset-sm-3 offset-lg-4 bg-light mb-1 border border-dark">
-          <p>Closing Date: {{ car.timeStart }}</p>
+        {% else %}
+        <div class="col col-10 col-sm-6  offset-1 offset-sm-3  bg-light mb-1 border border-dark panel-item">
+          <p class="text-center">Starting Date: <span class="text-danger font-weight-bold mx-1">{{ car.timeEnd|date:'G:i - D/m' }}</span></p>
         </div>
-         <div class="col col-10 col-sm-6 col-lg-4 offset-1 offset-sm-3 offset-lg-4 bg-light mb-1 border border-dark">
-          <p>Number of bids: 4</p>
-        </div>
-          <div class="col col-10 col-sm-6 col-lg-4 offset-1 offset-sm-3 offset-lg-4 bg-light mb-1 border border-dark">
-          <form action="">
-            <label for="bid">Place Your Bid</label>
-            <input type="number" name="bid" id="bid" placeholder="">
-            <button class="" type="submit">Bid</button>
-          </form>
-        </div>
+        <div class="col col-10 col-sm-6  offset-1 offset-sm-3 bg-light mb-1 border border-dark panel-item">
+          <p class="text-center">Closing Date: <span class="text-danger font-weight-bold mx-1">{{ car.timeEnd|date:'G:i - D/m' }}</span></p>
         </div>
 
+        {% endif %}
       </div>
-
-      {% else %}
-      <h4 class="header text-center text-info"><a href=""> Please Sign in to Bid</a></h4>
-      {% endif %}
-      
-  </div>
+     
 </section>
 {% endblock %}

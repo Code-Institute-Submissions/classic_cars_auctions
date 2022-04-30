@@ -10,31 +10,31 @@
         <form action="all_auctions" method="get" class="bg-secondary">
             <h1 class="header text-light ml-5 pt-3">Car search</h1>
             <div class="row mx-0 my-0 px-0 py-0">
-                <div class="col-8 offset-2 col-sm-4">
+                <div class="col-10 offset-2 col-sm-4">
                     <p class="mb-0 text-light">Make</p>
                     {{ auctions_filter.form.make}}
                 </div>
-                <div class="col-8 offset-2 col-sm-4 offset-sm-1">
+                <div class="col-10 offset-2 col-sm-4 offset-sm-1">
                     <p class="mb-0 text-light">Fuel type</p>
                     {{ auctions_filter.form.fuel_type}}
                 </div>
-                <div class="col-8 offset-2 col-sm-4 mt-2">
+                <div class="col-10 offset-2 col-sm-4 mt-2">
                     <p class="mb-0 text-light">Min Age</p>
                     {{ auctions_filter.form.year_gt }}
                 </div>
-                <div class="col-8 offset-2 col-sm-4 offset-sm-1 mt-2">
+                <div class="col-10 offset-2 col-sm-4 offset-sm-1 mt-2">
                     <p class="mb-0 text-light">Max Age</p>
                     {{ auctions_filter.form.year_lt }}
                 </div>
-                <div class="col-8 offset-2 col-sm-4 offset-sm-2 mt-2">
+                <div class="col-10 offset-2 col-sm-4 offset-sm-2 mt-2">
                     <p class="mb-0 text-light">Min Reserved Price</p>
                     {{ auctions_filter.form.reserved_price_gt }}
                 </div>
-                <div class="col-8 offset-2 col-sm-4 offset-sm-1 mt-2">
+                <div class="col-10 offset-2 col-sm-4 offset-sm-1 mt-2">
                     <p class="mb-0 text-light">Max Reserved Price</p>
                     {{ auctions_filter.form.reserved_price_lt }}
                 </div>
-                <div class="col-8 offset-2 col-sm-5 offset-sm-4 mt-2">
+                <div class="col-10 offset-2 col-sm-5 offset-sm-4 mt-2">
                     <p class="mb-0 text-light">Enter A Key Word</p>
                     {{ auctions_filter.form.description }}
                 </div>
@@ -79,7 +79,7 @@
                         <div class="row">
                             <div class="col-6">
                                 <p class="my-1">Reserved Price<span
-                                        class="text-info d-block">{{ car.reservedPrice }}</span></p>
+                                        class="text-info d-block">{{ car.reservedPrice }} €</span></p>
                             </div>
                             <div class="col-6">
                                 <p class="my-1">Fuel Type<span
@@ -89,10 +89,10 @@
                         <div class="row">
                             <div class="col-6">
                                 <p class="my-1">Auction Staring<span
-                                        class="text-info d-block">{{ car.timeStart }}</span></p>
+                                        class="text-info d-block">{{ car.timeStart|date:'G:i - D/m' }}</span></p>
                             </div>
                             <div class="col-6">
-                                <p class="my-1">Auction Ending<span class="text-info d-block">{{ car.timeEnd }}</span>
+                                <p class="my-1">Auction Ending<span class="text-info d-block">{{ car.timeEnd|date:'G:i - D/m' }}</span>
                                 </p>
                             </div>
                         </div>
