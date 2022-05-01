@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
-# from django.contrib import messages
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib import messages
 from django.utils import timezone
 from .models import Car, Bid
 from .filters import CarFilter
@@ -49,6 +50,9 @@ def auction_detail(request, car_id):
     request.session['car_id'] = car_id
     request.session['min_bid'] = min_bid
 
+    if current_date >= end_time:
+        winner_bid(car_id)
+
     context = {
         'car': car,
         'auction_is_on': auction_is_on,
@@ -66,23 +70,34 @@ def get_user_bid(request):
     user_bid = 0
     if request.user.is_authenticated:
         user_id = request.user.id
-    min_bid = request.session['min_bid']
     car_id = request.session['car_id']
-
     car = get_object_or_404(Car, id=car_id)
+    bids = Bid.objects.filter(car_id=car_id)
+    
+    if bids:
+        highest_bid = Bid.objects.filter(car_id=car_id).order_by('-amount')[0].amount
+        min_bid = highest_bid + 50
+    else:
+        min_bid = car.reservedPrice - 100
 
     current_date = timezone.now()
 
     form = BidForm()
     if request.method == 'POST':
-        user_bid = int(request.POST['user_bid'])
+        user_bid = request.POST['user_bid']
 
-    if user_bid >= int(min_bid):
-        new_bid = Bid(car=car, user_id=user_id,  amount=user_bid,
-                      time=current_date, winnerBid=False)
-        new_bid.save()
-    else:
-        print("Your bid should be equal or superior to {% min_bid %}")
+    if user_bid:
+        bid = int(user_bid)
+        if bid >= int(min_bid):
+            new_bid = Bid(car=car, user_id=user_id,  amount=bid,
+                          time=current_date, winnerBid=False)
+            new_bid.save()
+            messages.success(request, f'Your bid {bid} € was successfully'
+                             ' added')
+            return redirect('get_user_bid')
+        else:
+            messages.error(request, f'Your bid should be equal to {min_bid}'
+                                    ' or superior')
 
     context = {
         'form': form,
@@ -91,17 +106,15 @@ def get_user_bid(request):
     return render(request, 'auctions/user_bid.html', context)
 
 
-# def winner_bid(car_id):
-#     """function to specify winner bid"""
-#     car = get_object_or_404(Car, id=car_id)
-#     bids = list(Bid.objects.filter(car_id=car_id))
-#     if len(bids) != 0:
-#         win_bid = highest_bid(bids)
-#     if win_bid > car.reservedPrice:
-#         new_bid = Bid(car=car, user_id=user_id,  amount=win_bid,
-#                       time=current_date,
-#                          winnerBid=False)
-#         new_bid.save()
+def winner_bid(car_id):
+    """function to specify winner bid"""
+    car = get_object_or_404(Car, id=car_id)
+    highest_bid = Bid.objects.filter(car_id=car_id).order_by('-amount')[0].amount
+    
+    if highest_bid:
+        if int(highest_bid) > car.reservedPrice:
+            Bid.objects.filter(car_id=car_id).update(winnerBid=True)
+            
 
 # def bid(request, auction_id):
 #     """ A view to bid """
