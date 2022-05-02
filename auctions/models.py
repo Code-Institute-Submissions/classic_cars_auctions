@@ -20,7 +20,7 @@ class Car(models.Model):
     timeEnd = models.DateTimeField()
 
     def __str__(self):
-        return str(self.id)
+        return str(self.make)
 
 
 class Bidder(models.Model):
@@ -40,4 +40,4 @@ class Bid(models.Model):
     winnerBid = models.BooleanField()
 
     def __str__(self):
-        return str(self.user)
+        return str(self.car)

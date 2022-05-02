@@ -55,7 +55,7 @@
       <div class="row">
         {% if  auction_is_on %}
         <div class="col col-10 col-sm-6  offset-1 offset-sm-3  bg-light mb-1 border border-dark panel-item">
-          <p class="text-center">Closing Date: <span class="text-danger font-weight-bold mx-1">{{ car.timeEnd|date:'G:i - D/m' }}</span></p>
+          <p class="text-center">Closing Date: <span class="text-danger font-weight-bold mx-1">{{ car.timeEnd|date:'G:i - d/M' }}</span></p>
         </div>
           {% if request.user.is_authenticated %}
           <div class="col col-10 col-sm-6  offset-1 offset-sm-3  min-bid bg-light mb-1 border border-dark text-center panel-item"><p> Minimum Bid<span class="text-danger font-weight-bold mx-1"> {{ min_bid }}</span>€</p></div>
@@ -63,7 +63,7 @@
                 <h4 class="text-info font-weight-bold mt-3">Biding History</h4>
                 {% if bids|length > 0 %}
                   {% for bid in bids %}
-                    <p class="border border-dark text-center"> <span class="text-danger mr-2">{{ bid.amount }}€</span> At {{bid.time|date:'G:i - D'}}</p>
+                    <p class="border border-dark text-center"> <span class="text-danger mr-2">{{ bid.amount }}€</span> At {{bid.time|date:'G:i - d - M'}}</p>
                   {% endfor %}
                 {% else %}
                   <p>No Bids yet for this item</p>
@@ -80,14 +80,13 @@
         </div>
         {% else %}
         <div class="col col-10 col-sm-6  offset-1 offset-sm-3  bg-light mb-1 border border-dark panel-item">
-          <p class="text-center">Starting Date: <span class="text-danger font-weight-bold mx-1">{{ car.timeEnd|date:'G:i - D/m' }}</span></p>
+          <p class="text-center">Starting Date: <span class="text-danger font-weight-bold mx-1">{{ car.timeEnd|date:'G:i - d/M' }}</span></p>
         </div>
         <div class="col col-10 col-sm-6  offset-1 offset-sm-3 bg-light mb-1 border border-dark panel-item">
-          <p class="text-center">Closing Date: <span class="text-danger font-weight-bold mx-1">{{ car.timeEnd|date:'G:i - D/m' }}</span></p>
+          <p class="text-center">Closing Date: <span class="text-danger font-weight-bold mx-1">{{ car.timeEnd|date:'G:i - d/M' }}</span></p>
         </div>
 
         {% endif %}
       </div>
-     
 </section>
 {% endblock %}

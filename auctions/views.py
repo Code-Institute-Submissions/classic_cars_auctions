@@ -1,7 +1,7 @@
-from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.utils import timezone
+from datetime import timedelta
 from .models import Car, Bid
 from .filters import CarFilter
 from .forms import BidForm
@@ -45,13 +45,13 @@ def auction_detail(request, car_id):
         highest_bid = Bid.objects.filter(car_id=car_id).order_by('-amount')[0].amount
         min_bid = highest_bid + 50
     else:
-        min_bid = car.reservedPrice - 100
+        min_bid = car.reservedPrice - 300
 
     request.session['car_id'] = car_id
     request.session['min_bid'] = min_bid
 
-    if current_date >= end_time:
-        winner_bid(car_id)
+    # if current_date >= end_time:
+    #     winner_bid(car_id)
 
     context = {
         'car': car,
@@ -73,7 +73,7 @@ def get_user_bid(request):
     car_id = request.session['car_id']
     car = get_object_or_404(Car, id=car_id)
     bids = Bid.objects.filter(car_id=car_id)
-    
+
     if bids:
         highest_bid = Bid.objects.filter(car_id=car_id).order_by('-amount')[0].amount
         min_bid = highest_bid + 50
@@ -106,21 +106,23 @@ def get_user_bid(request):
     return render(request, 'auctions/user_bid.html', context)
 
 
-def winner_bid(car_id):
+def winner_bid():
     """function to specify winner bid"""
-    car = get_object_or_404(Car, id=car_id)
-    highest_bid = Bid.objects.filter(car_id=car_id).order_by('-amount')[0].amount
-    
-    if highest_bid:
-        if int(highest_bid) > car.reservedPrice:
-            Bid.objects.filter(car_id=car_id).update(winnerBid=True)
-            
+    print('yyyy')
+    # car_id = request.session['car_id']
+    # current_date = timezone.now()
+    # car = get_object_or_404(Car, id=car_id)
+    # bids = Bid.objects.filter(car_id=car_id)
+    # new_auction_end = car.timeEnd + timedelta(hours=48)
+    # if current_date >= car.timeEnd:
+    #     if bids:
+    #         highest_bid = Bid.objects.filter(car_id=car_id).order_by('-amount')[0]
+    #         highest_bid_amount = highest_bid.amount
+    #         highest_bid_id = highest_bid.id
 
-# def bid(request, auction_id):
-#     """ A view to bid """
-    # user_bid = None
-    # if request.method == 'POST':
-    #     bid = Bid(car=)
-    #     user_bid = int(request.POST.get('bid'))
-    # print(auction_id)
-    # return render(request, 'auctions/bid.html')
+    #         if highest_bid_amount > car.reservedPrice:
+    #             Bid.objects.filter(id=highest_bid_id).update(winnerBid=True)
+    #         else:
+    #             Car.objects.filter(id=car_id).update(timeEnd=new_auction_end)
+    #     else:
+    #         Car.objects.filter(id=car_id).update(timeEnd=new_auction_end)
