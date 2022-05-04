@@ -5,6 +5,7 @@
 
 {% block content %}
 
+{{ cars }}
 <section>
   <div class="banner text-center">
     <h1 class="pt-2 pt-sm-5 pt-5">CCA<span>Classic Cars Auctions</span> The Perfect Place To Buy your Classic Car</h1>
@@ -37,6 +38,19 @@
     </div> 
   </div>
   <hr class="hor-line-home my-5">
+  {% if car %}
+  <div class="sold  my-5">
+    <div class="row mx-0 bx-0">
+      <div class="col col-10 offset-1 col-md-6 offset-md-3  pt-3 Shelby">
+        <h5 class="footer-header"><a href="{% url 'home' %}">CCA<span>Classic Cars
+          Auctions</span></a></h5>
+        <img class="" src="{{ car.image.url }}" alt="{{ car.make }}">
+        <h3 class="text-center mb-2">Sold</h3>
+        <p class="text-center mb-4 text-light">{{ car.make }} {{ car.model }} Sold For {{ highest_bid }} €</p>
+      </div>
+    </div>
+  </div>
+  {% else %}
   <div class="sold  my-5">
     <div class="row mx-0 bx-0">
       <div class="col col-10 offset-1 col-md-6 offset-md-3  pt-3 Shelby">
@@ -48,6 +62,7 @@
       </div>
     </div>
   </div>
+  {% endif %}
   <hr class="hor-line-home my-5">
   <div class="row  mt-5 px-0 mx-0">
     <div class="col col-10 offset-1  col-sm-5 how-to-bid">
