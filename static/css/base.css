@@ -46,6 +46,12 @@ a:hover {
     border: none;
 }
 
+.capitlise {
+    text-transform: capitalize;
+}
+
+
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -240,7 +246,7 @@ font-family: 'Roboto', sans-serif; */
 
 
 
-.car {
+.car, #car {
     width: 80%;
     margin: 0 auto;
     border: rgb(201, 40, 40) 2px solid;
@@ -248,12 +254,12 @@ font-family: 'Roboto', sans-serif; */
     background-color:#e9e7e7;
 }
 
-.car h2 {
+.car h2, #car h2 {
     color: rgb(201, 40, 40);
     font-size: 24px;
 }
 
-.car p {
+.car p, #car p {
     font-size: 15px;
     font-family: 700;
     overflow-wrap: break-word;
@@ -274,7 +280,7 @@ font-family: 'Roboto', sans-serif; */
 
 /* auction detail */
 
-#auction-detail .car {
+#auction-detail #car {
     border: none;
 }
 
@@ -284,19 +290,27 @@ font-family: 'Roboto', sans-serif; */
 
 }
 
-/* user_bid */
+.item-sold h1 {
+    color: #cc3217;
+    font-size: 42px;
+}
+
+.item-sold .price {
+    font-size: 38px;
+}
 
 #add_bid {
     width: 80%;
     background-color: #e9e7e7;
     margin: 0 auto;
+    display: none;
 }
 
-#add_bid h1 {
+#add_bid h2 {
     color:rgb(201, 40, 40);
 }
 
-.legal-ingo p{
+.legal-info p{
     font-size: 16px;
     font-weight: 600;
 }
@@ -320,7 +334,7 @@ font-family: 'Roboto', sans-serif; */
     position: fixed;
     top: 200px;
     left: 50px;
-    z-index: 10;
+    z-index: 100;
 }
 
 .custom-toast {
@@ -376,11 +390,6 @@ font-family: 'Roboto', sans-serif; */
     border-bottom-color: #343a40 !important;
 }
 
-.bag-notification-wrapper {
-    height: 100px;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
 
 
 /* footer */
@@ -486,13 +495,6 @@ footer li i {
     
 }
 
-@media (max-width: 330px) {
-    /* .ul-sm-d-none {
-        display: none !important;
-    } */
-   
-}
-
 
  @media (min-width: 320px) and (max-width: 568px)  {
 
@@ -523,7 +525,6 @@ footer li i {
 
     .message-container {
         position: fixed;
-        top: 200px;
         left: 30%;
         z-index: 10;
     }
@@ -571,7 +572,6 @@ footer li i {
 
     .message-container {
         position: fixed;
-        top: 200px;
         left: 40%;
         z-index: 10;
     }
