@@ -9,7 +9,7 @@ class Car(models.Model):
     firstRegistred = models.IntegerField()
     fuelType = models.CharField(max_length=50)
     odometer = models.IntegerField(null=True, blank=True)
-    transmission = models.CharField(max_length=50)
+    transmission = models.CharField(max_length=50, null=True, blank=True)
     bodyType = models.CharField(max_length=50, null=True, blank=True)
     color = models.CharField(max_length=50, null=True, blank=True)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
