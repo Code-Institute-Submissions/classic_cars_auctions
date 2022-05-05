@@ -51,9 +51,17 @@
       </div>
     </div>
     <div class="bidding-panel pb-4">
-      {% if sold %}
+      {% if highest_bid_obj.winnerBid %}
       <div class="col col-10 col-sm-6  offset-1 offset-sm-3 item-sold text-center">
-        <h1 class="header text-capitalize">sold for <span class="price">{{ highest_bid }}</span><span class="text-info">€</span></h1>
+        <h1 class="header text-capitalize">sold for <span class="price">{{ highest_bid_obj.amount }}</span><span class="text-info">€</span></h1>
+      </div>
+      <div class="text-center">
+        {% if user.is_authenticated %}
+        {% if request.user.id == highest_bid_obj.user.id %}
+        <p>Congratulations, you won this Auction. The last step to secure your purchase <span class="text-danger text-capitalize">{{ car.make }} , {{ car.model }}</span>  is the payment of a 10% deposit.</p>
+        <p><a class="text-danger font-weight-bold payment_link" href="">Pay For This Item</a></p>
+        {% endif %}
+        {% endif %}
       </div>
       {% else %}
       <h3 class="header text-center text-info">Bidding Panel</h3>

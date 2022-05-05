@@ -49,10 +49,10 @@ def auction_detail(request, car_id):
     auction_is_on = current_date > start_time and current_date < end_time
 
     if bids:
-        highest_bid = Bid.objects.filter(car_id=car_id).order_by('-amount')[0].amount
-        sold = Bid.objects.filter(car_id=car_id).order_by('-amount')[0].winnerBid
-        print(sold)
-        min_bid = highest_bid + 50
+        highest_bid_obj = Bid.objects.filter(car_id=car_id).order_by('-amount')[0]
+        # sold = Bid.objects.filter(car_id=car_id).order_by('-amount')[0].winnerBid
+        # winner_bid_id = Bid.objects.filter(car_id=car_id).order_by('-amount')[0].id
+        min_bid = highest_bid_obj.amount + 50
 
     else:
         min_bid = car.reservedPrice - 300
@@ -79,9 +79,11 @@ def auction_detail(request, car_id):
         'car': car,
         'auction_is_on': auction_is_on,
         'bids': bids,
-        'min_bid':  min_bid,
-        'sold': sold,
-        'highest_bid': highest_bid,
+        'highest_bid_obj': highest_bid_obj,
+        # 'min_bid':  min_bid,
+        # 'sold': sold,
+        # 'highest_bid': highest_bid,
+        # 'winner_bid': winner_bid,
         'form': form,
     }
 
@@ -90,7 +92,6 @@ def auction_detail(request, car_id):
 
 def winner_bid(car_id):
     """function to specify winner bid"""
-    # car_id = request.session['car_id']
     current_date = timezone.now()
     car = get_object_or_404(Car, id=car_id)
     bids = Bid.objects.filter(car_id=car_id)

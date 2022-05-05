@@ -330,6 +330,10 @@ font-family: 'Roboto', sans-serif; */
     
 }
 
+.payment_link {
+    text-decoration: underline !important;
+}
+
 /* ------------------------------- bootstrap toasts */
 
 .message-container {
