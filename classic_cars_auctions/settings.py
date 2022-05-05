@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'home',
     'auctions',
     'django_filters',
+    'payment'
 ]
 
 MIDDLEWARE = [
