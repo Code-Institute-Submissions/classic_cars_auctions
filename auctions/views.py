@@ -1,7 +1,6 @@
-from django.utils import timezone
 from datetime import timedelta
+from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Car, Bid
 from .filters import CarFilter
@@ -12,6 +11,10 @@ def all_auctions(request):
     """ A view to return all cars and for sorting cars """
 
     cars = Car.objects.all()
+
+    for car in cars:
+        car_id = car.id
+        winner_bid(car_id)
 
     if request.method == 'POST':
         user_bid = request.POST['bid']
@@ -37,6 +40,7 @@ def auction_detail(request, car_id):
     if request.user.is_authenticated:
         user_id = request.user.id
     car = get_object_or_404(Car, id=car_id)
+    print(car_id)
     bids = Bid.objects.filter(car_id=car_id)
 
     current_date = timezone.now()
@@ -84,10 +88,9 @@ def auction_detail(request, car_id):
     return render(request, 'auctions/auction_detail.html', context)
 
 
-def winner_bid():
+def winner_bid(car_id):
     """function to specify winner bid"""
-    print('yyyy')
-    car_id = request.session['car_id']
+    # car_id = request.session['car_id']
     current_date = timezone.now()
     car = get_object_or_404(Car, id=car_id)
     bids = Bid.objects.filter(car_id=car_id)

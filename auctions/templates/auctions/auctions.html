@@ -1,9 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
 
-
-
 {% block content %}
+
 
 <section id="auctions" class="pb-5">
     <div class="auction-search mt-4 mb-5">
@@ -52,7 +51,7 @@
             <div class="col col-12">
                 <div class="row">
                     <div class="col col-12  col-md-6 car-img-container">
-                        <img src="{{ car.image.url }}" alt="">
+                        <img src="{{ car.image.url }}" alt="{{ car.make }}">
                     </div>
                     <div class="col col-12 col-sm-10 offset-sm-1 offset-md-0 col-md-6 my-3">
                         <h5 class="footer-header"><a href="{% url 'auction_detail' car.id %}">CCA<span>Classic Cars

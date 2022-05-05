@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+<div class="col">
+    {% if won_auctions %}
+    {% else %}
+        <p> You didn't won any auctions yet</p>
+        <a href="{% url 'all_auctions' %}">Back to Auctions</a>
+    {% endif %}
+</div>
+
+
+{% endblock %}
+

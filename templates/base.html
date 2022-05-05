@@ -51,7 +51,7 @@
     <link rel=" shortcut icon" type="image.png" href="{% static 'images/favicon.ico' %}" />
     {% endblock %}
 
-    <title>Boutique Ado {% block extra_title %}{% endblock %}</title>
+    <title>Classic Cars Auctions {% block extra_title %}{% endblock %}</title>
 </head>
 
 <body>
@@ -86,6 +86,9 @@
                     <a class="nav-link" href="{% url 'all_auctions' %}">Auctions</a>
                 </li>
                 {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'view_bag' %}">Won Auctions</a>
+                </li>
                 <li class="nav-item ">
                     <a class="nav-link" href="#">Profile</a>
                 </li>
@@ -105,8 +108,6 @@
     </nav>
 
     {% if messages %}
-    <div class="message-container">
-        {% if messages %}
         <div class="message-container">
             {% for message in messages %}
                 {% with message.level as level %}
@@ -122,8 +123,6 @@
                 {% endwith %}
             {% endfor %}
         </div>
-    {% endif %}
-    </div>
     {% endif %}
 
 
@@ -197,7 +196,7 @@
             </div>
         </div>
     </footer>
-
+    
     {% block postloadjs %}
     <script type="text/javascript">
         $('.toast').toast('show');

@@ -214,6 +214,7 @@ font-family: 'Roboto', sans-serif; */
 .sold img {
    width: 100%;
    position: relative;
+   border-radius: 6px;
 }
 
 .sold h3 {
@@ -298,6 +299,7 @@ font-family: 'Roboto', sans-serif; */
 .item-sold .price {
     font-size: 38px;
 }
+
 
 #add_bid {
     width: 80%;
