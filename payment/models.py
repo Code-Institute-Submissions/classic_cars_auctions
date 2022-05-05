@@ -21,7 +21,6 @@ class Payment(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     deposit = models.IntegerField()
 
-
     def _generate_order_number(self):
         """
         Generate a random, unique order number using UUID
