@@ -59,7 +59,7 @@
         {% if user.is_authenticated %}
         {% if request.user.id == highest_bid_obj.user.id %}
         <p>Congratulations, you won this Auction. The last step to secure your purchase <span class="text-danger text-capitalize">{{ car.make }} , {{ car.model }}</span>  is the payment of a 10% deposit.</p>
-        <p><a class="text-danger font-weight-bold payment_link" href="">Pay For This Item</a></p>
+        <p><a class="text-danger font-weight-bold payment_link" href="{% url 'payment' highest_bid_obj.id  %}">Pay For This Item</a></p>
         {% endif %}
         {% endif %}
       </div>

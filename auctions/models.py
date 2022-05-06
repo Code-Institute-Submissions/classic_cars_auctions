@@ -40,4 +40,4 @@ class Bid(models.Model):
     winnerBid = models.BooleanField()
 
     def __str__(self):
-        return str(self.car)
+        return str(self.id)

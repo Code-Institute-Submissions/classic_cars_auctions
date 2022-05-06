@@ -14,7 +14,7 @@ def all_auctions(request):
 
     for car in cars:
         car_id = car.id
-        winner_bid(car_id)
+        # winner_bid(car_id)
 
     if request.method == 'POST':
         user_bid = request.POST['bid']
@@ -33,14 +33,12 @@ def all_auctions(request):
 
 def auction_detail(request, car_id):
     """ A view to return car and auctions detail """
-    highest_bid = None
+    highest_bid_obj = None
     user_bid = 0
-    sold = None
     form = BidForm()
     if request.user.is_authenticated:
         user_id = request.user.id
     car = get_object_or_404(Car, id=car_id)
-    print(car_id)
     bids = Bid.objects.filter(car_id=car_id)
 
     current_date = timezone.now()
@@ -50,8 +48,6 @@ def auction_detail(request, car_id):
 
     if bids:
         highest_bid_obj = Bid.objects.filter(car_id=car_id).order_by('-amount')[0]
-        # sold = Bid.objects.filter(car_id=car_id).order_by('-amount')[0].winnerBid
-        # winner_bid_id = Bid.objects.filter(car_id=car_id).order_by('-amount')[0].id
         min_bid = highest_bid_obj.amount + 50
 
     else:
@@ -74,17 +70,15 @@ def auction_detail(request, car_id):
             else:
                 messages.error(request, f'Your bid should be equal'
                                f' or superior to {min_bid} €')
+     
 
     context = {
         'car': car,
         'auction_is_on': auction_is_on,
         'bids': bids,
         'highest_bid_obj': highest_bid_obj,
-        # 'min_bid':  min_bid,
-        # 'sold': sold,
-        # 'highest_bid': highest_bid,
-        # 'winner_bid': winner_bid,
         'form': form,
+        'min_bid': min_bid,
     }
 
     return render(request, 'auctions/auction_detail.html', context)

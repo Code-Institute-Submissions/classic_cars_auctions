@@ -49,8 +49,7 @@ class PaymentLineItem(models.Model):
                             on_delete=models.CASCADE)
     winner_bid = models.ForeignKey(Bid, null=False,
                             blank=False, on_delete=models.CASCADE)
-    deposit = models.DecimalField(max_digits=6, decimal_places=2, null=False, 
-                                  blank=False, editable=False)
+    deposit = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
 
     def save(self, *args, **kwargs):
         """

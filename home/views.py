@@ -7,10 +7,10 @@ def index(request):
     car = None
     highest_bid = 0
     highest_bid = Bid.objects.filter(winnerBid=True).last()
- 
+
     if highest_bid:
         car_id = Bid.objects.filter(winnerBid=True).last().car.id
-        highest_bid =highest_bid = Bid.objects.filter(winnerBid=True).last().amount
+        highest_bid = Bid.objects.filter(winnerBid=True).last().amount
         car = get_object_or_404(Car, id=car_id)
 
     context = {
