@@ -12,16 +12,17 @@ def all_auctions(request):
 
     cars = Car.objects.all()
 
-    for car in cars:
-        car_id = car.id
-        # winner_bid(car_id)
-
     if request.method == 'POST':
         user_bid = request.POST['bid']
-        print(user_bid)
 
     auctions_filter = CarFilter(request.GET, queryset=cars)
     cars = auctions_filter.qs
+   
+    if not cars:
+        cars = Car.objects.all()
+
+        messages.error(request, "Sorry, but we couldn't find any cars matching"
+                                " your criteria")
 
     context = {
         'cars': cars,
