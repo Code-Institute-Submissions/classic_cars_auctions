@@ -4,12 +4,14 @@ from auctions.models import Bid, Car
 
 def index(request):
     """ A view to return the index page """
-    highest_bid = Bid.objects.filter(winnerBid=True).last().amount
-    highest_bid_id = Bid.objects.filter(winnerBid=True).last().car.id
-    print(highest_bid_id)
+    car = None
+    highest_bid = 0
+    highest_bid = Bid.objects.filter(winnerBid=True).last()
  
     if highest_bid:
-        car = get_object_or_404(Car, id=highest_bid_id)
+        car_id = Bid.objects.filter(winnerBid=True).last().car.id
+        highest_bid =highest_bid = Bid.objects.filter(winnerBid=True).last().amount
+        car = get_object_or_404(Car, id=car_id)
 
     context = {
         'car': car,
