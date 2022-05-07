@@ -1,11 +1,11 @@
 from django import forms
-from .models import Order
+from .models import Payment
 
 
 class PaymentForm(forms.ModelForm):
     """Payment Form"""
     class Meta:
-        """Class to displey fields"""
+        """form fields"""
         model = Payment
         fields = ('full_name', 'email', 'phone_number',
                   'street_address1', 'street_address2',
