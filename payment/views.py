@@ -17,11 +17,13 @@ def payment(request, highest_bid_obj_id):
     else:
         messages.error(request, 'Unauthorized Access.')
         return redirect(reverse('all_auctions'))
-   
+
     context = {
        'winner_bid': winner_bid,
        'payment_form': payment_form,
        'deposit': deposit,
+       'stripe_public_key': 'pk_test_51KgHIsA2xS5xmfsxSeIRUuMEGtdvUMiDOu6i20EFqkp5s9gcR0WGDQMhWwrbAqMa3oV8hF52GTD5HsRqyVUY7dt200R7AllYsj',
+       'client_secret': 'test client secret',
     }
-    
+
     return render(request, 'payment/payment.html', context)

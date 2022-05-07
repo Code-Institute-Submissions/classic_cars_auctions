@@ -11,7 +11,7 @@
     width: 90%;
     margin: 0 auto;
     background-color: #e9e7e7;
-    border: 2px solid rgb(201, 40, 40);
+    border: 1px solid #000;
     border-radius: 6px;
 }
 
@@ -29,6 +29,46 @@
 .fieldset-label {
     font-size: 20px;
     font-weight: 600;
+}
+
+/* stripe elements */
+
+.StripeElement,
+.stripe-style-input {
+  box-sizing: border-box;
+  height: 40px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 0px;
+  background-color: white;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus,
+.stripe-style-input:focus,
+.stripe-style-input:active {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+
+.stripe-style-input::placeholder {
+    color: #aab7c4;
+}
+
+.fieldset-label {
+    position: relative;
+    right: .5rem;
+}
+
+#payment-form .form-control,
+#card-element {
+    color: #000;
+    border: 1px solid #000;
 }
 
 
