@@ -30,12 +30,8 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:ital,wght@0,400;0,700;1,100;1,300;1,400;1,500;1,700&display=swap"
         rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-    </script>
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
-    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
     </script>
@@ -67,7 +63,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                            <a href="{% url 'home' %}" class="logo-text">Classic Cars Auctions</a>
+                    <a href="{% url 'home' %}" class="logo-text">Classic Cars Auctions</a>
                 </div>
             </div>
         </div>
@@ -107,21 +103,21 @@
     </nav>
 
     {% if messages %}
-        <div class="message-container">
-            {% for message in messages %}
-                {% with message.level as level %}
-                    {% if level == 40 %}
-                        {% include 'includes/toasts/toast_error.html' %}
-                    {% elif level == 30 %}
-                        {% include 'includes/toasts/toast_warning.html' %}
-                    {% elif level == 25 %}
-                        {% include 'includes/toasts/toast_success.html' %}
-                    {% else %}
-                        {% include 'includes/toasts/toast_info.html' %}
-                    {% endif %}
-                {% endwith %}
-            {% endfor %}
-        </div>
+    <div class="message-container">
+        {% for message in messages %}
+        {% with message.level as level %}
+        {% if level == 40 %}
+        {% include 'includes/toasts/toast_error.html' %}
+        {% elif level == 30 %}
+        {% include 'includes/toasts/toast_warning.html' %}
+        {% elif level == 25 %}
+        {% include 'includes/toasts/toast_success.html' %}
+        {% else %}
+        {% include 'includes/toasts/toast_info.html' %}
+        {% endif %}
+        {% endwith %}
+        {% endfor %}
+    </div>
     {% endif %}
 
 
@@ -166,10 +162,13 @@
                     </div>
                     <div class="col col-12">
                         <ul class="row list-unstyled">
-                            <li class="col col-11 offset-1 mb-2 col-sm-5 col-lg-3  mb-lg-0 "><i class="fas fa-phone-alt  mr-1"></i>001 000177</li>
-                            <li class="col col-11 offset-1 mb-2 col-sm-0 offset-sm-1 col-lg-4 offset-lg-0 mb-lg-0"><i class="fas fa-paper-plane  mr-1"></i>classic_cars@cca.com</li>
-                            <li class="col col-11 offset-1 mb-2 col-sm-12 col-lg-4 ofsset-lg-0 mb-lg-0 ml-lg-0 pl-lg-0 "><i
-                                    class="fas fa-map-marker-alt mr-1"></i>9 Mount Julia Avenue Dublin</li>
+                            <li class="col col-11 offset-1 mb-2 col-sm-5 col-lg-3  mb-lg-0 "><i
+                                    class="fas fa-phone-alt  mr-1"></i>001 000177</li>
+                            <li class="col col-11 offset-1 mb-2 col-sm-0 offset-sm-1 col-lg-4 offset-lg-0 mb-lg-0"><i
+                                    class="fas fa-paper-plane  mr-1"></i>classic_cars@cca.com</li>
+                            <li
+                                class="col col-11 offset-1 mb-2 col-sm-12 col-lg-4 ofsset-lg-0 mb-lg-0 ml-lg-0 pl-lg-0 ">
+                                <i class="fas fa-map-marker-alt mr-1"></i>9 Mount Julia Avenue Dublin</li>
                         </ul>
 
                     </div>
@@ -188,18 +187,20 @@
                 </div>
                 <div class="row">
                     <div class="col col-10 offset-1 ">
-                        <p class="mb-0 ml-5 ml-sm-0 copy-right">&copy; Copyrights. All rights reserved.<a class="ml-3 ml-sm-2" href="{% url 'home' %}">Classic Car
+                        <p class="mb-0 ml-5 ml-sm-0 copy-right">&copy; Copyrights. All rights reserved.<a
+                                class="ml-3 ml-sm-2" href="{% url 'home' %}">Classic Car
                                 Auctions</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
-    
+
     {% block postloadjs %}
     <script type="text/javascript">
         $('.toast').toast('show');
-    </script>  
+
+    </script>
     {% endblock %}
 
 
