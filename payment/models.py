@@ -1,7 +1,4 @@
-import uuid
-
 from django.db import models
-
 from auctions.models import Bid, Car
 
 
@@ -48,8 +45,8 @@ class PaymentLineItem(models.Model):
     car = models.ForeignKey(Car, null=False, blank=False,
                             on_delete=models.CASCADE)
     winner_bid = models.ForeignKey(Bid, null=False,
-                            blank=False, on_delete=models.CASCADE)
-    car_price = models.DecimalField(max_digits=6, decimal_places=2, null=False, blank=False, editable=False)
+                                   blank=False, on_delete=models.CASCADE)
+    car_price = models.IntegerField()
 
     # def save(self, *args, **kwargs):
     #     """
