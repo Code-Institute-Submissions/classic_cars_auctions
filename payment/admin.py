@@ -5,7 +5,7 @@ from .models import Payment, PaymentLineItem
 class PaymentLineItemAdminInline(admin.TabularInline):
     """PaymentLineItemAdminInline"""
     model = PaymentLineItem
-    readonly_fields = ('deposit',)
+    readonly_fields = ('car_price',)
 
 
 class PaymentAdmin(admin.ModelAdmin):
