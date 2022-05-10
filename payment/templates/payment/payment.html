@@ -25,7 +25,7 @@
     <div class="payment-element">
       <h2 class="text-info ml-3 my-4">Payment Details</h2>
       <div class="info-text text-justify">
-        <form action="{% url 'payment' %}" id="payment-form" method="post">
+        <form action="{% url 'get_payment' %}" id="payment-form" method="post">
           {% csrf_token %}
           <fieldset class="rounded px-3 mb-5">
             <legend class="fieldset-label small text-black px-2 w-auto">Details</legend>
@@ -72,6 +72,13 @@
       </form>
     </div>
   </div>
+  <div id="loading-overlay">
+    <h1 class="text-light logo-font loading-spinner">
+        <span class="icon">
+            <i class="fas fa-3x fa-sync-alt fa-spin"></i>
+        </span>
+    </h1>
+</div>
 </section>
 <hr class="hor-line-home my-5">
 {% endblock %}

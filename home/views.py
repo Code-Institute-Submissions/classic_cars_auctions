@@ -4,6 +4,7 @@ from auctions.models import Bid, Car
 
 def index(request):
     """ A view to return the index page """
+    
     car = None
     highest_bid = 0
     highest_bid = Bid.objects.filter(winnerBid=True).last()

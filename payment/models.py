@@ -47,6 +47,7 @@ class PaymentLineItem(models.Model):
     winner_bid = models.ForeignKey(Bid, null=False,
                                    blank=False, on_delete=models.CASCADE)
     car_price = models.IntegerField()
+    
 
     # def save(self, *args, **kwargs):
     #     """
