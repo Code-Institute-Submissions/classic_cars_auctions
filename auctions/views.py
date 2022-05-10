@@ -34,11 +34,15 @@ def all_auctions(request):
 
 def auction_detail(request, car_id):
     """ A view to return car and auctions detail """
+    payment_info = []
+    request.session['payment_info'] = payment_info
     highest_bid_obj = None
+    # winner_bid = None
     user_bid = 0
     form = BidForm()
     if request.user.is_authenticated:
         user_id = request.user.id
+
     car = get_object_or_404(Car, id=car_id)
     bids = Bid.objects.filter(car_id=car_id)
 
@@ -59,9 +63,12 @@ def auction_detail(request, car_id):
         if not user_bid:
             messages.error(request, 'Oops!! Something went wrong.'
                            ' Please enter your bid again.')
+
         else:
-            bid = int(user_bid)
-            if bid >= int(min_bid):
+            bid = user_bid
+
+            if int(bid) >= min_bid:
+                print(int(bid))
                 new_bid = Bid(car=car, user_id=user_id,  amount=bid,
                               time=current_date, winnerBid=False)
                 new_bid.save()
@@ -71,7 +78,14 @@ def auction_detail(request, car_id):
             else:
                 messages.error(request, f'Your bid should be equal'
                                f' or superior to {min_bid} €')
-     
+    if bids:
+        if highest_bid_obj.winnerBid and highest_bid_obj.user.id == user_id:
+            payment_info. append({
+                'car_id': car_id,
+                'winner_bid_id': highest_bid_obj.id,
+                'car_price': highest_bid_obj.amount,
+            })
+            request.session['payment_info'] = payment_info
 
     context = {
         'car': car,
@@ -85,7 +99,7 @@ def auction_detail(request, car_id):
     return render(request, 'auctions/auction_detail.html', context)
 
 
-def winner_bid(car_id):
+def get_winner_bid(car_id):
     """function to specify winner bid"""
     current_date = timezone.now()
     car = get_object_or_404(Car, id=car_id)

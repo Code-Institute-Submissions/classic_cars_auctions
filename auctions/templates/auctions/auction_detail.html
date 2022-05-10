@@ -14,32 +14,34 @@
             <img src="{{ car.image.url }}" alt="car image">
           </div>
           <div class="col col-12 col-sm-10 offset-sm-1 offset-md-0 col-md-6 my-3">
-            <h5 class="footer-header"><a href="{% url 'home' %}">CCA<span>Classic Cars
-                  Auctions</span></a></h5>
-            <div class="row">
+            <div class="mb-4 text-center">
+              <h5 class="header text-danger">CCA<span class="ml-3 block">Classic Cars
+                    Auctions</span></h5>
+            </div>
+            <div class="row mt-4">
               <div class="col-6">
-                <p class="my-1">First Registred<span
+                <p class="my-2 pl-md-5">First Registred<span
                     class="text-info text-capitalize d-block">{{ car.firstRegistred }}</span></p>
               </div>
               <div class="col-6">
-                <p class="my-1">Color<span class="text-info text-capitalize d-block">{{ car.color }}</span></p>
+                <p class="my-2 pl-md-5">Color<span class="text-info text-capitalize d-block">{{ car.color }}</span></p>
               </div>
             </div>
             <div class="row">
               <div class="col-6">
-                <p class="my-1">Odometer<span class="text-info d-block">{{ car.odometer }} km</span></p>
+                <p class="my-2 pl-md-5">Odometer<span class="text-info d-block">{{ car.odometer }} km</span></p>
               </div>
               <div class="col-6">
-                <p class="my-1">Transmission<span
+                <p class="my-2 pl-md-5">Transmission<span
                     class="text-info text-capitalize d-block">{{ car.transmission }}</span></p>
               </div>
             </div>
             <div class="row">
               <div class="col-6">
-                <p class="my-1">Reserved Price<span class="text-info d-block">{{ car.reservedPrice }} €</span></p>
+                <p class="my-2 pl-md-5">Reserved Price<span class="text-info d-block">{{ car.reservedPrice }} €</span></p>
               </div>
               <div class="col-6">
-                <p class="my-1">Fuel Type<span class="text-info text-capitalize d-block">{{ car.fuelType }}</span></p>
+                <p class="my-2 pl-md-5">Fuel Type<span class="text-info text-capitalize d-block">{{ car.fuelType }}</span></p>
               </div>
             </div>
           </div>
@@ -59,7 +61,7 @@
         {% if user.is_authenticated %}
         {% if request.user.id == highest_bid_obj.user.id %}
         <p>Congratulations, you won this Auction. The last step to secure your purchase <span class="text-danger text-capitalize">{{ car.make }} , {{ car.model }}</span>  is the payment of a 10% deposit.</p>
-        <p><a class="text-danger font-weight-bold payment_link" href="{% url 'payment' highest_bid_obj.id  %}">Pay For This Item</a></p>
+        <p><a class="text-danger font-weight-bold payment_link" href="{% url 'payment' %}">Pay For This Item</a></p>
         {% endif %}
         {% endif %}
       </div>
@@ -88,7 +90,8 @@
           {% endif %}
         </div>
         <div class="col col-10 col-sm-6  offset-1 offset-sm-3 text-center my-3">
-          <button id="show-bidding-form" class="btn btn-lg red-background text-light border border-dark"> Place a Bid</button>
+          <button id="show-bidding-form" class="btn btn-lg red-background text-light border border-dark"> Place a
+            Bid</button>
         </div>
         {% else %}
         <div class="col col-10 col-sm-6  offset-1 offset-sm-3  my-3">
@@ -143,13 +146,14 @@
 {% block postloadjs %}
 {{ block.super }}
 <script type="text/javascript">
-   $('#show-bidding-form').click(function() {
+  $('#show-bidding-form').click(function () {
     $('#car').css({
       'display': 'none',
     });
     $('#add_bid').css({
       'display': 'block',
     });
-});
+  });
+
 </script>
 {% endblock %}
