@@ -108,10 +108,10 @@ def payment_success(request, payment_number):
     Handle successful checkouts
     """
     save_info = request.session.get('save_info')
-    payment_info = request.session.get('payment_info', {})
-    for item in payment_info:
-        left_to_pay = item['car_price'] - item['car_price'] / 10
     payment = get_object_or_404(Payment, payment_number=payment_number)
+    payment_line = get_object_or_404(PaymentLineItem, payment_id=payment.id)
+
+    left_to_pay = payment_line.car_price - payment_line.car_price / 10
 
     messages.success(request, f'Order successfully processed! \
         Your order number is { payment_number }. A confirmation \
