@@ -15,19 +15,17 @@
   </div>
   <hr class="hor-line-home my-3">
   <div class="payment-wrapper">
-    {% for item in winner_bid %}
     <div class="payment-element ml-3 mt-4">
       <h2 class="text-info">Payment Sumary</h2>
-      <p class="mb-2">Car :<span class="text-danger ml-2 mr-1 text-capitalize">{{ item.car.make }},
-          {{ item.car.model }}</span>
-        {{ item.car.firstRegistred }}</p>
-      <p class="mb-2">Price :<span class="text-danger ml-2 mr-1">{{item.amount }}</span>€</p>
-      <p>Deposit to pay :<span class="text-danger ml-2 mr-1">{{ deposit }}</span>€</p>
+      <p class="mb-2">Car :<span class="text-danger ml-2 mr-1 text-capitalize">{{ car.make }},
+          {{ car.model }}</span>{{ car.firstRegistred }}</p>
+      <p class="mb-2">Price :<span class="text-danger ml-2 mr-1">{{ car_price }}</span>€</p>
+      <p>Deposit to pay :<span class="text-danger ml-2 mr-1">{{ payment_amount }}</span>€</p>
     </div>
     <div class="payment-element">
       <h2 class="text-info ml-3 my-4">Payment Details</h2>
       <div class="info-text text-justify">
-        <form action="{% url 'payment' item.id %}" id="payment-form" method="post">
+        <form action="{% url 'payment' %}" id="payment-form" method="post">
           {% csrf_token %}
           <fieldset class="rounded px-3 mb-5">
             <legend class="fieldset-label small text-black px-2 w-auto">Details</legend>
@@ -67,14 +65,13 @@
               <span class="icon">
                 <i class="fas fa-exclamation-circle"></i>
               </span>
-              <span>Your card will be charged <strong class="text-info">€{{ deposit|floatformat:2 }}</strong></span>
+              <span>Your card will be charged <strong class="text-info">€{{ payment_amount|floatformat:2 }}</strong></span>
             </p>
           </div>
       </div>
       </form>
     </div>
   </div>
-  {% endfor %}
 </section>
 <hr class="hor-line-home my-5">
 {% endblock %}
