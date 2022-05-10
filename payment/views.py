@@ -1,5 +1,5 @@
 import uuid
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.conf import settings
@@ -12,7 +12,7 @@ from .forms import PaymentForm
 
 
 @login_required()
-def payment(request):
+def get_payment(request):
     """View to render Payment"""
 
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
@@ -31,7 +31,6 @@ def payment(request):
         car_id = item['car_id']
         winner_bid_id = item['winner_bid_id']
         car_price = item['car_price']
-        print(item)
     payment_amount = car_price / 10
     winner_bid = Bid.objects.get(id=winner_bid_id)
     car = Car.objects.get(id=car_id)
@@ -47,7 +46,7 @@ def payment(request):
         street_address2 = request.POST['street_address2']
         county = request.POST['county']
 
-        new_payment = Payment(
+        payment = Payment(
                               payment_number=unique_number,
                               full_name=full_name,
                               email=email,
@@ -58,22 +57,22 @@ def payment(request):
                               street_address2=street_address2, county=county,
                               deposit=payment_amount
                               )
-        new_payment.save()
+        payment.save()
         try:
             Payment.objects.get(payment_number=unique_number)
         except Payment.DoesNotExist:
             messages.error(request, 'message1')
-            new_payment.delete()
-            return redirect('payment')
+            payment.delete()
+            return redirect('get_payment')
         payment_line_item = PaymentLineItem(
-                    payment=new_payment,
+                    payment=payment,
                     car=car,
                     winner_bid=winner_bid,
                     car_price=car_price,
                     )
         payment_line_item.save()
-        messages.success(request, 'success')
-        return redirect('all_auctions')
+        request.session['save_info'] = 'save_info' in request.POST
+        return redirect(reverse('payment_success', args=[payment.payment_number]))
 
         try:
             PaymentLineItem.objects.get(payment__payment_number=unique_number)
@@ -102,3 +101,29 @@ def payment(request):
     }
 
     return render(request, 'payment/payment.html', context)
+
+
+def payment_success(request, payment_number):
+    """
+    Handle successful checkouts
+    """
+    save_info = request.session.get('save_info')
+    payment_info = request.session.get('payment_info', {})
+    for item in payment_info:
+        left_to_pay = item['car_price'] - item['car_price'] / 10
+    payment = get_object_or_404(Payment, payment_number=payment_number)
+
+    messages.success(request, f'Order successfully processed! \
+        Your order number is { payment_number }. A confirmation \
+        email will be sent to { payment.email }.')
+
+    if 'payment_info' in request.session:
+        del request.session['payment_info']
+
+    template = 'payment/payment_success.html'
+    context = {
+        'payment': payment,
+        'left_to_pay': left_to_pay
+    }
+
+    return render(request, template, context)
