@@ -49,8 +49,12 @@
       </div>
       <div id="car-description1" class="col col-10 offset-1">
         <p class="text-info mb-0 mt-4 mb-2 font-weight-bold">Description</p>
-        <p class="text-justify">{{ car.description }}</p>
+        <p class="text-justify">{{ car.description|truncatewords:"25"|linebreaks }}<button id="show-description" class="description-btn mt-0">show-more</button></p>
         
+      </div>
+      <div id="car-description2"class="col col-10 offset-1 hide">
+        <p class="text-info mb-0 mt-4 mb-2 font-weight-bold">Description</p>
+        <p class="text-justify">{{ car.description }}<button id="hide-description" class="description-btn mt-0">show less</button></p></p>
       </div>
     </div>
     <div class="bidding-panel pb-4">
@@ -156,6 +160,17 @@
       'display': 'block',
     });
   });
+
+</script>
+<script type="text/javascript">
+  $('#show-description').click(function () {
+        $('#car-description1').addClass('hide');
+        $('#car-description2').removeClass('hide');
+    });
+    $('#hide-description').click(function () {
+        $('#car-description1').removeClass('hide');
+        $('#car-description2').addClass('hide');
+    });
 
 </script>
 {% endblock %}
