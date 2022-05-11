@@ -16,6 +16,14 @@ a:hover {
     margin: 0px !important;
 }
 
+.hide {
+    display: none;
+}
+
+.show {
+    display: block
+}
+
 .header{
     font-size: 24px;
     font-weight: 600;
@@ -286,21 +294,41 @@ font-family: 'Roboto', sans-serif; */
     border: none;
 }
 
+.auction-logo p{
+    font-size: 25px !important;
+    font-weight: 600;
+}
+
+.auction-logo p span {
+    font-family: 'Lobster', sans-serif;;
+}
+
 .panel-item p {
     margin-top: 10px;
     font-weight: 600;
 
 }
 
-.item-sold h1 {
+.item-sold p {
     color: #cc3217;
-    font-size: 42px;
+    font-size: 40px;
+    font-weight: bold;
 }
 
-.item-sold .price {
-    font-size: 38px;
+.car-description1 p{
+    position: relative;
+}
+#hide-description, #show-description {
+    background-color: transparent;
+    border: none;
+    color: #17a2b8;
 }
 
+#show-description {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
 
 #add_bid {
     width: 80%;
