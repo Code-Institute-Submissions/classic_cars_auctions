@@ -7,7 +7,6 @@
 
 {% block content %}
 
-
 <section id="payment-section" class=" pt-3">
   <hr class="hor-line-home my-3">
   <div class="payment-header text-center">
@@ -35,11 +34,11 @@
           <fieldset class="rounded px-3 mb-5">
             <legend class="fieldset-label small text-black px-2 w-auto">New Owner Info</legend>
             {{ payment_form.phone_number | as_crispy_field }}
+            {{ payment_form.street_address1 | as_crispy_field }}
+            {{ payment_form.street_address2 | as_crispy_field }}
             {{ payment_form.country | as_crispy_field }}
             {{ payment_form.postcode | as_crispy_field }}
             {{ payment_form.town_or_city | as_crispy_field }}
-            {{ payment_form.street_address1 | as_crispy_field }}
-            {{ payment_form.street_address2 | as_crispy_field }}
             {{ payment_form.county | as_crispy_field }}
             <div class="form-check form-check-inline float-right mr-0">
               <label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
