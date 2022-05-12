@@ -1,17 +1,37 @@
 import uuid
-from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.conf import settings
 
-
-import stripe
 from auctions.models import Bid, Car
 from .models import Payment, PaymentLineItem
 from .forms import PaymentForm
 
+import stripe
+import json
 
-@login_required()
+
+# @require_POST
+# def cache_payment_data(request):
+#     """Cach Payment"""
+#     try:
+#         pid = request.POST.get('client_secret').split('_secret')[0]
+#         stripe.api_key = settings.STRIPE_SECRET_KEY
+#         stripe.PaymentIntent.modify(pid, metadata={
+#             'payment_info': json.dumps(request.session.get('payment_info', {})),
+#             'save_info': request.POST.get('save_info'),
+#             'username': request.user,
+#         })
+#         return HttpResponse(status=200)
+#     except Exception as e:
+#         messages.error(request, 'Sorry, your payment cannot be \
+#             processed right now. Please try again later.')
+#         return HttpResponse(content=e, status=400)
+
+
+# @login_required()
 def get_payment(request):
     """View to render Payment"""
 
@@ -19,14 +39,8 @@ def get_payment(request):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     unique_number = uuid.uuid4()
-    payment_form = PaymentForm()
 
     payment_info = request.session.get('payment_info', {})
-
-    if not payment_info:
-        messages.error(request, "Unauthorized access")
-        return redirect(reverse('all_auctions'))
-
     for item in payment_info:
         car_id = item['car_id']
         winner_bid_id = item['winner_bid_id']
@@ -34,58 +48,55 @@ def get_payment(request):
     payment_amount = car_price / 10
     winner_bid = Bid.objects.get(id=winner_bid_id)
     car = Car.objects.get(id=car_id)
+    print(car_id)
 
     if request.method == 'POST':
-        full_name = request.POST['full_name']
-        email = request.POST['email']
-        phone_number = request.POST['phone_number']
-        country = request.POST['country']
-        postcode = request.POST['postcode']
-        town_or_city = request.POST['town_or_city']
-        street_address1 = request.POST['street_address1']
-        street_address2 = request.POST['street_address2']
-        county = request.POST['county']
+        payment_data = {
+            'payment_number': unique_number,
+            'full_name': request.POST['full_name'],
+            'email': request.POST['email'],
+            'phone_number': request.POST['phone_number'],
+            'country': request.POST['country'],
+            'postcode': request.POST['postcode'],
+            'town_or_city': request.POST['town_or_city'],
+            'street_address1': request.POST['street_address1'],
+            'street_address2': request.POST['street_address2'],
+            'county': request.POST['county'],
+            'deposit': payment_amount,
+        }
+        payment_form = PaymentForm(payment_data)
+        if payment_form.is_valid():
+            payment = payment_form.save(commit=False)
+            payment.car_id = car_id
+            payment.payment_number = unique_number
+            payment.save()
+            payment_line_item = PaymentLineItem(
+                payment=payment,
+                car=car,
+                winner_bid=winner_bid,
+                car_price=car_price,
+                )
+            payment_line_item.save()
+            request.session['save_info'] = 'save_info' in request.POST
+            return redirect(reverse('payment_success', args=[payment.payment_number]))
+      
+        else:
+            messages.error(request, 'There was an error with your form. \
+                Please double check your information.')
+    else:
+        payment_info = request.session.get('payment_info', {})
+        if not payment_info:
+            messages.error(request, "Unauthorized access")
+            return redirect(reverse('all_auctions'))
 
-        payment = Payment(
-                              payment_number=unique_number,
-                              full_name=full_name,
-                              email=email,
-                              phone_number=phone_number,
-                              country=country, postcode=postcode,
-                              town_or_city=town_or_city,
-                              street_address1=street_address1,
-                              street_address2=street_address2, county=county,
-                              deposit=payment_amount
-                              )
-        payment.save()
-        try:
-            Payment.objects.get(payment_number=unique_number)
-        except Payment.DoesNotExist:
-            messages.error(request, 'message1')
-            payment.delete()
-            return redirect('get_payment')
-        payment_line_item = PaymentLineItem(
-                    payment=payment,
-                    car=car,
-                    winner_bid=winner_bid,
-                    car_price=car_price,
-                    )
-        payment_line_item.save()
-        request.session['save_info'] = 'save_info' in request.POST
-        return redirect(reverse('payment_success', args=[payment.payment_number]))
+        stripe_total = round(payment_amount * 100)
+        stripe.api_key = stripe_secret_key
+        intent = stripe.PaymentIntent.create(
+                amount=stripe_total,
+                currency=settings.STRIPE_CURRENCY,
+            )
 
-        try:
-            PaymentLineItem.objects.get(payment__payment_number=unique_number)
-        except PaymentLineItem.DoesNotExist:
-            messages.error(request,'message2')
-            new_payment.delete()
-
-    stripe_total = round(payment_amount * 100)
-    stripe.api_key = stripe_secret_key
-    intent = stripe.PaymentIntent.create(
-        amount=stripe_total,
-        currency=settings.STRIPE_CURRENCY,
-    )
+        payment_form = PaymentForm()
 
     if not stripe_public_key:
         messages.warning(request, 'Stripe public key is missing. \
