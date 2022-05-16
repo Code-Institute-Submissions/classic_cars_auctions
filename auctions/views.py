@@ -111,8 +111,17 @@ def auction_detail(request, car_id):
 
 def add_auction(request):
     """ Add a product to the store """
-    
-    form = CarForm()
+    if request.method == 'POST':
+        form = CarForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully added new auction!')
+            return redirect(reverse('add_auction'))
+        else:
+            messages.error(request, 'Failed to add product. Please ensure \
+                           the form is valid.')
+    else:
+        form = CarForm()
 
     template = 'auctions/add_auction.html'
     context = {
