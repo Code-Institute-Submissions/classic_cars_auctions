@@ -110,7 +110,7 @@ def auction_detail(request, car_id):
 
 
 def add_auction(request):
-    """ Add a product to the store """
+    """ Add an auction to the website """
     if request.method == 'POST':
         form = CarForm(request.POST, request.FILES)
         if form.is_valid():
@@ -129,6 +129,33 @@ def add_auction(request):
     }
 
     return render(request, template, context)
+
+
+def edit_auction(request, car_id):
+    """ Edit an auction """
+    car = get_object_or_404(Car, id=car_id)
+    if request.method == 'POST':
+        form = CarForm(request.POST, request.FILES, instance=car)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Successfully updated product!')
+            return redirect(reverse('auction_detail', args=[car.id]))
+        else:
+            messages.error(request, 'Failed to update product. Please ensure \
+                                    the form is valid.')
+    else:
+        form = CarForm(instance=car)
+        messages.info(request, f'You are editing {car.make}, {car.model}')
+
+    template = 'auctions/edit_auction.html'
+
+    context = {
+        'form': form,
+        'car': car,
+    }
+
+    return render(request, template, context)
+
 
 
 def get_winner_bid(car_id):
