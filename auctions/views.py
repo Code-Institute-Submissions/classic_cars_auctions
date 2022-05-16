@@ -1,11 +1,13 @@
+import datetime
 from datetime import timedelta
 from django.utils import timezone
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib import messages
 from payment.models import Payment
 from .models import Car, Bid
 from .filters import CarFilter
 from .forms import BidForm, CarForm
+
 
 
 
@@ -109,7 +111,9 @@ def auction_detail(request, car_id):
 
 def add_auction(request):
     """ Add a product to the store """
+    
     form = CarForm()
+
     template = 'auctions/add_auction.html'
     context = {
         'form': form,

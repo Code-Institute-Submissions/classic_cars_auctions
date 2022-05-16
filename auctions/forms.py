@@ -1,4 +1,5 @@
 from django import forms
+from bootstrap_datepicker_plus.widgets import DateTimePickerInput
 from .models import Car
 
 
@@ -11,6 +12,7 @@ class BidForm(forms.Form):
         self.fields['user_bid'].required = False
         self.label_suffix = ""
 
+
 class CarForm(forms.ModelForm):
     """Car form"""
     class Meta:
@@ -18,9 +20,7 @@ class CarForm(forms.ModelForm):
         model = Car
         fields = '__all__'
 
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-
-            for field_name, field in self.fields.items():
-                field.widget.attrs['class'] = 'border-black rounded-0 form-control'
-
+        widgets = {
+            'timeStart': DateTimePickerInput(),
+            'timeEnd': DateTimePickerInput(),
+            }

@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -40,4 +41,4 @@ class Bid(models.Model):
     winnerBid = models.BooleanField()
 
     def __str__(self):
-        return f'{self.id} on order {self.car.make}'
+        return f'{self.id} , {self.car.make}'
