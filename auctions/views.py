@@ -2,6 +2,7 @@ import datetime
 from datetime import timedelta
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from payment.models import Payment
 from .models import Car, Bid
@@ -109,8 +110,12 @@ def auction_detail(request, car_id):
     return render(request, 'auctions/auction_detail.html', context)
 
 
+@login_required
 def add_auction(request):
     """ Add an auction to the website """
+    if not request.user.is_superuser:
+        return redirect(reverse('home'))
+
     if request.method == 'POST':
         form = CarForm(request.POST, request.FILES)
         if form.is_valid():
@@ -131,8 +136,12 @@ def add_auction(request):
     return render(request, template, context)
 
 
+@login_required
 def edit_auction(request, car_id):
     """ Edit an auction """
+    if not request.user.is_superuser:
+        return redirect(reverse('home'))
+
     car = get_object_or_404(Car, id=car_id)
     if request.method == 'POST':
         form = CarForm(request.POST, request.FILES, instance=car)
@@ -156,9 +165,12 @@ def edit_auction(request, car_id):
 
     return render(request, template, context)
 
-
+@login_required
 def delete_auction(request, car_id):
     """ Delete an auction from the website """
+    if not request.user.is_superuser:
+        return redirect(reverse('home'))
+        
     car = get_object_or_404(Car, id=car_id)
     car.delete()
     messages.success(request, 'Auction deleted!')
