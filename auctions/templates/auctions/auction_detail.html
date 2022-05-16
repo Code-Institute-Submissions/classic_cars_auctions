@@ -16,7 +16,7 @@
           <div class="col col-12 col-sm-10 offset-sm-1 offset-md-0 col-md-6 my-3">
             <div class="mb-4 text-center auction-logo">
               <p class="text-danger">CCA<span class="ml-3 block">Classic Cars
-                    Auctions</span></p>
+                  Auctions</span></p>
             </div>
             <div class="row mt-4">
               <div class="col-6">
@@ -38,10 +38,12 @@
             </div>
             <div class="row">
               <div class="col-6">
-                <p class="my-2 pl-md-5">Reserved Price<span class="text-info d-block">{{ car.reservedPrice }} €</span></p>
+                <p class="my-2 pl-md-5">Reserved Price<span class="text-info d-block">{{ car.reservedPrice }} €</span>
+                </p>
               </div>
               <div class="col-6">
-                <p class="my-2 pl-md-5">Fuel Type<span class="text-info text-capitalize d-block">{{ car.fuelType }}</span></p>
+                <p class="my-2 pl-md-5">Fuel Type<span
+                    class="text-info text-capitalize d-block">{{ car.fuelType }}</span></p>
               </div>
             </div>
           </div>
@@ -49,28 +51,31 @@
       </div>
       <div id="car-description1" class="col col-10 offset-1">
         <p class="text-info mb-0 mt-4 mb-2 font-weight-bold">Description</p>
-        <p class="text-justify">{{ car.description|truncatewords:"25"|linebreaks }}<button id="show-description" class="description-btn mt-0">show-more</button></p>
-        
+        <p class="text-justify">{{ car.description|truncatewords:"75"|linebreaks }}<button id="show-description"
+            class="description-btn mt-0">show-more</button></p>
+
       </div>
-      <div id="car-description2"class="col col-10 offset-1 hide">
+      <div id="car-description2" class="col col-10 offset-1 hide">
         <p class="text-info mb-0 mt-4 mb-2 font-weight-bold">Description</p>
-        <p class="text-justify">{{ car.description }}<button id="hide-description" class="description-btn mt-0">show less</button></p></p>
+        <p class="text-justify">{{ car.description }}<button id="hide-description" class="description-btn mt-0">show
+            less</button></p>
+        </p>
       </div>
     </div>
     <div class="bidding-panel pb-4">
       {% if highest_bid_obj.winnerBid %}
 
-          {% include 'includes/auction_detail/sold.html' %}
+      {% include 'includes/auction_detail/sold.html' %}
 
       {% if user.is_authenticated and not existing_payment %}
 
       {% if request.user.id == highest_bid_obj.user.id %}
 
-          {% include 'includes/auction_detail/payment_link.html' %}
+      {% include 'includes/auction_detail/payment_link.html' %}
 
       {% endif %}
       {% endif %}
-      
+
       {% else %}
       <h3 class="header text-center text-info">Bidding Panel</h3>
       <div class="row">
@@ -84,13 +89,31 @@
           class="col col-10 col-sm-6  offset-1 offset-sm-3  min-bid bg-light mb-1 border border-dark text-center panel-item">
           <p> Minimum Bid<span class="text-danger font-weight-bold mx-1">{{ min_bid }}</span>€</p>
         </div>
-        <div class="col col-10 col-sm-6  offset-1 offset-sm-3  bg-light mb-1 border border-dark">
+        <div class="col col-10 col-sm-6  offset-1 offset-sm-3 bg-light mb-1 border border-dark text-center">
           <h4 class="text-info font-weight-bold mt-3">Bidding History</h4>
           {% if bids|length > 0 %}
-          {% for bid in bids %}
-          <p class="border border-dark text-center"> <span class="text-danger mr-2">{{ bid.amount }}€</span> At
-            {{bid.time|date:'G:i - d - M'}}</p>
-          {% endfor %}
+          <div class="col-12 col-lg-6 offset-3 mb-4">
+            <div class="history table-responsive">
+                <table class="table table-sm table-borderless  bg-grey-light">
+                <thead>
+                  <tr>
+                    <th>Bid</th>
+                    <th>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for bid in bids %}
+                  <tr>
+                    <td class="bid-amount-history">
+                      {{ bid.amount }}€
+                    </td>
+                    <td class="bid-date-history">{{bid.time|date:'G:i - d - M'}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
           {% else %}
           <p>No Bids yet for this item</p>
           {% endif %}
@@ -164,13 +187,13 @@
 </script>
 <script type="text/javascript">
   $('#show-description').click(function () {
-        $('#car-description1').addClass('hide');
-        $('#car-description2').removeClass('hide');
-    });
-    $('#hide-description').click(function () {
-        $('#car-description1').removeClass('hide');
-        $('#car-description2').addClass('hide');
-    });
+    $('#car-description1').addClass('hide');
+    $('#car-description2').removeClass('hide');
+  });
+  $('#hide-description').click(function () {
+    $('#car-description1').removeClass('hide');
+    $('#car-description2').addClass('hide');
+  });
 
 </script>
 {% endblock %}
