@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+<div class="overlay"></div>
+<div class="container">
+    <div class="row mx-0">
+    </div>
+    <hr class="hor-line-home mt-5 mb-4">
+    <div class="text-center">
+        <h2 class="logo-font mb-4 text-danger">Auction Management</h2>
+        <hr class="hor-line-home mb-5 mt-3">
+        <h5 class="text-info ">Add An Auction</h5>
+    </div>
+</div>
+
+<div class="row mx-0">
+    <div class="col-12 col-md-6 offset-md-3">
+        <form method="POST" action="{% url 'add_auction' %}" class="form mb-2" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <div class="text-right">
+                <a class="btn btn-outline-black rounded-0" href="{% url 'all_auctions' %}">Cancel</a>
+                <button class="btn btn-black rounded-0" type="submit">Add Product</button>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+{% endblock %}

@@ -2,9 +2,11 @@ from datetime import timedelta
 from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
+from payment.models import Payment
 from .models import Car, Bid
 from .filters import CarFilter
-from .forms import BidForm
+from .forms import BidForm, CarForm
+
 
 
 def all_auctions(request):
@@ -37,6 +39,7 @@ def auction_detail(request, car_id):
     payment_info = []
     request.session['payment_info'] = payment_info
     highest_bid_obj = None
+    
     # winner_bid = None
     user_bid = 0
     form = BidForm()
@@ -68,7 +71,6 @@ def auction_detail(request, car_id):
             bid = user_bid
 
             if int(bid) >= min_bid:
-                print(int(bid))
                 new_bid = Bid(car=car, user_id=user_id,  amount=bid,
                               time=current_date, winnerBid=False)
                 new_bid.save()
@@ -78,14 +80,19 @@ def auction_detail(request, car_id):
             else:
                 messages.error(request, f'Your bid should be equal'
                                f' or superior to {min_bid} €')
-    if bids:
-        if highest_bid_obj.winnerBid and highest_bid_obj.user.id == user_id:
-            payment_info. append({
-                'car_id': car_id,
-                'winner_bid_id': highest_bid_obj.id,
-                'car_price': highest_bid_obj.amount,
-            })
-            request.session['payment_info'] = payment_info
+
+    existing_payment = Payment.objects.filter(car_id=car_id)
+    if existing_payment:
+        payment_info = None
+    else:
+        if bids:
+            if highest_bid_obj.winnerBid and highest_bid_obj.user.id == user_id:
+                payment_info. append({
+                    'car_id': car_id,
+                    'winner_bid_id': highest_bid_obj.id,
+                    'car_price': highest_bid_obj.amount,
+                })
+                request.session['payment_info'] = payment_info
 
     context = {
         'car': car,
@@ -94,9 +101,21 @@ def auction_detail(request, car_id):
         'highest_bid_obj': highest_bid_obj,
         'form': form,
         'min_bid': min_bid,
+        'existing_payment': existing_payment,
     }
 
     return render(request, 'auctions/auction_detail.html', context)
+
+
+def add_auction(request):
+    """ Add a product to the store """
+    form = CarForm()
+    template = 'auctions/add_auction.html'
+    context = {
+        'form': form,
+    }
+
+    return render(request, template, context)
 
 
 def get_winner_bid(car_id):
