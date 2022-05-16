@@ -114,9 +114,9 @@ def add_auction(request):
     if request.method == 'POST':
         form = CarForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            car = form.save()
             messages.success(request, 'Successfully added new auction!')
-            return redirect(reverse('add_auction'))
+            return redirect(reverse('auction_detail', args=[car.id]))
         else:
             messages.error(request, 'Failed to add product. Please ensure \
                            the form is valid.')
@@ -155,6 +155,14 @@ def edit_auction(request, car_id):
     }
 
     return render(request, template, context)
+
+
+def delete_auction(request, car_id):
+    """ Delete an auction from the website """
+    car = get_object_or_404(Car, id=car_id)
+    car.delete()
+    messages.success(request, 'Auction deleted!')
+    return redirect(reverse('all_auctions'))
 
 
 
