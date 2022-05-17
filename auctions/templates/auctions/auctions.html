@@ -103,6 +103,16 @@
                 <a class="btn btn-lg red-background  my-4 text-light" href="{% url 'auction_detail' car.id %}">View This
                     Auction</a>
             </div>
+            <div>
+            {% if request.user.is_superuser %}
+            <div class="ml-5 mb-2 text-light">
+           
+                <a class="text-light bg-dark border border-dark rounded p-1" href="{% url 'edit_auction' car.id %}">Edit</a> 
+                <a class="text-light bg-danger border border-dark rounded p-1" href="{% url 'delete_auction' car.id %}">Delete</a>
+            
+             </div>
+            {% endif %}
+        </div>
         </div>
     </div>
     {% endfor %}

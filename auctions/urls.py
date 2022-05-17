@@ -11,4 +11,5 @@ urlpatterns = [
     path('edit/<int:car_id>/',
          views.edit_auction, name='edit_auction'),
     path('delete/<int:car_id>/', views.delete_auction, name='delete_auction'),
+    path('admin/', views.admin, name='admin'),
 ]

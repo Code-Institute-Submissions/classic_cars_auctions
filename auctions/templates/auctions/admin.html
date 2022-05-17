@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mb-5">
+    <div class="row mx-0">
+    </div>
+    <hr class="hor-line-home mt-5 mb-4">
+    <div class="text-center">
+        <h2 class="logo-font mb-4 text-danger">Auction Management</h2>
+        <hr class="hor-line-home mb-2 mt-3">
+        <h5 class="text-info ">Admin</h5>
+    </div>
+    <div class="row ml-0 mr-0">
+        <div class="col col-10 offset-1 col-xl-8 offset-xl-2">
+            <p class="text-danger">Add A New Auctions <a class="border border-info py-1 ml-4 bg-grey-light"
+                    href="{% url 'add_auction' %}"><span class="text-info ml-4 ">ADD<i
+                            class="far fa-plus-square mx-3"></i></span></a></p>
+            <p class="text-danger">Update or Delete Exsiting Auctions</p>
+            <div class="history table-responsive">
+                <table class="table table-sm table-borderless bg-grey-light">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Auction</th>
+                            <th>Time start</th>
+                            <th>Time End</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for car in cars %}
+                        <tr>
+                            <td> {{ car.id}} </td>
+                            <td><span class="text-info">{{ car.make}}, {{ car.model }}</span></td>
+                            <td> {{ car.timeStart|date:'G:i - d - M - y'}} </td>
+                            <td> {{ car.timeEnd|date:'G:i - d - M - y'}}</td>
+                            <td><a class="text-light bg-dark border border-dark rounded p-1"
+                                    href="{% url 'edit_auction' car.id %}">Edit</a> </td>
+                            <td class="pb-4"><a class="text-light bg-danger border border-dark rounded p-1"
+                                    href="{% url 'delete_auction' car.id %}">Delete</a></td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+<hr class="hor-line-home my-5">
+
+{% endblock %}
