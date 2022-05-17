@@ -14,8 +14,12 @@ from .forms import BidForm, CarForm
 
 def all_auctions(request):
     """ A view to return all cars and for sorting cars """
+    # update_something()
 
     cars = Car.objects.all()
+
+    for car in cars:
+        print((car.id, car.make))
 
     if request.method == 'POST':
         user_bid = request.POST['bid']
@@ -194,23 +198,29 @@ def admin(request):
     return render(request, template, context)
 
 
-
-
-def get_winner_bid(car_id):
+def update_something():
     """function to specify winner bid"""
+    print('hhh')
     current_date = timezone.now()
-    car = get_object_or_404(Car, id=car_id)
-    bids = Bid.objects.filter(car_id=car_id)
-    new_auction_end = car.timeEnd + timedelta(hours=48)
-    if current_date >= car.timeEnd:
-        if bids:
-            highest_bid = Bid.objects.filter(car_id=car_id).order_by('-amount')[0]
-            highest_bid_amount = highest_bid.amount
-            highest_bid_id = highest_bid.id
+    cars = Car.objects.all()
+    # bids = Bid.objects.filter(car_id=car_id)
+    # new_auction_end = car.timeEnd + timedelta(hours=48)
+    for car in cars:
+        new_auction_end = car.timeEnd + timedelta(hours=48)
+        bids = Bid.objects.filter(car_id=car.id)
 
-            if highest_bid_amount > car.reservedPrice:
-                Bid.objects.filter(id=highest_bid_id).update(winnerBid=True)
+        if current_date >= car.timeEnd:
+            if bids:
+                highest_bid = Bid.objects.filter(car_id=car.id).order_by('-amount')[0]
+                highest_bid_amount = highest_bid.amount
+                highest_bid_id = highest_bid.id
+
+                if highest_bid_amount > car.reservedPrice:
+                    Bid.objects.filter(id=highest_bid_id).update(winnerBid=True)
+                else:
+                    Car.objects.filter(id=car.id).update(timeEnd=new_auction_end)
             else:
-                Car.objects.filter(id=car_id).update(timeEnd=new_auction_end)
-        else:
-            Car.objects.filter(id=car_id).update(timeEnd=new_auction_end)
+                Car.objects.filter(id=car.id).update(timeEnd=new_auction_end)
+
+# def update_something():
+#     print("this function runs every 10 seconds")
