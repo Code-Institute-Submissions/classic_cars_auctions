@@ -1,0 +1,10 @@
+You won the auction for {{ obj.car.make}}
+Your bid for the amount of {{ obj.amount }} is a Winner Binner Bid.
+To secure this car {{ obj.car.make}} {{ obj.car.model }}, you need to pay a deposit of 10% of the final price.
+If you have any questions, feel free to contact us at 001 000177.
+
+Thank you !
+
+Sincerely,
+
+Classic Cars Auctions

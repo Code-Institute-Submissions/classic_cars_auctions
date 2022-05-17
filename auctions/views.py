@@ -1,6 +1,11 @@
 import datetime
 from datetime import timedelta
 from django.utils import timezone
+from django.conf import settings
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from .email import send_confirmation_email
+
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -15,11 +20,7 @@ from .forms import BidForm, CarForm
 
 def all_auctions(request):
     """ A view to return all cars and for sorting cars """
-    # get_winner_bid()
-    # check_payments()
-    # get_winner_bid()
 
-    
     cars = Car.objects.all()
 
     if request.method == 'POST':
@@ -44,15 +45,18 @@ def all_auctions(request):
 
 def auction_detail(request, car_id):
     """ A view to return car and auctions detail """
+    bid_subject_url = 'auctions/confirmation_emails/bid_confirmation_email_subject.txt',
+    bid_body_url = 'auctions/confirmation_emails/bid_confirmation_email_body.txt'
+
     payment_info = []
     request.session['payment_info'] = payment_info
     highest_bid_obj = None
-    
-    # winner_bid = None
+
     user_bid = 0
     form = BidForm()
     if request.user.is_authenticated:
         user_id = request.user.id
+        user = User.objects.get(id=user_id)
 
     car = get_object_or_404(Car, id=car_id)
     bids = Bid.objects.filter(car_id=car_id)
@@ -82,6 +86,7 @@ def auction_detail(request, car_id):
                 new_bid = Bid(car=car, user_id=user_id,  amount=bid,
                               time=current_date, winnerBid=False)
                 new_bid.save()
+                send_confirmation_email(new_bid, bid_subject_url, bid_body_url)
                 messages.success(request, f'Your bid for {bid} € was'
                                  ' successfully added')
                 return redirect('auction_detail', car_id=car_id)
@@ -204,7 +209,8 @@ def get_winner_bid():
         function to specify the winner's bid and to extend
         auctions  if the winning bid does not exist.
     """
-    print('hahaha')
+    winner_subject_url = 'auctions/confirmation_emails/winner_confirmation_email_subject.txt',
+    winner_body_url = 'auctions/confirmation_emails/winner_confirmation_email_body.txt'
     current_date = timezone.now()
     cars = Car.objects.all()
 
@@ -217,12 +223,11 @@ def get_winner_bid():
 
                 highest_bid = Bid.objects.filter(car_id=car.id).order_by('-amount')[0]
                 if not highest_bid.winnerBid:
-                    # highest_bid_amount = highest_bid.amount
-                    # highest_bid_id = highest_bid.id
+                    user = highest_bid.user
 
                     if highest_bid.amount >= car.reservedPrice:
                         Bid.objects.filter(id=highest_bid.id).update(winnerBid=True)
-                        # send email
+                        send_confirmation_email(highest_bid, winner_subject_url, winner_body_url)
                     else:
                         Car.objects.filter(id=car.id).update(timeEnd=new_auction_end)
             else:
@@ -236,6 +241,8 @@ def check_payments():
     the winner bid is cancled and
     it goes to second highest bidder
     """
+    defaulter_subject_url = 'auctions/confirmation_emails/payment_defaulter_email_subject.txt',
+    defaulter_body_url = 'auctions/confirmation_emails/payment_defaulter_email_body.txt'
     print('huhu')
     current_date = timezone.now()
     bids = Bid.objects.all()
@@ -246,31 +253,5 @@ def check_payments():
             payment = Payment.objects.filter(bids_id=bid.id)
             if not payment:
                 if current_date > payment_deadline:
-                    defaulter = User.objects.filter(id=bid.user.id)
-                    # send email payment defaulter
-                    # bid.winnerBid = False
+                    send_confirmation_email(bid, defaulter_subject_url, defaulter_body_url)
                     Bid.objects.filter(id=bid.id).delete()
-                    # new_winner_bid = Bid.objects.filter(car_id=bid.car.id).order_by('-amount')[1]
-                    # if new_winner_bid:
-                    #     new_auction_end = current_date + timedelta(hours=48)
-                    #     if new_winner_bid.amount < bid.car.reservedPrice:
-                    #         Car.objects.filter(id=bid.car.id).update(timeEnd=new_auction_end)
-                    #     else:
-                    #         new_winner_bid.winnerBid=True
-                    #         new_winner_bid.save()
-                    #         Bid.objects.filter(id=bid.id).delete()
-                    # else:
-
-                        
-                            
-
-
-                            
-                            
-
-
-                    
-
-
-
-

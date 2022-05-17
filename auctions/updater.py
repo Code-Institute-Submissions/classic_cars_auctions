@@ -7,4 +7,4 @@ def start():
     scheduler.add_job(check_payments, 'interval', seconds=35)
     scheduler.add_job(get_winner_bid, 'interval', seconds=35)
     scheduler.start()
-    scheduler.shutdown()
+    # scheduler.shutdown()

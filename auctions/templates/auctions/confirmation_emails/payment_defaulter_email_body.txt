@@ -1,0 +1,10 @@
+Hi {{ obj.user.user.username}}
+This email has been sent to inform you that you breached Classic Cars Auction agreement by not paying the 10% deposit of the final {{ obj.car.make }} {{ obj.car.model }} price within 48h of the auction end.
+Your bid will be canceled, and you are not entitled to buy this car.
+If you have any questions, feel free to contact us at 001 000177.
+
+Thank you !
+
+Sincerely,
+
+Classic Cars Auctions

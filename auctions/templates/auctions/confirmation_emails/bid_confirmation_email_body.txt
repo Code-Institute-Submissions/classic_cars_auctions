@@ -1,0 +1,14 @@
+Hello {{ obj.user.username }}!
+
+Your bid for {{ obj.car.make}}, of {{ obj.amount }} € was succefully added.
+
+Bid amount :  {{ obj.amount }} €
+date : {{ obj.time }} 
+
+If you have any questions, feel free to contact us at .
+
+Thank you for your order!
+
+Sincerely,
+
+Classic Cars Auctions
