@@ -8,7 +8,7 @@ class CarFilter(django_filters.FilterSet):
                                      lookup_expr='icontains')
 
     year_gt = django_filters.NumberFilter(field_name='firstRegistred',
-                                          lookup_expr='gte') 
+                                          lookup_expr='gte')
     year_lt = django_filters.NumberFilter(field_name='firstRegistred',
                                           lookup_expr='lte')
 

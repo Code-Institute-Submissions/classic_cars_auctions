@@ -4,6 +4,7 @@ from django.utils import timezone
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.models import User
 from payment.models import Payment
 from .models import Car, Bid
 from .filters import CarFilter
@@ -14,19 +15,19 @@ from .forms import BidForm, CarForm
 
 def all_auctions(request):
     """ A view to return all cars and for sorting cars """
-    # update_something()
+    # get_winner_bid()
+    # check_payments()
+    # get_winner_bid()
 
+    
     cars = Car.objects.all()
-
-    for car in cars:
-        print((car.id, car.make))
 
     if request.method == 'POST':
         user_bid = request.POST['bid']
 
     auctions_filter = CarFilter(request.GET, queryset=cars)
     cars = auctions_filter.qs
-   
+
     if not cars:
         cars = Car.objects.all()
 
@@ -198,29 +199,78 @@ def admin(request):
     return render(request, template, context)
 
 
-def update_something():
-    """function to specify winner bid"""
-    print('hhh')
+def get_winner_bid():
+    """
+        function to specify the winner's bid and to extend
+        auctions  if the winning bid does not exist.
+    """
+    print('hahaha')
     current_date = timezone.now()
     cars = Car.objects.all()
-    # bids = Bid.objects.filter(car_id=car_id)
-    # new_auction_end = car.timeEnd + timedelta(hours=48)
+
     for car in cars:
-        new_auction_end = car.timeEnd + timedelta(hours=48)
+        new_auction_end = current_date + timedelta(hours=48)
         bids = Bid.objects.filter(car_id=car.id)
 
         if current_date >= car.timeEnd:
             if bids:
-                highest_bid = Bid.objects.filter(car_id=car.id).order_by('-amount')[0]
-                highest_bid_amount = highest_bid.amount
-                highest_bid_id = highest_bid.id
 
-                if highest_bid_amount > car.reservedPrice:
-                    Bid.objects.filter(id=highest_bid_id).update(winnerBid=True)
-                else:
-                    Car.objects.filter(id=car.id).update(timeEnd=new_auction_end)
+                highest_bid = Bid.objects.filter(car_id=car.id).order_by('-amount')[0]
+                if not highest_bid.winnerBid:
+                    # highest_bid_amount = highest_bid.amount
+                    # highest_bid_id = highest_bid.id
+
+                    if highest_bid.amount >= car.reservedPrice:
+                        Bid.objects.filter(id=highest_bid.id).update(winnerBid=True)
+                        # send email
+                    else:
+                        Car.objects.filter(id=car.id).update(timeEnd=new_auction_end)
             else:
                 Car.objects.filter(id=car.id).update(timeEnd=new_auction_end)
 
-# def update_something():
-#     print("this function runs every 10 seconds")
+
+def check_payments():
+    """
+    function to check for payments
+    if payment exists if not
+    the winner bid is cancled and
+    it goes to second highest bidder
+    """
+    print('huhu')
+    current_date = timezone.now()
+    bids = Bid.objects.all()
+
+    for bid in bids:
+        if bid.winnerBid:
+            payment_deadline = bid.car.timeEnd + timedelta(hours=48)
+            payment = Payment.objects.filter(bids_id=bid.id)
+            if not payment:
+                if current_date > payment_deadline:
+                    defaulter = User.objects.filter(id=bid.user.id)
+                    # send email payment defaulter
+                    # bid.winnerBid = False
+                    Bid.objects.filter(id=bid.id).delete()
+                    # new_winner_bid = Bid.objects.filter(car_id=bid.car.id).order_by('-amount')[1]
+                    # if new_winner_bid:
+                    #     new_auction_end = current_date + timedelta(hours=48)
+                    #     if new_winner_bid.amount < bid.car.reservedPrice:
+                    #         Car.objects.filter(id=bid.car.id).update(timeEnd=new_auction_end)
+                    #     else:
+                    #         new_winner_bid.winnerBid=True
+                    #         new_winner_bid.save()
+                    #         Bid.objects.filter(id=bid.id).delete()
+                    # else:
+
+                        
+                            
+
+
+                            
+                            
+
+
+                    
+
+
+
+
