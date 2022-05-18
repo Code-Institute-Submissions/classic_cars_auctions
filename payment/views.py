@@ -1,4 +1,3 @@
-# import uuid
 from django.shortcuts import (render, redirect, reverse, get_object_or_404,
                               HttpResponse)
 from django.views.decorators.http import require_POST
@@ -6,13 +5,33 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.conf import settings
 
-
+from profiles.models import UserProfile
+from profiles.forms import UserProfileForm
 from auctions.models import Bid, Car
 from .models import Payment
 from .forms import PaymentForm
 
 
 import stripe
+import json
+
+
+@require_POST
+def cache_payment_data(request):
+    """Cach Payment"""
+    try:
+        pid = request.POST.get('client_secret').split('_secret')[0]
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        stripe.PaymentIntent.modify(pid, metadata={
+            'payment_info': json.dumps(request.session.get('payment_info', {})),
+            'save_info': request.POST.get('save_info'),
+            'username': request.user,
+        })
+        return HttpResponse(status=200)
+    except Exception as e:
+        messages.error(request, 'Sorry, your payment cannot be \
+            processed right now. Please try again later.')
+        return HttpResponse(content=e, status=400)
 
 
 @login_required()
@@ -21,6 +40,8 @@ def get_payment(request):
 
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
+
+    # unique_number = uuid.uuid4()
 
     payment_info = request.session.get('payment_info', {})
     user_id = request.user.id
@@ -31,10 +52,11 @@ def get_payment(request):
         winner_bid_id = item['winner_bid_id']
 
         winner_bid = Bid.objects.get(id=winner_bid_id)
+        # bids = Bid.objects.filter(user_id=user_id)
         car = Car.objects.get(id=car_id)
         car_price = winner_bid.amount
         payment_amount = car_price / 10
-    
+
 
     if request.method == 'POST':
         payment_data = {
@@ -60,8 +82,8 @@ def get_payment(request):
                 request.session['save_info'] = 'save_info' in request.POST
                 return redirect(reverse('payment_success', args=[payment.payment_number]))
             else:
-                    messages.error(request, 'try agin')
-                    return redirect(reverse('get_payment'))
+                messages.error(request, 'try agin')
+                return redirect(reverse('get_payment'))
 
         else:
             messages.error(request, 'There was an error with your form. \
@@ -77,12 +99,29 @@ def get_payment(request):
                 amount=stripe_total,
                 currency=settings.STRIPE_CURRENCY,
         )
-        payment_form = PaymentForm()
+
+        if request.user.is_authenticated:
+            try:
+                profile = UserProfile.objects.get(user=request.user)
+                payment_form = PaymentForm(initial={
+                    'full_name': profile.user.get_full_name(),
+                    'email': profile.user.email,
+                    'phone_number': profile.default_phone_number,
+                    'country': profile.default_country,
+                    'postcode': profile.default_postcode,
+                    'town_or_city': profile.default_town_or_city,
+                    'street_address1': profile.default_street_address1,
+                    'street_address2': profile.default_street_address2,
+                    'county': profile.default_county,
+                })
+            except UserProfile.DoesNotExist:
+                payment_form = PaymentForm()
+        else:
+            payment_form = PaymentForm()
 
     if not stripe_public_key:
         messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
-
     print(payment_amount)
     context = {
         'payment_form': payment_form,

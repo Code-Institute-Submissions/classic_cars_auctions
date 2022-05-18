@@ -91,6 +91,17 @@
 }
 
 
+select,
+select option {
+    color: #000000;
+}
+
+select:invalid,
+select option[value=""] {
+    color: #aab7c4 !important;
+}
+
+
 
 /* media query */
 
@@ -119,7 +130,7 @@
 
 @media (min-width: 768px)  {
     .payment-wrapper {
-        width: 45%;
+        width: 60%;
     }
 
     .payment-element h2 {

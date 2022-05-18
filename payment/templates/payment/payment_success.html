@@ -12,12 +12,12 @@
         <div class="col">
             <hr class="hor-line-home my-3">
             <div class="text-center">
-                <h2 class="logo-font header mb-4">Thank You</h2>
+                <h2 class="logo-font header mb-4 text-danger">Thank You</h2>
             </div>
             <hr class="hor-line-home my-3">
             <div class="text-center">
-            <p class="text-black">Your payment information is below. A confirmation email will be sent to
-                <strong>{{payment.email }}</strong>.</p>
+                <p class="text-black">Your payment information is below. A confirmation email will be sent to
+                    <strong>{{ payment.email }}</strong>.</p>
             </div>
         </div>
     </div>
@@ -160,16 +160,35 @@
 
                 <div class="row">
                     <div class="col-12 col-md-4">
-                        <p class="mb-0 text-black font-weight-bold"> Payed Deposit € {{ payment.deposit }}</p>
+                        <p class="mb-0 text-black font-weight-bold">Deposit € {{ payment.deposit }}</p>
                     </div>
+                    {% if not from_profile %}
                     <div class="col-12">
-                        <p class="mb-0 text-info mt-4"><strong><span class="text-danger mr-1">{{ payment.deposit }}</span>€  represents 10% of the car price, and the amount of<span class="text-danger ml-2 mr-1">{{ left_to_pay }}</span>€ should be paid by bank draft or by cash in our office before the collection.</strong></p>
+                        <p class="mb-0 text-info mt-4"><strong><span
+                                    class="text-danger mr-1">{{ payment.deposit }}</span>€ represents 10% of the car
+                                price, and the amount of<span class="text-danger ml-2 mr-1">{{ left_to_pay }}</span>€
+                                should be paid by bank draft or by cash in our office before the collection.</strong>
+                        </p>
                     </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
-    <hr class="hor-line-home my-5">
+
+    <div class="row">
+        <div class="col-12 col-lg-7 text-right">
+            {% if from_profile %}
+            <a href="{% url 'profile' %}" class="btn btn-black rounded-0 my-2">
+                <span class="icon mr-2">
+                    <i class="fas fa-angle-left"></i>
+                </span>
+                <span class="text-uppercase">Back to Profile</span>
+            </a>
+        </div>
+    </div>
+    {% endif %}
 </div>
+<hr class="hor-line-home my-5">
 
 {% endblock %}

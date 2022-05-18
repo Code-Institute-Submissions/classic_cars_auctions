@@ -16,9 +16,9 @@
   <div class="payment-wrapper">
     <div class="payment-element ml-3 mt-4">
       <h2 class="text-info">Payment Sumary</h2>
-      <p class="mb-2">Car :<span class="text-danger ml-2 mr-1 text-capitalize">{{ car.make }},
-          {{ car.model }}</span>{{ car.firstRegistred }}</p>
-      <p class="mb-2">Price :<span class="text-danger ml-2 mr-1">{{ car_price }}</span>€</p>
+      <p class="mb-2">Car :<span class="text-danger ml-2 mr-1 text-capitalize">{{  winner_bid.car.make }},
+          {{ winner_bid.car.model }}</span>{{ winner_bid.car.firstRegistred }}</p>
+      <p class="mb-2">Price :<span class="text-danger ml-2 mr-1">{{ winner_bid.amount }}</span>€</p>
       <p>Deposit to pay :<span class="text-danger ml-2 mr-1">{{ payment_amount }}</span>€</p>
     </div>
     <div class="payment-element">
