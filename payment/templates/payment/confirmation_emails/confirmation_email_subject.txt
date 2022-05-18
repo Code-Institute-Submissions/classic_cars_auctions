@@ -1,1 +1,1 @@
-Classic Cars Auctions Confirmation for Order Number {{ payment.payment_number }}
+Classic Cars Auctions Pyment Confirmation for Payment Number {{ payment.payment_number }}

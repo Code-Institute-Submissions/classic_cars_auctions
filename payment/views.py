@@ -41,8 +41,6 @@ def get_payment(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
-    # unique_number = uuid.uuid4()
-
     payment_info = request.session.get('payment_info', {})
     user_id = request.user.id
 
@@ -52,7 +50,6 @@ def get_payment(request):
         winner_bid_id = item['winner_bid_id']
 
         winner_bid = Bid.objects.get(id=winner_bid_id)
-        # bids = Bid.objects.filter(user_id=user_id)
         car = Car.objects.get(id=car_id)
         car_price = winner_bid.amount
         payment_amount = car_price / 10
@@ -145,7 +142,7 @@ def payment_success(request, payment_number):
     print(left_to_pay)
 
     profile = UserProfile.objects.get(user=request.user)
-    # Attach the user's profile to the order
+    # Attach the user's profile to the Payment
     payment.user_profile = profile
     payment.save()
 
@@ -165,7 +162,7 @@ def payment_success(request, payment_number):
             user_profile_form.save()
 
     messages.success(request, f'Payment successfully processed! \
-        Your order number is { payment_number }. A confirmation \
+        Your Payment number is { payment_number }. A confirmation \
         email will be sent to { payment.email }.')
 
     if 'payment_info' in request.session:

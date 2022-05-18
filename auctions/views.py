@@ -23,8 +23,6 @@ def all_auctions(request):
 
     cars = Car.objects.all()
 
-    payment_remainder(request, bid)
-
     auctions_filter = CarFilter(request.GET, queryset=cars)
     cars = auctions_filter.qs
 
@@ -246,7 +244,6 @@ def check_payments():
     """
     defaulter_subject_url = 'auctions/confirmation_emails/payment_defaulter_email_subject.txt',
     defaulter_body_url = 'auctions/confirmation_emails/payment_defaulter_email_body.txt'
-    print('huhu')
     current_date = timezone.now()
     bids = Bid.objects.all()
 

@@ -84,18 +84,25 @@
                     <a class="nav-link" href="{% url 'all_auctions' %}">Auctions</a>
                 </li>
                 {% if request.user.is_authenticated %}
+                    {% if request.user.is_superuser %}
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'admin' %}" class="nav-link">Admin</a>
+                </li>
+                
+                    {% endif %}
                 <li class="nav-item ">
-                    <a class="nav-link" href="#">Profile</a>
+                    <a class="nav-link" href="{% url 'profile' %}">Profile</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="#">Logout</a>
+                    <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Register</a>
+                    <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
                 </li>
                 <li class="nav-item ">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href="{% url 'account_login' %}">Login</a>
                 </li>
                 {% endif %}
             </ul>
@@ -149,14 +156,14 @@
                                     href="#"><strong>Auctions</strong> </a></li>
                             {% if request.user.is_authenticated %}
                             <li class="col-12 col-sm-2 mr-sm-2"><a class="text-danger"
-                                    href="#"><strong>Profile</strong></a></li>
+                                    href="{% url 'profile' %}"><strong>Profile</strong></a></li>
                             <li class="col-12 col-sm-2 mr-sm-2"><a class="text-danger"
-                                    href="#"><strong>Logout</strong></a></li>
+                                    href="{% url 'account_logout' %}"><strong>Logout</strong></a></li>
                             {% else %}
                             <li class="col col-12 col-sm-2 mr-sm-2"><a class="text-danger"
-                                    href="#"><strong>Register</strong></a></li>
+                                    href="{% url 'account_signup' %}"><strong>Register</strong></a></li>
                             <li class="col col-12 col-sm-2 mr-sm-2"><a class="text-danger"
-                                    href="#"><strong>Login</strong></a></li>
+                                    href="{% url 'account_login' %}"><strong>Login</strong></a></li>
                             {% endif %}
                         </ul>
                     </div>
