@@ -1,3 +1,4 @@
+import uuid
 from django_countries.fields import CountryField
 
 from django.db import models
@@ -27,3 +28,21 @@ class Payment(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     deposit = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
 
+
+    def _generate_payment_number(self):
+        """
+        Generate a random, unique payment number using UUID
+        """
+        return uuid.uuid4().hex.upper()
+
+    def save(self, *args, **kwargs):
+        """
+        Override the original save method to set the payment number
+        if it hasn't been set already.
+        """
+        if not self.payment_number:
+            self.payment_number = self._generate_payment_number()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return str(self.payment_number)
