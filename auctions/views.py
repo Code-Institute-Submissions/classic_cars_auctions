@@ -23,8 +23,7 @@ def all_auctions(request):
 
     cars = Car.objects.all()
 
-    if request.method == 'POST':
-        user_bid = request.POST['bid']
+    payment_remainder(request, bid)
 
     auctions_filter = CarFilter(request.GET, queryset=cars)
     cars = auctions_filter.qs
@@ -47,6 +46,7 @@ def auction_detail(request, car_id):
     """ A view to return car and auctions detail """
     bid_subject_url = 'auctions/confirmation_emails/bid_confirmation_email_subject.txt',
     bid_body_url = 'auctions/confirmation_emails/bid_confirmation_email_body.txt'
+    message = 'Congratulations Your bid is the winning bid!!! You Won this auction.  Please proceed with the payment.'
 
     payment_info = []
     request.session['payment_info'] = payment_info
@@ -100,6 +100,8 @@ def auction_detail(request, car_id):
     else:
         if bids:
             if highest_bid_obj.winnerBid and highest_bid_obj.user.id == user_id:
+                
+                messages.success(request, message)
                 payment_info. append({
                     'car_id': car_id,
                     'winner_bid_id': highest_bid_obj.id,
@@ -115,6 +117,7 @@ def auction_detail(request, car_id):
         'form': form,
         'min_bid': min_bid,
         'existing_payment': existing_payment,
+        'on_auction_detail_page': True,
     }
 
     return render(request, 'auctions/auction_detail.html', context)
@@ -255,3 +258,4 @@ def check_payments():
                 if current_date > payment_deadline:
                     send_confirmation_email(bid, defaulter_subject_url, defaulter_body_url)
                     Bid.objects.filter(id=bid.id).delete()
+
