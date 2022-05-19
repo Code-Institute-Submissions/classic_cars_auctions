@@ -2,12 +2,6 @@ from django.contrib import admin
 from .models import Payment
 
 
-# class PaymentLineItemAdminInline(admin.TabularInline):
-#     """PaymentLineItemAdminInline"""
-#     model = PaymentLineItem
-#     readonly_fields = ('car_price',)
-
-
 class PaymentAdmin(admin.ModelAdmin):
     """PymentAdmin"""
     # inlines = (PaymentLineItemAdminInline,)

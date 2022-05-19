@@ -16,8 +16,6 @@ from .filters import CarFilter
 from .forms import BidForm, CarForm
 
 
-
-
 def all_auctions(request):
     """ A view to return all cars and for sorting cars """
 
@@ -42,9 +40,12 @@ def all_auctions(request):
 
 def auction_detail(request, car_id):
     """ A view to return car and auctions detail """
-    bid_subject_url = 'auctions/confirmation_emails/bid_confirmation_email_subject.txt',
-    bid_body_url = 'auctions/confirmation_emails/bid_confirmation_email_body.txt'
-    message = 'Congratulations Your bid is the winning bid!!! You Won this auction.  Please proceed with the payment.'
+    bid_subject_url = 'auctions/confirmation_emails/'\
+                      'bid_confirmation_email_subject.txt'
+    bid_body_url = 'auctions/confirmation_emails/'\
+                   'bid_confirmation_email_body.txt'
+    message = 'Congratulations Your bid is the winning bid!!!'\
+              'You Won this auction.  Please proceed with the payment.'
 
     payment_info = []
     request.session['payment_info'] = payment_info
@@ -65,7 +66,10 @@ def auction_detail(request, car_id):
     auction_is_on = current_date > start_time and current_date < end_time
 
     if bids:
-        highest_bid_obj = Bid.objects.filter(car_id=car_id).order_by('-amount')[0]
+        highest_bid_obj = Bid.objects.filter(
+                              car_id=car_id
+                              ).order_by('-amount')[0]
+
         min_bid = highest_bid_obj.amount + 50
 
     else:
@@ -97,8 +101,9 @@ def auction_detail(request, car_id):
         payment_info = None
     else:
         if bids:
-            if highest_bid_obj.winnerBid and highest_bid_obj.user.id == user_id:
-                
+            if (highest_bid_obj.winnerBid and
+               highest_bid_obj.user.id == user_id):
+
                 messages.success(request, message)
                 payment_info. append({
                     'car_id': car_id,
@@ -194,7 +199,7 @@ def admin(request):
     """ render Admin view """
     if not request.user.is_superuser:
         return redirect(reverse('home'))
-    
+
     cars = Car.objects.all()
 
     template = 'auctions/admin.html'
@@ -210,8 +215,10 @@ def get_winner_bid():
         function to specify the winner's bid and to extend
         auctions  if the winning bid does not exist.
     """
-    winner_subject_url = 'auctions/confirmation_emails/winner_confirmation_email_subject.txt',
-    winner_body_url = 'auctions/confirmation_emails/winner_confirmation_email_body.txt'
+    winner_subject_url = 'auctions/confirmation_emails/'\
+                         'winner_confirmation_email_subject.txt'
+    winner_body_url = 'auctions/confirmation_emails/'\
+                      'winner_confirmation_email_body.txt'
     current_date = timezone.now()
     cars = Car.objects.all()
 
@@ -221,16 +228,16 @@ def get_winner_bid():
 
         if current_date >= car.timeEnd:
             if bids:
-
-                highest_bid = Bid.objects.filter(car_id=car.id).order_by('-amount')[0]
+                highest_bid = Bid.objects.filter(
+                                 car_id=car.id).order_by('-amount')[0]
                 if not highest_bid.winnerBid:
-                    user = highest_bid.user
-
                     if highest_bid.amount >= car.reservedPrice:
-                        Bid.objects.filter(id=highest_bid.id).update(winnerBid=True)
+                        Bid.objects.filter(
+                           id=highest_bid.id).update(winnerBid=True)
                         send_confirmation_email(highest_bid, winner_subject_url, winner_body_url)
                     else:
-                        Car.objects.filter(id=car.id).update(timeEnd=new_auction_end)
+                        Car.objects.filter(
+                            id=car.id).update(timeEnd=new_auction_end)
             else:
                 Car.objects.filter(id=car.id).update(timeEnd=new_auction_end)
 
@@ -242,8 +249,10 @@ def check_payments():
     the winner bid is cancled and
     it goes to second highest bidder
     """
-    defaulter_subject_url = 'auctions/confirmation_emails/payment_defaulter_email_subject.txt',
-    defaulter_body_url = 'auctions/confirmation_emails/payment_defaulter_email_body.txt'
+    defaulter_subject_url = 'auctions/confirmation_emails/'\
+                            'payment_defaulter_email_subject.txt',
+    defaulter_body_url = 'auctions/confirmation_emails/'\
+                         'payment_defaulter_email_body.txt'
     current_date = timezone.now()
     bids = Bid.objects.all()
 
@@ -255,4 +264,3 @@ def check_payments():
                 if current_date > payment_deadline:
                     send_confirmation_email(bid, defaulter_subject_url, defaulter_body_url)
                     Bid.objects.filter(id=bid.id).delete()
-

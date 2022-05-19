@@ -6,5 +6,6 @@ class AuctionsConfig(AppConfig):
     name = 'auctions'
 
     def ready(self):
+        """Method to star updater"""
         from . import updater
         updater.start()

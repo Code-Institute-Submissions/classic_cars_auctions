@@ -255,7 +255,11 @@ font-family: 'Roboto', sans-serif; */
 }
 
 .auction-search p {
-    font-size: 20px;
+    font-size: 15px;
+}
+
+.auction-search button {
+    width: 110px;
 }
 
 #all-cars {
@@ -279,7 +283,6 @@ font-family: 'Roboto', sans-serif; */
 
 .car p, #car p {
     font-size: 15px;
-    font-family: 700;
     overflow-wrap: break-word;
 }
 
@@ -634,7 +637,7 @@ footer li i {
 @media (min-width: 568px) and (max-width: 767px)  {
 
     .auction-search p {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .car-img-container img {
@@ -694,7 +697,7 @@ footer li i {
     }
 
     .auction-search p {
-        font-size: 16px;
+        font-size: 14px;
     }
 
     .message-container {

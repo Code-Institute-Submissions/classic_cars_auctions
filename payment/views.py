@@ -11,7 +11,6 @@ from auctions.models import Bid, Car
 from .models import Payment
 from .forms import PaymentForm
 
-
 import stripe
 import json
 
@@ -23,7 +22,8 @@ def cache_payment_data(request):
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
-            'payment_info': json.dumps(request.session.get('payment_info', {})),
+            'payment_info': json.dumps(request.session.get(
+                                       'payment_info', {})),
             'save_info': request.POST.get('save_info'),
             'username': request.user,
         })
@@ -54,7 +54,6 @@ def get_payment(request):
         car_price = winner_bid.amount
         payment_amount = car_price / 10
 
-
     if request.method == 'POST':
         payment_data = {
             'full_name': request.POST['full_name'],
@@ -77,7 +76,8 @@ def get_payment(request):
 
             if payment:
                 request.session['save_info'] = 'save_info' in request.POST
-                return redirect(reverse('payment_success', args=[payment.payment_number]))
+                return redirect(reverse('payment_success',
+                                args=[payment.payment_number]))
             else:
                 messages.error(request, 'try agin')
                 return redirect(reverse('get_payment'))
@@ -176,4 +176,3 @@ def payment_success(request, payment_number):
     }
 
     return render(request, template, context)
-

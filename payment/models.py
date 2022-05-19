@@ -10,8 +10,9 @@ class Payment(models.Model):
     """Payment Model"""
     payment_number = models.CharField(max_length=32, null=False,
                                       editable=False)
-    user_profile = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
-                                     null=True, blank=True, related_name='payment')
+    user_profile = models.ForeignKey(
+                          UserProfile, on_delete=models.SET_NULL,
+                          null=True, blank=True, related_name='payment')
     car = models.ForeignKey(Car, on_delete=models.SET_NULL,
                             null=True, blank=True, related_name='car')
     bids = models.ForeignKey(Bid, on_delete=models.SET_NULL,
@@ -26,8 +27,8 @@ class Payment(models.Model):
     street_address2 = models.CharField(max_length=80, null=True, blank=True)
     county = models.CharField(max_length=80, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
-    deposit = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
-
+    deposit = models.DecimalField(
+                    max_digits=10, decimal_places=2, null=False, default=0)
 
     def _generate_payment_number(self):
         """
