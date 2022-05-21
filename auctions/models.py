@@ -24,20 +24,19 @@ class Car(models.Model):
         return str(self.make)
 
 
-class Bidder(models.Model):
-    """Bidder Model"""
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+# class Bidder(models.Model):
+#     """Bidder Model"""
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return str(self.user.username)
+#     def __str__(self):
+#         return str(self.user.username)
 
 
 class Bid(models.Model):
     """Bid Model"""
     car = models.ForeignKey(
                'Car', null=True, blank=True, on_delete=models.SET_NULL)
-    user = models.ForeignKey(
-               'Bidder', null=True, blank=True, on_delete=models.SET_NULL)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     amount = models.IntegerField()
     time = models.DateTimeField(auto_now_add=True)
     winnerBid = models.BooleanField()

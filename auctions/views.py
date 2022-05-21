@@ -85,12 +85,15 @@ def auction_detail(request, car_id):
             bid = user_bid
 
             if int(bid) >= min_bid:
-                new_bid = Bid(car=car, user_id=user_id,  amount=bid,
+                new_bid = Bid(car=car, user=user,  amount=bid,
                               time=current_date, winnerBid=False)
                 new_bid.save()
                 send_confirmation_email(new_bid, bid_subject_url, bid_body_url)
                 messages.success(request, f'Your bid for {bid} € was'
                                  ' successfully added')
+                # car_obj_bids = Bid.objects.filter(car_id=car_id)
+                # for bid in car_obj_bids:
+                #     print(bid.user)
                 return redirect('auction_detail', car_id=car_id)
             else:
                 messages.error(request, f'Your bid should be equal'
