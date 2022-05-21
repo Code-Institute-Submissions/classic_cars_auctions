@@ -5,7 +5,7 @@ from django.template.loader import render_to_string
 
 def send_confirmation_email(obj, subject_url, body_url):
     """Send the user a confirmation email"""
-    cust_email = obj.user.user.email
+    cust_email = obj.user.email
     subject = render_to_string(
         subject_url,
         {'obj': obj})

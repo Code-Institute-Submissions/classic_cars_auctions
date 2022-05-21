@@ -36,7 +36,7 @@ class Bid(models.Model):
     """Bid Model"""
     car = models.ForeignKey(
                'Car', null=True, blank=True, on_delete=models.SET_NULL)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     amount = models.IntegerField()
     time = models.DateTimeField(auto_now_add=True)
     winnerBid = models.BooleanField()
