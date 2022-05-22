@@ -52,4 +52,3 @@ def payment_history(request, payment_number):
     }
 
     return render(request, template, context)
-

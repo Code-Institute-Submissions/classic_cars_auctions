@@ -29,7 +29,8 @@ def send_outbid_email(obj, new_amount, subject_url, body_url):
         {'obj': obj, 'new_amount': new_amount})
     body = render_to_string(
         body_url,
-        {'obj': obj, 'new_amount': new_amount, 'contact_email': settings.DEFAULT_FROM_EMAIL})
+        {'obj': obj, 'new_amount': new_amount,
+         'contact_email': settings.DEFAULT_FROM_EMAIL})
 
     send_mail(
         subject,

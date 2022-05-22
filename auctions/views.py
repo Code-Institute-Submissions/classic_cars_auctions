@@ -96,16 +96,15 @@ def auction_detail(request, car_id):
                 messages.success(request, f'Your bid for {new_bid.amount}'
                                  ' € was successfully added')
                 car_obj_bids = Bid.objects.filter(car_id=car_id)
-                # car_obj_bids_id = Bid.objects.filter(car_id=car_id)
-                # print(car_obj_bids_id)
                 id_list = []
                 id_list.append(user.id)
                 for old_bid in car_obj_bids:
                     bid_count = id_list.count(old_bid.user.id)
                     if bid_count == 0:
-                        send_outbid_email(old_bid, new_bid.amount, outbid_sub_url, outbid_body_url)
+                        send_outbid_email(old_bid, new_bid.amount,
+                                          outbid_sub_url, outbid_body_url)
                         id_list.append(old_bid.user.id)
-                        
+
                 return redirect('auction_detail', car_id=car_id)
             else:
                 messages.error(request, f'Your bid should be equal'
@@ -253,7 +252,9 @@ def get_winner_bid():
                     if highest_bid.amount >= car.reservedPrice:
                         Bid.objects.filter(
                            id=highest_bid.id).update(winnerBid=True)
-                        send_confirmation_email(highest_bid, winner_subject_url, winner_body_url)
+                        send_confirmation_email(highest_bid,
+                                                winner_subject_url,
+                                                winner_body_url)
                     else:
                         Car.objects.filter(
                             id=car.id).update(timeEnd=new_auction_end)
@@ -281,5 +282,6 @@ def check_payments():
             payment = Payment.objects.filter(bids_id=bid.id)
             if not payment:
                 if current_date > payment_deadline:
-                    send_confirmation_email(bid, defaulter_subject_url, defaulter_body_url)
+                    send_confirmation_email(bid, defaulter_subject_url,
+                                            defaulter_body_url)
                     Bid.objects.filter(id=bid.id).delete()

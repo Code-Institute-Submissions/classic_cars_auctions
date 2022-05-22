@@ -9,12 +9,12 @@ from .models import Payment
 import json
 import time
 
+
 class StripeWH_Handler:
     """Handle Stripe webhooks"""
 
     def __init__(self, request):
         self.request = request
-    
 
     def _send_confirmation_email(self, payment):
         """Send the user a confirmation email"""
@@ -25,14 +25,13 @@ class StripeWH_Handler:
         body = render_to_string(
             'payment/confirmation_emails/confirmation_email_body.txt',
             {'payment': payment, 'contact_email': settings.DEFAULT_FROM_EMAIL})
-        
+
         send_mail(
             subject,
             body,
             settings.DEFAULT_FROM_EMAIL,
             [cust_email]
-        )        
-
+        )
 
     def handle_event(self, event):
         """
@@ -58,15 +57,10 @@ class StripeWH_Handler:
         for item in json.loads(payment_info):
             car_id = item['car_id']
             winner_bid_id = item['winner_bid_id']
-            # car_price = item['car_price']
-        
-            
+
         winner_bid = Bid.objects.get(id=winner_bid_id)
         car = Car.objects.get(id=car_id)
-        
-        
 
-        # Clean data in the shipping details
         for field, value in shipping_details.address.items():
             if value == "":
                 shipping_details.address[field] = None
@@ -87,8 +81,7 @@ class StripeWH_Handler:
                     county__iexact=shipping_details.address.state,
                     deposit=deposit,
                     car=car,
-                    bids = winner_bid,
-                  
+                    bids=winner_bid,
                 )
                 payment_exists = True
                 break
@@ -115,7 +108,7 @@ class StripeWH_Handler:
                 deposit=deposit,
                 car=car,
                 bids=winner_bid,
-            )    
+            )
         self._send_confirmation_email(payment)
         return HttpResponse(
             content=f'Webhook received: {event["type"]} | SUCCESS: Created Payment in webhook',

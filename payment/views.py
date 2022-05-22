@@ -119,7 +119,6 @@ def get_payment(request):
     if not stripe_public_key:
         messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
-    print(payment_amount)
     context = {
         'payment_form': payment_form,
         'car_price': car_price,
@@ -137,11 +136,9 @@ def payment_success(request, payment_number):
     """
     save_info = request.session.get('save_info')
     payment = get_object_or_404(Payment, payment_number=payment_number)
-
     left_to_pay = payment.bids.amount - payment.bids.amount / 10
-    print(left_to_pay)
-
     profile = UserProfile.objects.get(user=request.user)
+
     # Attach the user's profile to the Payment
     payment.user_profile = profile
     payment.save()
