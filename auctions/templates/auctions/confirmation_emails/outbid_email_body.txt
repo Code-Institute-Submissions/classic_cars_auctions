@@ -1,8 +1,8 @@
 Hello {{ obj.user.username }}!
 
-Your Bid for {{ obj.car.make}}, {{ obj.car.model }} was added succefully.
+New bid for {{ obj.car.make }}, {{ obj.car.model }}  was  added.
 
-Bid Amount : {{ obj.amount }}
+Bid amount :  {{ new_amount }} €
 
 date : {{ obj.time }} 
 

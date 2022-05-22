@@ -1,0 +1,1 @@
+Classic Cars Auctions New Bid for {{ obj.car.make }}, {{ obj.car.model}} Added.

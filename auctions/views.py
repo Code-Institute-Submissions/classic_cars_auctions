@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.conf import settings
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
-from .email import send_confirmation_email
+from .email import send_confirmation_email, send_outbid_email
 
 from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.contrib.auth.decorators import login_required
@@ -44,6 +44,10 @@ def auction_detail(request, car_id):
                       'bid_confirmation_email_subject.txt'
     bid_body_url = 'auctions/confirmation_emails/'\
                    'bid_confirmation_email_body.txt'
+    outbid_sub_url = 'auctions/confirmation_emails/'\
+                     'outbid_email_subject.txt'
+    outbid_body_url = 'auctions/confirmation_emails/'\
+                      'outbid_email_body.txt'
     message = 'Congratulations Your bid is the winning bid!!!'\
               'You Won this auction.  Please proceed with the payment.'
 
@@ -82,18 +86,26 @@ def auction_detail(request, car_id):
                            ' Please enter your bid again.')
 
         else:
-            bid = user_bid
+            new_bid_amount = int(user_bid)
 
-            if int(bid) >= min_bid:
-                new_bid = Bid(car=car, user=user,  amount=bid,
+            if new_bid_amount >= min_bid:
+                new_bid = Bid(car=car, user=user,  amount=new_bid_amount,
                               time=current_date, winnerBid=False)
                 new_bid.save()
                 send_confirmation_email(new_bid, bid_subject_url, bid_body_url)
-                messages.success(request, f'Your bid for {bid} € was'
-                                 ' successfully added')
-                # car_obj_bids = Bid.objects.filter(car_id=car_id)
-                # for bid in car_obj_bids:
-                #     print(bid.user)
+                messages.success(request, f'Your bid for {new_bid.amount}'
+                                 ' € was successfully added')
+                car_obj_bids = Bid.objects.filter(car_id=car_id)
+                # car_obj_bids_id = Bid.objects.filter(car_id=car_id)
+                # print(car_obj_bids_id)
+                id_list = []
+                id_list.append(user.id)
+                for old_bid in car_obj_bids:
+                    bid_count = id_list.count(old_bid.user.id)
+                    if bid_count == 0:
+                        send_outbid_email(old_bid, new_bid.amount, outbid_sub_url, outbid_body_url)
+                        id_list.append(old_bid.user.id)
+                        
                 return redirect('auction_detail', car_id=car_id)
             else:
                 messages.error(request, f'Your bid should be equal'
