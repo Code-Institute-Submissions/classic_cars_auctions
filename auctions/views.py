@@ -215,12 +215,16 @@ def admin(request):
     if not request.user.is_superuser:
         return redirect(reverse('home'))
 
-    cars = Car.objects.all()
+    cars = Car.objects.order_by('-timeStart')
+    payments = Payment.objects.order_by('-date')
+    bids = Bid.objects.order_by('-time')
 
     template = 'auctions/admin.html'
 
     context = {
         'cars': cars,
+        'payments': payments,
+        'bids': bids,
     }
     return render(request, template, context)
 
