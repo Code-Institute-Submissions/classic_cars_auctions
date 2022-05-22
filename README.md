@@ -4,11 +4,11 @@
 
 Classic Cars Auctions is an online auction website specializing in classic cars, offering enthusiasts the opportunity to buy vehicles from across the eras. It is designed to be responsive and accessible on a range of devices, making it easy to navigate for potential customers.
 
-- Home page on diffrent divices<br>
+ Home page on diffrent divices<br>
 <h2 align="center"><img src="readme_files/images/homepage.jpg"></h2><br><br>
-- Auctions page on diffrent divices<br>
+ Auctions page on diffrent divices<br>
 <h2 align="center"><img src="readme_files/images/auctionspage.jpg"></h2></h2><br><br>
-- Auction_detail page on diffrent divices<br>
+Auction_detail page on diffrent divices<br>
 <h2 align="center"><img src="readme_files/images/auction_detail.jpg"></h2></h2><br><br>
 
 ## User Experience (UX)
@@ -91,20 +91,13 @@ Classic Cars Auctions is an online auction website specializing in classic cars,
     1. Car Model:<br> 
     represents an auction and contains all car necesserey information.</br></br>
         <h3 align="center"><img src="readme_files/images/car_model.jpg"></h3><br><br>
-        
-        
-    2.  Bidder Model:<br>
-        The Bidder Model contains all the information about the bidding user and is related to User by One To One relationship.
-        </br></br>
-        <h3 align="center"><img src="readme_files/images/Bidder_model.jpg"></h3> 
 
     3. The bid Model :<br> contains all information about the bid placed by the user and a Boolean field winnerBid, which is set by default to None. Once the auction ends, if the given bid is a winning bid, the field's value is updated to True.
         </br></br>
         <h3 align="center"><img src="readme_files/images/bid_model.jpg"></h3> </br></br>
 -   #### Models Relationship for Auctions App
     1. The Car Model is related to the Bid Model by relation OnetoMany as the Bid model takes The car model as ForegineKey. 
-    2. The bidder Model is related to Bid Model by relation OnetoMany as the Bid model takes The user field, the only field in the Bidder model, as ForegineKey. 
-    3. The bidder model is related to Allauth User Model by relation OneToOne.
+    2. The Bid model is related to Allauth User Model by relation OneToOne.
     </br></br>
     <h3 align="center"><img src="readme_files/images/auction_relation.jpg"></h3> </br></br>
 
@@ -125,10 +118,12 @@ Classic Cars Auctions is an online auction website specializing in classic cars,
 -   #### Models
     1. UserProfile Model:<br> 
     The UserProfile Model contains all user detail needed for payment as the Payment Model use the data stored in the UserProfile Model.</br></br>
-        <h3 align="center"><img src="readme_files/images/allapps-relations.jpg"></h3><br><br>
+    <h3 align="center"><img src="readme_files/images/UserProfile.jpg"></h3><br><br>    
 
 -   ### Relationship between Models across all Apps.
-        
+    1. Car Model that represents the auction is related to Bid Model. The Payment Model is related to the To Car Model, Bid Model, and UserProfile Model, as payment use user info stored in the UserProfile Model for payment.
+    2. Allauth User Model is related to Bid Model and UserProfile.<br><br>
+    <h3 align="center"><img src="readme_files/images/allapps-relations.jpg"></h3><br><br>
         
     
 
@@ -189,14 +184,14 @@ Classic Cars Auctions is an online auction website specializing in classic cars,
 
 The W3C Markup Validator and W3C CSS Validator Services were used to validate every page of the project to ensure there were no syntax errors in the project.
 
--   [W3C Markup Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) - [Results](https://github.com/)
+-   [W3C Markup Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) - [Results](https://github.com/uskawi/classic_cars_auctions/tree/main/readme_files/images)
 -   [W3C CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) - [Results](https://github.com/)
 
 The JSHint JavaScript Validator was used to validate every file containing JavaScript  of the project to ensure there  were no errors.
 -   [W3C Markup Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) - [Results](https://github.com/)
 
 The PEP8 online Python  Validator a was used to validate every Python file of the project to ensure there were no  errors.
--   [](http://pep8online.com/) - [Results](https://github.com/)
+-   [PEP8 online](http://pep8online.com/) - [Results](https://github.com/)
 
 ### Testing User Stories from User Experience (UX) Section
 
