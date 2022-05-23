@@ -85,7 +85,6 @@
                 </li>
                 {% if request.user.is_authenticated %}
                     {% if request.user.is_superuser %}
-                </li>
                 <li class="nav-item">
                     <a href="{% url 'admin' %}" class="nav-link">Admin</a>
                 </li>
@@ -204,7 +203,7 @@
     </footer>
 
     {% block postloadjs %}
-    <script type="text/javascript">
+    <script>
         $('.toast').toast('show');
 
     </script>

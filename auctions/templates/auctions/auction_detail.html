@@ -7,59 +7,62 @@
 <section id="auction-detail">
   <div id="car" class="my-5">
     <div class="row mx-0 px-0 my-5 car-card">
-      <h2 class="col col-12  mt-3 text-uppercase"> {{ car.make }} <span>{{ car.model }}</span></h2>
-      <div class="col col-12">
-        <div class="row">
-          <div class="col col-12  col-md-6 car-img-container">
-            <img src="{{ car.image.url }}" alt="car image">
-          </div>
-          <div class="col col-12 col-sm-10 offset-sm-1 offset-md-0 col-md-6 my-3">
-            <div class="mb-4 text-center auction-logo">
-              <p class="text-danger">CCA<span class="ml-3 block">Classic Cars
-                  Auctions</span></p>
+      <div class="row mx-0 px-0 my-5 car-card">
+        <h2 class="col col-12  mt-3 text-uppercase"> {{ car.make }} <span>{{ car.model }}</span></h2>
+        <div class="col col-12">
+          <div class="row">
+            <div class="col col-12  col-md-6 car-img-container">
+              <img src="{{ car.image.url }}" alt="car image">
             </div>
-            <div class="row mt-4">
-              <div class="col-6">
-                <p class="my-2 pl-md-5">First Registred<span
-                    class="text-info text-capitalize d-block">{{ car.firstRegistred }}</span></p>
+            <div class="col col-12 col-sm-10 offset-sm-1 offset-md-0 col-md-6 my-3">
+              <div class="mb-4 text-center auction-logo">
+                <p class="text-danger">CCA<span class="ml-3 block">Classic Cars
+                    Auctions</span></p>
               </div>
-              <div class="col-6">
-                <p class="my-2 pl-md-5">Color<span class="text-info text-capitalize d-block">{{ car.color }}</span></p>
+              <div class="row mt-4">
+                <div class="col-6">
+                  <p class="my-2 pl-md-5">First Registred<span
+                      class="text-info text-capitalize d-block">{{ car.firstRegistred }}</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="my-2 pl-md-5">Color<span class="text-info text-capitalize d-block">{{ car.color }}</span>
+                  </p>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-6">
-                <p class="my-2 pl-md-5">Odometer<span class="text-info d-block">{{ car.odometer }} km</span></p>
+              <div class="row">
+                <div class="col-6">
+                  <p class="my-2 pl-md-5">Odometer<span class="text-info d-block">{{ car.odometer }} km</span></p>
+                </div>
+                <div class="col-6">
+                  <p class="my-2 pl-md-5">Transmission<span
+                      class="text-info text-capitalize d-block">{{ car.transmission }}</span></p>
+                </div>
               </div>
-              <div class="col-6">
-                <p class="my-2 pl-md-5">Transmission<span
-                    class="text-info text-capitalize d-block">{{ car.transmission }}</span></p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-6">
-                <p class="my-2 pl-md-5">Reserved Price<span class="text-info d-block">{{ car.reservedPrice }} €</span>
-                </p>
-              </div>
-              <div class="col-6">
-                <p class="my-2 pl-md-5">Fuel Type<span
-                    class="text-info text-capitalize d-block">{{ car.fuelType }}</span></p>
+              <div class="row">
+                <div class="col-6">
+                  <p class="my-2 pl-md-5">Reserved Price<span class="text-info d-block">{{ car.reservedPrice }} €</span>
+                  </p>
+                </div>
+                <div class="col-6">
+                  <p class="my-2 pl-md-5">Fuel Type<span
+                      class="text-info text-capitalize d-block">{{ car.fuelType }}</span></p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div id="car-description1" class="col col-10 offset-1">
-        <p class="text-info mb-0 mt-4 mb-2 font-weight-bold">Description</p>
-        <p class="text-justify">{{ car.description|truncatewords:"75"|linebreaks }}<button id="show-description"
-            class="description-btn mt-0">show-more</button></p>
+        <div id="car-description1" class="col col-10 offset-1">
+          <p class="text-info mb-0 mt-4 mb-2 font-weight-bold">Description</p>
+          <p class="text-justify">{{ car.description|truncatewords:"75"|linebreaks }}<button id="show-description"
+              class="description-btn mt-0">show-more</button>
 
-      </div>
-      <div id="car-description2" class="col col-10 offset-1 hide">
-        <p class="text-info mb-0 mt-4 mb-2 font-weight-bold">Description</p>
-        <p class="text-justify">{{ car.description }}<button id="hide-description" class="description-btn mt-0">show
-            less</button></p>
+        </div>
+        <div id="car-description2" class="col col-10 offset-1 hide">
+          <p class="text-info mb-0 mt-4 mb-2 font-weight-bold">Description</p>
+          <p class="text-justify">{{ car.description }}<button id="hide-description" class="description-btn mt-0">show
+              less</button></p>
 
+        </div>
       </div>
     </div>
     <div class="bidding-panel pb-4">
@@ -94,7 +97,7 @@
           {% if bids|length > 0 %}
           <div class="col-12 col-lg-6 offset-3 mb-4">
             <div class="history table-responsive">
-                <table class="table table-sm table-borderless  bg-grey-light">
+              <table class="table table-sm table-borderless  bg-grey-light">
                 <thead>
                   <tr>
                     <th>Bid</th>
@@ -127,18 +130,19 @@
           <h4 class="header text-center text-info"><a href=""> Please Sign in to Bid</a></h4>
         </div>
         {% endif %}
-      </div>
-      {% else %}
-      <div class="col col-10 col-sm-6  offset-1 offset-sm-3  bg-light mb-1 border border-dark panel-item">
-        <p class="text-center">Starting Date: <span
-            class="text-danger font-weight-bold mx-1">{{ car.timeEnd|date:'G:i - d/M' }}</span></p>
-      </div>
-      <div class="col col-10 col-sm-6  offset-1 offset-sm-3 bg-light mb-1 border border-dark panel-item">
-        <p class="text-center">Closing Date: <span
-            class="text-danger font-weight-bold mx-1">{{ car.timeEnd|date:'G:i - d/M' }}</span></p>
-      </div>
+        {% else %}
+        <div class="col col-10 col-sm-6  offset-1 offset-sm-3  bg-light mb-1 border border-dark panel-item">
+          <p class="text-center">Starting Date: <span
+              class="text-danger font-weight-bold mx-1">{{ car.timeEnd|date:'G:i - d/M' }}</span></p>
+        </div>
+        <div class="col col-10 col-sm-6  offset-1 offset-sm-3 bg-light mb-1 border border-dark panel-item">
+          <p class="text-center">Closing Date: <span
+              class="text-danger font-weight-bold mx-1">{{ car.timeEnd|date:'G:i - d/M' }}</span></p>
+        </div>
+        {% endif %}
 
-      {% endif %}
+
+      </div>
     </div>
   </div>
   {% if request.user.is_authenticated and auction_is_on %}
@@ -163,9 +167,6 @@
       </form>
     </div>
   </div>
-
-
-
   {% endif %}
   {% endif %}
 </section>
@@ -174,7 +175,7 @@
 {% endblock %}
 {% block postloadjs %}
 {{ block.super }}
-<script type="text/javascript">
+<script>
   $('#show-bidding-form').click(function () {
     $('#car').css({
       'display': 'none',
@@ -185,7 +186,7 @@
   });
 
 </script>
-<script type="text/javascript">
+<script>
   $('#show-description').click(function () {
     $('#car-description1').addClass('hide');
     $('#car-description2').removeClass('hide');
