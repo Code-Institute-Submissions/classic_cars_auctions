@@ -152,7 +152,7 @@
                             <li class="col col-12 col-sm-2 mr-sm-2"><a class="text-danger"
                                     href="{% url 'home' %}"><strong>Home</strong> </a></li>
                             <li class="col col-12 col-sm-2 mr-sm-2"><a class="text-danger"
-                                    href="#"><strong>Auctions</strong> </a></li>
+                                    href="{% url 'all_auctions' %}"><strong>Auctions</strong> </a></li>
                             {% if request.user.is_authenticated %}
                             <li class="col-12 col-sm-2 mr-sm-2"><a class="text-danger"
                                     href="{% url 'profile' %}"><strong>Profile</strong></a></li>

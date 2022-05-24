@@ -339,6 +339,7 @@ td.bid-amount-history, td.bid-date-history {
 .car-description1 p{
     position: relative;
 }
+
 #hide-description, #show-description {
     background-color: transparent;
     border: none;
@@ -349,6 +350,14 @@ td.bid-amount-history, td.bid-date-history {
     position: absolute;
     bottom: 0;
     right: 0;
+}
+
+.bid-login-message a {
+    text-decoration: underline;
+}
+
+.bid-login-message a:hover { 
+    color: #cc3217;
 }
 
 #add_bid {
@@ -638,6 +647,7 @@ footer li i {
 
     .auction-search p {
         font-size: 14px;
+        letter-spacing: 0.6px;
     }
 
     .car-img-container img {
@@ -698,6 +708,7 @@ footer li i {
 
     .auction-search p {
         font-size: 14px;
+        letter-spacing: 0.6px;
     }
 
     .message-container {
