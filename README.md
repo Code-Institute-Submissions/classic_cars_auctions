@@ -76,35 +76,26 @@ Auction_detail page on diffrent divices<br>
 -  Admin Managment
 
 ## Project Structure and Database.
-
 -   ### Home App
 
--   ####    Description
-
-    Home is used to show a home page. The home page 
+    1. Home is used to show a home page. The home page 
     The Home App does not have any Database model, and its purpose is to display the Home page containing the banner image welcome section and general information about the process that the user should undergo during an auction. 
 
 -   ### Auction App
 
 -   ####    Description
-
     Auctions App is the app where all the auction logic happens.
     The Auction app allows the user to search for an auction in the database, access the auction, and place a bid. 
     Auction App is responsible for finding the winner's bid, checking if payments were made in time, and finding the payment defaulters.
-
 -   #### Models
-
--   ##### Car Model
+    1. Car Model:<br> 
     represents an auction and contains all car necesserey information.</br></br>
         <h3 align="center"><img src="readme_files/images/car_model.jpg"></h3><br><br>
 
--    ##### The bid Model
-
-     contains all information about the bid placed by the user and a Boolean field winnerBid, which is set by default to None. Once the auction ends, if the given bid is a winning bid, the field's value is updated to True.
+    3. The bid Model :<br> contains all information about the bid placed by the user and a Boolean field winnerBid, which is set by default to None. Once the auction ends, if the given bid is a winning bid, the field's value is updated to True.
         </br></br>
         <h3 align="center"><img src="readme_files/images/bid_model.jpg"></h3> </br></br>
-
--   ##### Models Relationship for Auctions App
+-   #### Models Relationship for Auctions App
     1. The Car Model is related to the Bid Model by relation OnetoMany as the Bid model takes The car model as ForegineKey. 
     2. The Bid model is related to Allauth User Model by relation OneToOne.
     </br></br>
@@ -113,22 +104,19 @@ Auction_detail page on diffrent divices<br>
 -   ### Payment App
 
 -   ####    Description
-    The Payment App's role is to accept payments and generate payment confirmations. The technology used in the payment app is Stripe. The user can complete the payment by submitting the payment form then the payment is saved in the DB.
-
+    The Payment App's role is to accept payments and generate payment confirmations. The technology used in the payment app is Stripe. The user can complete the payment by submitting the payment form then the payment is saved in the DB. 
 -   #### Models
--   ##### Payment Model
-
+    1. Payment Model:<br> 
     The Payment Model contains all needed user information to complete payment.</br></br>
         <h3 align="center"><img src="readme_files/images/payment.jpg"></h3><br><br>
 
 -   ### Profile App
 
 -   ####    Description
-    Profile App's role is t store default user information and allow the user to update detail and display user history.
+   |Profile App's role is t store default user information and allow the user to update detail and display user history.
 
 -   #### Models
--   ##### UserProfile Model
-
+    1. UserProfile Model:<br> 
     The UserProfile Model contains all user detail needed for payment as the Payment Model use the data stored in the UserProfile Model.</br></br>
     <h3 align="center"><img src="readme_files/images/UserProfile.jpg"></h3><br><br>    
 
