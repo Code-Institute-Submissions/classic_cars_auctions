@@ -78,16 +78,17 @@ Auction_detail page on diffrent divices<br>
 ## Project Structure and Database.
 -   ### Home App
 
-    1. Home is used to show a home page. The home page. 
-    The Home App does not have any Database model, and its purpose is to display the Home page containing the banner image welcome section and general information about the process that the user should undergo during an auction. 
+    -   ####    Description
+
+    1. The Home App does not have any Database model, and its purpose is to display the Home page containing the banner image welcome section and general information about the process that the user should undergo during an auction. 
 
 -   ### Auction App
 
     -   ####    Description
 
         1. Auctions App is the app where all the auction logic happens.
-        2. The Auction app allows the user to search for an auction in the database, access the auction, and place a     bid. 
-        3. Auction App is responsible for finding the winner's bid, checking if payments were made in time, and finding the payment defaulters.
+        1. The Auction app allows the user to search for an auction in the database, access the auction, and place a     bid. 
+        1. Auction App is responsible for finding the winner's bid, checking if payments were made in time, and finding the payment defaulters.
 
     -   #### Models
         -   ##### Car Model
@@ -96,13 +97,14 @@ Auction_detail page on diffrent divices<br>
             <h3 align="center"><img src="readme_files/images/car_model.jpg"></h3><br><br>
 
         -    ##### The bid Model 
-            1. contains all information about the bid placed by the user and a Boolean field winnerBid, which is set by default to None. Once the auction ends, if the given bid is a winning bid, the field's value is updated to True.
-            </br></br>
-            <h3 align="center"><img src="readme_files/images/bid_model.jpg"></h3> </br></br>
+
+             1. contains all information about the bid placed by the user and a Boolean field winnerBid, which is set by default to None. Once the auction ends, if the given bid is a winning bid, the field's value is updated to True.
+             </br></br>
+             <h3 align="center"><img src="readme_files/images/bid_model.jpg"></h3> </br></br>
     -   #### Models Relationship for Auctions App
 
         1.  The Car Model is related to the Bid Model by relation OnetoMany as the Bid model takes The car model as ForegineKey. 
-        2. The Bid model is related to Allauth User Model by relation OneToOne.
+        1. The Bid model is related to Allauth User Model by relation OneToOne.
         </br></br>
         <h3 align="center"><img src="readme_files/images/auction_relation.jpg"></h3> </br></br>
 
@@ -111,7 +113,7 @@ Auction_detail page on diffrent divices<br>
     -   ####    Description
 
         1. The Payment App's role is to accept payments and generate payment confirmations. 
-        2. The technology used in the payment app is Stripe. The user can complete the payment by submitting the payment form then the payment is saved in the DB. 
+        1. The technology used in the payment app is Stripe. The user can complete the payment by submitting the payment form then the payment is saved in the DB. 
     -   #### Models
 
         -   #####  Payment Model
@@ -196,14 +198,14 @@ Auction_detail page on diffrent divices<br>
 
 The W3C Markup Validator and W3C CSS Validator Services were used to validate every page of the project to ensure there were no syntax errors in the project.
 
--   [W3C Markup Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) - [Results](https://github.com/uskawi/classic_cars_auctions/tree/main/readme_files/images)
--   [W3C CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) - [Results](https://github.com/)
+-   [W3C Markup Validator](https://validator.w3.org/#validate_by_uri) - [Results](https://github.com/uskawi/classic_cars_auctions/tree/main/readme_files/validated_html)
+-   [W3C CSS Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) - [Results](https://github.com/uskawi/classic_cars_auctions/tree/main/readme_files/validated_css)
 
 The JSHint JavaScript Validator was used to validate every file containing JavaScript  of the project to ensure there  were no errors.
--   [W3C Markup Validator](https://jigsaw.w3.org/css-validator/#validate_by_input) - [Results](https://github.com/)
+-   [JShint JavaScript Validator](https://jshint.com/) - [Results](https://github.com/uskawi/classic_cars_auctions/tree/main/readme_files/validator_js)
 
 The PEP8 online Python  Validator a was used to validate every Python file of the project to ensure there were no  errors.
--   [PEP8 online](http://pep8online.com/) - [Results](https://github.com/)
+-   [PEP8 online](http://pep8online.com/) - [Results](https://github.com/uskawi/classic_cars_auctions/tree/main/readme_files/validated_python)
 
 ### Testing User Stories from User Experience (UX) Section
 
@@ -288,6 +290,11 @@ The PEP8 online Python  Validator a was used to validate every Python file of th
 ### Known Bugs
 
 -   On some mobile devices, a white line appears between the main header and navbar.
+
+## Problems Encountered During The Development Process
+
+-   The workspace didn't recognize the command " python3 manage.py runserver."  when I did run the command pip3 freeze requirements.txt,  many installed apps were missing. To solve this problem, I copied requiremnt.txt from Github, ran the command pip3 install -r requirements.txt, migrated all data again, and created a superuser.
+-  During the deployment to Heroku, I accidentally pushed the secret Postgres key to GitHub respiratory(**commit hash: 5195ef10f95d45d6bbb2b30cb33a82701fdd8fde**). I tried to undo the commit to remove the secret key by running the command git revert, then pushed the changes, but it didn't work the secret key was not removed, and I got an extra commit (**commit hash: 1eb52d80de69417e9845e05acfd2662de32fcc41**). I dropped the secret key and created a new one to fix the issue.
 
 ## Deployment
 
