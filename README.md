@@ -1,6 +1,6 @@
 <h1 align="center">Classic Cars Auctions Website</h1>
 
-[View the live project here.]()
+[View the live project here.](https://classic-cars-auctions.herokuapp.com/)
 
 Classic Cars Auctions is an online auction website specializing in classic cars, offering enthusiasts the opportunity to buy vehicles from across the eras. It is designed to be responsive and accessible on a range of devices, making it easy to navigate for potential customers.
 
@@ -69,60 +69,70 @@ Auction_detail page on diffrent divices<br>
 
 -  Bids
 
--   Payment
+-  Payment
 
--  Email outbid notifications
+-  Email Confirmation
 
 -  Admin Managment
 
 ## Project Structure and Database.
 -   ### Home App
 
-    1. Home is used to show a home page. The home page 
+    1. Home is used to show a home page. The home page. 
     The Home App does not have any Database model, and its purpose is to display the Home page containing the banner image welcome section and general information about the process that the user should undergo during an auction. 
 
 -   ### Auction App
 
--   ####    Description
-    Auctions App is the app where all the auction logic happens.
-    The Auction app allows the user to search for an auction in the database, access the auction, and place a bid. 
-    Auction App is responsible for finding the winner's bid, checking if payments were made in time, and finding the payment defaulters.
--   #### Models
-    1. Car Model:<br> 
-    represents an auction and contains all car necesserey information.</br></br>
-        <h3 align="center"><img src="readme_files/images/car_model.jpg"></h3><br><br>
+    -   ####    Description
 
-    3. The bid Model :<br> contains all information about the bid placed by the user and a Boolean field winnerBid, which is set by default to None. Once the auction ends, if the given bid is a winning bid, the field's value is updated to True.
+        1. Auctions App is the app where all the auction logic happens.
+        2. The Auction app allows the user to search for an auction in the database, access the auction, and place a     bid. 
+        3. Auction App is responsible for finding the winner's bid, checking if payments were made in time, and finding the payment defaulters.
+
+    -   #### Models
+        -   ##### Car Model
+
+            1. represents an auction and contains all car necesserey information.</br></br>
+            <h3 align="center"><img src="readme_files/images/car_model.jpg"></h3><br><br>
+
+        -    ##### The bid Model 
+            1. contains all information about the bid placed by the user and a Boolean field winnerBid, which is set by default to None. Once the auction ends, if the given bid is a winning bid, the field's value is updated to True.
+            </br></br>
+            <h3 align="center"><img src="readme_files/images/bid_model.jpg"></h3> </br></br>
+    -   #### Models Relationship for Auctions App
+
+        1.  The Car Model is related to the Bid Model by relation OnetoMany as the Bid model takes The car model as ForegineKey. 
+        2. The Bid model is related to Allauth User Model by relation OneToOne.
         </br></br>
-        <h3 align="center"><img src="readme_files/images/bid_model.jpg"></h3> </br></br>
--   #### Models Relationship for Auctions App
-    1. The Car Model is related to the Bid Model by relation OnetoMany as the Bid model takes The car model as ForegineKey. 
-    2. The Bid model is related to Allauth User Model by relation OneToOne.
-    </br></br>
-    <h3 align="center"><img src="readme_files/images/auction_relation.jpg"></h3> </br></br>
+        <h3 align="center"><img src="readme_files/images/auction_relation.jpg"></h3> </br></br>
 
 -   ### Payment App
 
--   ####    Description
-    The Payment App's role is to accept payments and generate payment confirmations. The technology used in the payment app is Stripe. The user can complete the payment by submitting the payment form then the payment is saved in the DB. 
--   #### Models
-    1. Payment Model:<br> 
-    The Payment Model contains all needed user information to complete payment.</br></br>
+    -   ####    Description
+
+        1. The Payment App's role is to accept payments and generate payment confirmations. 
+        2. The technology used in the payment app is Stripe. The user can complete the payment by submitting the payment form then the payment is saved in the DB. 
+    -   #### Models
+
+        -   #####  Payment Model
+
+        1. The Payment Model contains all needed user information to complete payment.</br></br>
         <h3 align="center"><img src="readme_files/images/payment.jpg"></h3><br><br>
 
--   ### Profile App
+    -   ### Profile App
 
--   ####    Description
-   |Profile App's role is t store default user information and allow the user to update detail and display user history.
+        -   ####    Description
+        1. Profile App's role is t store default user information and allow the user to update detail and display user history.
 
--   #### Models
-    1. UserProfile Model:<br> 
-    The UserProfile Model contains all user detail needed for payment as the Payment Model use the data stored in the UserProfile Model.</br></br>
-    <h3 align="center"><img src="readme_files/images/UserProfile.jpg"></h3><br><br>    
+    -   #### Models
+        -   ##### UserProfile Model
+        1. The UserProfile Model contains all user detail needed for payment as the Payment Model use the data stored in the UserProfile Model.</br></br>
+        <h3 align="center"><img src="readme_files/images/UserProfile.jpg"></h3><br><br>    
 
 -   ### Relationship between Models across all Apps.
-    1. Car Model that represents the auction is related to Bid Model. The Payment Model is related to the To Car Model, Bid Model, and UserProfile Model, as payment use user info stored in the UserProfile Model for payment.
-    2. Allauth User Model is related to Bid Model and UserProfile.<br><br>
+    1. Car Model that represents the auction is related to Bid Model. 
+    2. The Payment Model is related to the To Car Model Bid Model and UserProfile Model as payment use user info stored in the UserProfile Model for payment.
+    3. Allauth User Model is related to Bid Model and UserProfile.<br><br>
     <h3 align="center"><img src="readme_files/images/allapps-relations.jpg"></h3><br><br>
         
     
@@ -142,6 +152,8 @@ Auction_detail page on diffrent divices<br>
     - Django was used as the main framework for the development of the websites.
 1. [allauth 3.2:](https://django-allauth.readthedocs.io/en/latest/installation.html)
     - Allauth was used for  authentication, registration, and account management.
+1. [AWS:](https://django-allauth.readthedocs.io/en/latest/installation.html)
+    - Amazon Web Services were used to store data in the cloud for the deployed project in Heroku.
 1. [LibreOffice:](https://www.libreoffice.org/)
     - LibreOffice was used to create a schema demonstrating the database and the relationship between the Models shown in app structures and the database section in Readme.
 1. [Stripe:](https://stripe.com/ie)

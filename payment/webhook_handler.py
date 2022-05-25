@@ -91,7 +91,8 @@ class StripeWH_Handler:
         if payment_exists:
             self._send_confirmation_email(payment)
             return HttpResponse(
-                content=f'Webhook received: {event["type"]} | SUCCESS: Verified Payment already in database',
+                content=f'Webhook received: {event["type"]} |' +
+                'SUCCESS: Verified Payment already in database',
                 status=200)
         else:
             payment = None
