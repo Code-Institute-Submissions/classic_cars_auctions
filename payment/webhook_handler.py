@@ -90,9 +90,9 @@ class StripeWH_Handler:
                 time.sleep(1)
         if payment_exists:
             self._send_confirmation_email(payment)
+            message1 = 'SUCCESS: Verified Payment already in database'
             return HttpResponse(
-                content=f'Webhook received: {event["type"]} |' +
-                'SUCCESS: Verified Payment already in database',
+                content=f'Webhook received: {event["type"]} | {message1}',
                 status=200)
         else:
             payment = None
@@ -111,8 +111,9 @@ class StripeWH_Handler:
                 bids=winner_bid,
             )
         self._send_confirmation_email(payment)
+        message2 = 'SUCCESS: Created Payment in webhook'
         return HttpResponse(
-            content=f'Webhook received: {event["type"]} | SUCCESS: Created Payment in webhook',
+            content=f'Webhook received: {event["type"]} | {message2}',
             status=200)
 
     def handle_payment_intent_payment_failed(self, event):
