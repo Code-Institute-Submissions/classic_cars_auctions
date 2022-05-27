@@ -92,7 +92,7 @@ def auction_detail(request, car_id):
                 new_bid = Bid(car=car, user=user,  amount=new_bid_amount,
                               time=current_date, winnerBid=False)
                 new_bid.save()
-                # send_confirmation_email(new_bid, bid_subject_url, bid_body_url)
+                send_confirmation_email(new_bid, bid_subject_url, bid_body_url)
                 messages.success(request, f'Your bid for {new_bid.amount}'
                                  ' € was successfully added')
                 car_obj_bids = Bid.objects.filter(car_id=car_id)
@@ -277,11 +277,14 @@ def check_payments():
     bids = Bid.objects.all()
 
     for bid in bids:
-        if bid.winnerBid:
-            payment_deadline = bid.car.timeEnd + timedelta(hours=48)
-            payment = Payment.objects.filter(bids_id=bid.id)
-            if not payment:
-                if current_date > payment_deadline:
-                    send_confirmation_email(bid, defaulter_subject_url,
-                                            defaulter_body_url)
-                    Bid.objects.filter(id=bid.id).delete()
+        if not bid.car:
+            pass
+        else:
+            if bid.winnerBid:
+                payment_deadline = bid.car.timeEnd + timedelta(hours=48)
+                payment = Payment.objects.filter(bids_id=bid.id)
+                if not payment:
+                    if current_date > payment_deadline:
+                        send_confirmation_email(bid, defaulter_subject_url,
+                                                defaulter_body_url)
+                        Bid.objects.filter(id=bid.id).delete()
