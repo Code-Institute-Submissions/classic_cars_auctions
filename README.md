@@ -50,12 +50,8 @@ Auction_detail page on diffrent divices<br>
 
 *   ### Wireframes
 
-    -   Home Page Wireframe for small screens - [View](readme_files/images/home_sm.png)
-    -   Auctions Page Wireframe for small screens - [View](readme_files/images/auctions_sm.png)
-    -   Auction detail Page Wireframe for small screens - [View](readme_files/images/auction_sm.png)
-    -   Home Page Wireframe for medium and large screens - [View](readme_files/images/home.png)
-    -   Auctions Page Wireframe medium and large screens - [View](readme_files/images/auctions.png)
-    -   Auction detail Page Wireframe medium and large screens - [View](readme_files/images/auction.png)
+    -   Wireframe for small screens - [View](readme_files/wireframes/mobile)
+    -   Wireframes for medium and large screens - [View](readme_files/wireframes/descktop)
 
 ## Features
 
