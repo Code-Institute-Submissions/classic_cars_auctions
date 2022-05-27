@@ -53,9 +53,12 @@
                             </td>
                             <td>{{ payment.date|date:'G:i - d/M' }}</td>
                             <td>{{ payment.deposit }}€</td>
+                            {% if payment.car %}
                             <td><a href="{% url 'auction_detail' payment.car_id %}" title="{{ payment.car_id }}">
                                     Link</a></td>
-
+                            {% else %}
+                            <td> Car Deleted</td>
+                            {% endif %}
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -75,9 +78,13 @@
                     <tbody>
                         {% for bid in user_bids %}
                         <tr>
+                            {% if bid.car %}
                             <td>
                                 {{ bid.car.make }}
                             </td>
+                            {% else %}
+                            <td>Car Deleted</td>
+                            {% endif %}
                             <td>{{ bid.time|date:'G:i - d/M' }}</td>
                             <td>{{ bid.amount }}€</td>
                             {% if bid.winnerBid %}

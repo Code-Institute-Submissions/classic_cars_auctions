@@ -38,7 +38,7 @@
                             <td> {{ car.timeEnd|date:'G:i - d - M - y'}}</td>
                             <td><a class="text-light bg-dark border border-dark rounded p-1"
                                     href="{% url 'edit_auction' car.id %}">Edit</a> </td>
-                            <td class="pb-4"><a class="text-light bg-danger border border-dark rounded p-1"
+                            <td><a class="text-light bg-danger border border-dark rounded p-1"
                                     href="{% url 'delete_auction' car.id %}">Delete</a></td>
 
                         </tr>
@@ -50,7 +50,7 @@
             <hr class="hor-line-home my-5">
             <p class="text-danger">Bids</p>
             <div class="history table-responsive">
-                <table class="table table-sm table-borderless bg-grey-light">
+                <table class="table table-sm table-borderless bg-grey-light pb-2">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -65,12 +65,17 @@
                         {% for bid in bids %}
                         <tr>
                             <td> {{ bid.id}} </td>
+                            {% if bid.car %}
                             <td> {{ bid.car.id}} </td>
                             <td><span class="text-info">{{ bid.car.make}}, {{ bid.car.model }}</span></td>
+                            {% else %}
+                            <td>None</td>
+                            <td> Car Deleted </td>
+                            {% endif %}
                             <td> {{ bid.time|date:'G:i - d - M - y'}} </td>
                             <td>{{ bid.amount }}</td>
                             {% if bid.winnerBid %}
-                            <td class="pb-4"><span class="text-info">Winner Bid</span></td>
+                            <td><span class="text-info">Winner Bid</span></td>
                             {% endif %}
 
                         </tr>
@@ -87,8 +92,8 @@
                         <tr>
                             <th>Payment Number</th>
                             <th>Make and Model</th>
-                            <th>Deposit</th>
                             <th>Date</th>
+                            <th>Deposit</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -100,7 +105,11 @@
                                     {{ payment.payment_number|truncatechars:6 }}
                                 </a>
                             </td>
+                            {% if payment.car %}
                             <td><span class="text-info">{{ payment.car.make}}, {{ payment.car.model }}</span></td>
+                            {% else %}
+                            <td>Car Deleted</span></td>
+                            {% endif %}
                             <td> {{ payment.date|date:'G:i - d - M - y'}} </td>
                             <td> {{ payment.deposit }}</td>
                         </tr>
