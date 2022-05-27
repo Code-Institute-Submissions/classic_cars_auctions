@@ -6,7 +6,7 @@
 {% block content %}
 <section id="auction-detail">
   <div id="car" class="my-5">
-    <div class="row mx-0 px-0 my-5 car-card">
+    <div class="row mx-0 px-0 mt-5 mb-0 car-card">
       <div class="row mx-0 px-0 my-5 car-card">
         <h2 class="col col-12  mt-3 text-uppercase"> {{ car.make }} <span>{{ car.model }}</span></h2>
         <div class="col col-12">
@@ -40,7 +40,7 @@
               </div>
               <div class="row">
                 <div class="col-6">
-                  <p class="my-2 pl-md-5">Reserved Price<span class="text-info d-block">{{ car.reservedPrice }} €</span>
+                  <p class="my-2 pl-md-5">Reserve Price<span class="text-info d-block">{{ car.reservedPrice }} €</span>
                   </p>
                 </div>
                 <div class="col-6">
@@ -55,13 +55,11 @@
           <p class="text-info mb-0 mt-4 mb-2 font-weight-bold">Description</p>
           <p class="text-justify">{{ car.description|truncatewords:"50" }}</p>
           <button id="show-description" class="description-btn mt-0">show-more</button>
-
         </div>
         <div id="car-description2" class="col col-10 offset-1 hide">
           <p class="text-info mb-0 mt-4 mb-2 font-weight-bold">Description</p>
           <p class="text-justify">{{ car.description }}</p>
           <button id="hide-description" class="description-btn mt-0">show less</button>
-
         </div>
       </div>
     </div>
@@ -146,8 +144,11 @@
     </div>
   </div>
   {% if request.user.is_authenticated and auction_is_on %}
-  <div id="add_bid" class="my-5 border">
-    <h1 class="header text-center pt-5">Place Your Bid</h1>
+  <div id="add_bid" class="mt-5 mt-0">
+    <div id="cancel" class="ml-1">
+      <i class="fas fa-times-circle"></i>
+    </div>
+    <h1 class="header text-center pt-5 pb-0 mb-0">Place Your Bid</h1>
     <div class="col col-10 offset-1 mt-3 legal-info">
       <p class="text-justify"><span class="text-danger font-weight-bold mr-3">Please note:</span>If your bid is the
         winning bid, you are legally committed to buying this item. Otherwise, you will be banned from <span
@@ -159,11 +160,11 @@
       at least €<span class="text-danger"> {{ min_bid }}</span>.
     </div>
 
-    <div id="bidding-form" class="bid-form text-center pb-5">
+    <div id="bidding-form" class="bid-form text-center">
       <form action="{% url 'auction_detail' car.id %}" method="POST" class="mt-3">
         {% csrf_token %}
         {{ form }}
-        <button class="btn text-light red-background border border-dark mt-4" type="submit">Add</button>
+        <button class="btn  text-light red-background border border-dark my-4" type="submit">Add</button>
       </form>
     </div>
   </div>
@@ -180,10 +181,27 @@
     $('#car').css({
       'display': 'none',
     });
+
     $('#add_bid').css({
       'display': 'block',
     });
   });
+
+  $("#show-bidding-form").click(function () {
+  $("html, body").animate({
+    scrollTop: 100
+  }, 500)
+})
+
+  $('#cancel').click(function () {
+    $('#add_bid').css({
+      'display': 'none',
+    });
+    $('#car').css({
+      'display': 'Block',
+    });
+  });
+
 
 </script>
 <script>
@@ -191,6 +209,7 @@
     $('#car-description1').addClass('hide');
     $('#car-description2').removeClass('hide');
   });
+
   $('#hide-description').click(function () {
     $('#car-description1').removeClass('hide');
     $('#car-description2').addClass('hide');

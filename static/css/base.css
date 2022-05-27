@@ -245,7 +245,7 @@ font-family: 'Roboto', sans-serif; */
 /* auction-search  */
 
 .auction-search {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     border: 2px solid #cc3217;
     border-radius: 6px;
@@ -256,12 +256,15 @@ font-family: 'Roboto', sans-serif; */
 
 .auction-search p {
     font-size: 15px;
+    letter-spacing: 1px;
 }
 
 .auction-search button {
-    width: 110px;
+    width: 120px;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
 }
-
 #all-cars {
     width: 100%;
 }
@@ -269,21 +272,22 @@ font-family: 'Roboto', sans-serif; */
 
 
 .car, #car {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
     border: rgb(201, 40, 40) 2px solid;
     border-radius: 6px;
     background-color:#e9e7e7;
 }
 
+
 .car h2, #car h2 {
     color: rgb(201, 40, 40);
     font-size: 24px;
 }
 
-.car p, #car p {
+
+.car p {
     font-size: 15px;
-    overflow-wrap: break-word;
 }
 
 .car-img-container {
@@ -300,12 +304,16 @@ font-family: 'Roboto', sans-serif; */
 }
 
 /* auction detail */
-
-#auction-detail #car {
-    border: none;
+#auction-detail {
+    width: 100%;
 }
 
-.auction-logo p{
+#car {
+    border: none;
+    width: 95% !important;
+}
+
+.auction-logo p {
     font-size: 25px !important;
     font-weight: 600;
 }
@@ -313,6 +321,17 @@ font-family: 'Roboto', sans-serif; */
 .auction-logo p span {
     font-family: 'Lobster', sans-serif;;
 }
+
+#car-description1 p, #car-description2 p {
+    font-size: 15px;
+}
+
+#hide-description, #show-description {
+    background-color: transparent;
+    border: none;
+    color: #17a2b8;
+}
+
 
 .panel-item p {
     margin-top: 10px;
@@ -332,17 +351,12 @@ td.bid-amount-history, td.bid-date-history {
 
 .item-sold p {
     color: #cc3217;
-    font-size: 40px;
+    font-size: 30px;
     font-weight: bold;
 }
 
 .car-description1 p{
     position: relative;
-}
-#hide-description, #show-description {
-    background-color: transparent;
-    border: none;
-    color: #17a2b8;
 }
 
 #show-description {
@@ -352,10 +366,18 @@ td.bid-amount-history, td.bid-date-history {
 }
 
 #add_bid {
-    width: 80%;
+    width: 95%;
     background-color: #e9e7e7;
+    border: 2px solid #000 !important;
+    border-radius: 6px;
     margin: 0 auto;
     display: none;
+}
+
+#cancel {
+    font-size: 140%;
+    color: rgb(201, 40, 40);
+    cursor: pointer;
 }
 
 #add_bid h2 {
@@ -367,6 +389,10 @@ td.bid-amount-history, td.bid-date-history {
     font-weight: 600;
 }
 
+.bid-form input {
+    border: 2px solid #17a2b8;
+}
+
 .bid-form label {
     font-size: 14px;
     font-weight: 600;
@@ -375,14 +401,13 @@ td.bid-amount-history, td.bid-date-history {
 
 .bid-form button {
     display: block;
-    width: 20%;
+    width: 50%;
     margin: 0 auto;
+    font-size: 18px;
+    letter-spacing: 1.5px;
     
 }
 
-.payment_link {
-    text-decoration: underline !important;
-}
 
 /* ------------------------------- bootstrap toasts */
 
@@ -636,6 +661,14 @@ footer li i {
 
 @media (min-width: 568px) and (max-width: 767px)  {
 
+    .auction-search {
+        width: 80%;
+    }
+
+    .car {
+        width: 80%;
+    }
+
     .auction-search p {
         font-size: 14px;
     }
@@ -645,6 +678,20 @@ footer li i {
         border: 2px solid rgb(201, 40, 40);
         border-radius: 6px;
         margin-left: 10%;
+    }
+
+    .auction-search button {
+        font-size: 16px;
+        font-weight: 500;
+    }
+    /* auction_detail */
+
+    #car {
+        width: 80% !important;
+    }
+
+    .bid-form button {
+        width: 10%;
     }
 
     /* ------------------------------- bootstrap toasts */
@@ -696,8 +743,21 @@ footer li i {
         width: 80%;
     }
 
+    .auction-search {
+        width: 80%;
+    }
+
+    .car {
+        width: 80%;
+    }
+
     .auction-search p {
         font-size: 14px;
+    }
+
+    .auction-search button {
+        font-size: 16px;
+        font-weight: 500;
     }
 
     .message-container {
@@ -705,7 +765,16 @@ footer li i {
         left: 40%;
         z-index: 10;
     }
+     /* auction_detail */
 
+      #car {
+        width: 80% !important;
+    }
+
+
+    .bid-form button {
+        width: 150px;
+    }
 
      /* footer */
 
@@ -717,6 +786,7 @@ footer li i {
         width: 90%;
     }
 }
+
 
 
 

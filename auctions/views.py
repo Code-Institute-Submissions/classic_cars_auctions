@@ -92,7 +92,7 @@ def auction_detail(request, car_id):
                 new_bid = Bid(car=car, user=user,  amount=new_bid_amount,
                               time=current_date, winnerBid=False)
                 new_bid.save()
-                send_confirmation_email(new_bid, bid_subject_url, bid_body_url)
+                # send_confirmation_email(new_bid, bid_subject_url, bid_body_url)
                 messages.success(request, f'Your bid for {new_bid.amount}'
                                  ' € was successfully added')
                 car_obj_bids = Bid.objects.filter(car_id=car_id)

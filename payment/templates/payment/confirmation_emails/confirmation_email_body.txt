@@ -2,7 +2,6 @@ Hello {{ payment.full_name }}!
 
 This is a confirmation of deposit  payment for won auction for {{ payment.car.make}}, {{ payment.car.model}}.
 
-Pyment Number: {{ Payment.payment_number }}
 Date: {{ payment.date }}
 
 Deposit : ${{ payment.deposit }}
