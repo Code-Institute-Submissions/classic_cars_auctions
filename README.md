@@ -189,15 +189,14 @@ Auction_detail page on diffrent divices<br>
 1. [Postgres:](https://aws.amazon.com/rds/postgresql/what-is-postgresql/)
 -  Postgres was used as the primary data store for Heroku app.
 1. [django-storages:](https://django-storages.readthedocs.io/en/latest/)
-- Django-storages was used  custom storage backends for Django.
-1. [bootstrap_datepicker_plus 4.0.0:](https://django-bootstrap-datepicker-plus.readthedocs.io/en/latest/index.html)
-- bootstrap_datepicker_plus was used to create the DateTime picker inside the forms.
-1. [bootstrap_datepicker_plus 4.0.0:](https://django-bootstrap-datepicker-plus.readthedocs.io/en/latest/index.html)
-- bootstrap_datepicker_plus was used to create the DateTime picker inside the forms.
-1. [bootstrap_datepicker_plus 4.0.0:](https://django-bootstrap-datepicker-plus.readthedocs.io/en/latest/index.html)
-- bootstrap_datepicker_plus was used to create the DateTime picker inside the forms.
-1. [bootstrap_datepicker_plus 4.0.0:](https://django-bootstrap-datepicker-plus.readthedocs.io/en/latest/index.html)
-- bootstrap_datepicker_plus was used to create the DateTime picker inside the forms.
+-  Django-storages was used  custom storage backends for Django.
+1. [Boto3:](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
+-  Boto3 was used as the AWS SDK for Python to create, configure, and manage AWS services.
+1. [Psycopg2-binary:](https://pypi.org/project/psycopg2-binary/)
+-  Psycopg2-binary was used asPostgres database adapter for python.
+1. [Gunicorn:](https://docs.gunicorn.org/en/stable/run.html)
+-  Gunicorn  was used Python HTTP server for WSGI applications.
+
 
 
 ## Testing
