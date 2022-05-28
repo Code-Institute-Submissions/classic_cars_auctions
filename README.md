@@ -132,6 +132,14 @@ Auction_detail page on diffrent divices<br>
     2. The Payment Model is related to the To Car Model Bid Model and UserProfile Model as payment use user info stored in the UserProfile Model for payment.
     3. Allauth User Model is related to Bid Model and UserProfile.<br><br>
     <h3 align="center"><img src="readme_files/images/allapps-relations.jpg"></h3><br><br>
+
+## Auction Logic
+1. Users after login can add bids.
+2. The Apschudler runs a function get_winnerbid, which finds the highest bid when the auction ends.
+3. The bidder who placed the highest bid is the winner of the auction. He gets an email informing him that he has won the auction and has to pay a 10% deposit within 48 hours.
+4. The Apscheduler  The Apschudler runs a function check_payments that checks if payment is made within 48 hours.
+5. If payment is not made within 48 hours, the auction winner gets an email informing him that he defaulted on payment, then his bid is deleted, and the bidder who placed the second-highest bid is the winner.
+6. If the second-highest bid is inferior to the reserve price,  or there are no bids, then the auction is extended for 48hours.
         
     
 
