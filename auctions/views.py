@@ -111,20 +111,19 @@ def auction_detail(request, car_id):
                                f' or superior to {min_bid} €')
 
     existing_payment = Payment.objects.filter(car_id=car_id)
-    if existing_payment:
-        payment_info = None
-    else:
-        if bids:
-            if (highest_bid_obj.winnerBid and
-               highest_bid_obj.user.id == user_id):
 
-                messages.success(request, message)
-                payment_info. append({
-                    'car_id': car_id,
-                    'winner_bid_id': highest_bid_obj.id,
-                    'car_price': highest_bid_obj.amount,
-                })
-                request.session['payment_info'] = payment_info
+    if bids and request.user.is_authenticated:
+        user_id = request.user.id
+        if (highest_bid_obj.winnerBid and
+        highest_bid_obj.user.id == user_id):
+
+            payment_info. append({
+                'car_id': car_id,
+                'winner_bid_id': highest_bid_obj.id,
+                'car_price': highest_bid_obj.amount,
+            })
+            request.session['payment_info'] = payment_info
+
 
     context = {
         'car': car,
