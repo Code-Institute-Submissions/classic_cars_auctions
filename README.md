@@ -137,7 +137,7 @@ Auction_detail page on diffrent divices<br>
 1. Users after login can add bids.
 2. The Apschudler runs a function get_winnerbid, which finds the highest bid when the auction ends.
 3. The bidder who placed the highest bid is the winner of the auction. He gets an email informing him that he has won the auction and has to pay a 10% deposit within 48 hours.
-4. The Apscheduler  The Apschudler runs a function check_payments that checks if payment is made within 48 hours.
+4. The Apschudler runs a function check_payments that checks if payment is made within 48 hours.
 5. If payment is not made within 48 hours, the auction winner gets an email informing him that he defaulted on payment, then his bid is deleted, and the bidder who placed the second-highest bid is the winner.
 6. If the second-highest bid is inferior to the reserve price,  or there are no bids, then the auction is extended for 48hours.
         
@@ -195,15 +195,15 @@ Auction_detail page on diffrent divices<br>
 1. [django-crispy-forms==1.14.0](https://pypi.org/project/django-crispy-forms/)
     - Crispy foms was used to Styles forms.
 1. [Postgres:](https://aws.amazon.com/rds/postgresql/what-is-postgresql/)
--  Postgres was used as the primary data store for Heroku app.
+    -  Postgres was used as the primary data store for Heroku app.
 1. [django-storages:](https://django-storages.readthedocs.io/en/latest/)
--  Django-storages was used  custom storage backends for Django.
+    -  Django-storages was used  custom storage backends for Django.
 1. [Boto3:](https://boto3.amazonaws.com/v1/documentation/api/latest/index.html)
--  Boto3 was used as the AWS SDK for Python to create, configure, and manage AWS services.
+    -  Boto3 was used as the AWS SDK for Python to create, configure, and manage AWS services.
 1. [Psycopg2-binary:](https://pypi.org/project/psycopg2-binary/)
--  Psycopg2-binary was used asPostgres database adapter for python.
+    -  Psycopg2-binary was used asPostgres database adapter for python.
 1. [Gunicorn:](https://docs.gunicorn.org/en/stable/run.html)
--  Gunicorn  was used Python HTTP server for WSGI applications.
+    -  Gunicorn  was used Python HTTP server for WSGI applications.
 
 
 
@@ -219,6 +219,9 @@ The JSHint JavaScript Validator was used to validate every file containing JavaS
 
 The PEP8 online Python  Validator a was used to validate every Python file of the project to ensure there were no  errors.
 -   [PEP8 online](http://pep8online.com/) - [Results](https://github.com/uskawi/classic_cars_auctions/tree/main/readme_files/validated_python)
+
+Lighthouse  was used  for performance audits of the website.h
+-   [Lighthouse](https://developers.google.com/web/tools/lighthouse) - [Results](https://github.com/uskawi/classic_cars_auctions/tree/main/readme_files/lighthouse)
 
 ### Testing User Stories from User Experience (UX) Section
 
