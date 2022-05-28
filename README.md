@@ -338,68 +338,68 @@ I had to push everything manually to Heroku during the deployment because automa
 ### AWS Amazon Web Sevices
 
 Deployment of the project required the creation of an AWS account and the creation of a bucket within AWS s3 services to store static files including CSS and images.
--   #### Create an AWS account
+#### Create an AWS account
 
-    1. Navigate to https://aws.amazon.com/console/.
-    2. Click on the orange Button Sign up In to the Console.
-    3. Fill in All the required information and confirm your email.
-    4. Set payment method And pay  1$ (The AWS state this is not a fee but a payment and identity confirmation method).
+1. Navigate to https://aws.amazon.com/console/.
+2. Click on the orange Button Sign up In to the Console.
+3. Fill in All the required information and confirm your email.
+4. Set payment method And pay  1$ (The AWS state this is not a fee but a payment and identity confirmation method).
 
--  #### Create a bucket using the s3 console
+#### Create a bucket using the s3 console
 
-    1. Before creating a bucket, ensure that you have access to s3 services. It takes up to 24h after completing the registration.
-    2. Open the Amazon S3 console at https://console.aws.amazon.com/s3/.
-    3. Choose Create bucket.
-    4. In Bucket name, enter a DNS-compliant name for your bucket.
-    5. Choose the AWS Region where you want the bucket to reside.
-    6. Under Object Ownership, enable ACLs and control ownership of objects uploaded in your bucket. Choose ACLs enabled and Bucket owner preferred.
-    7. In Bucket settings for Block Public Access, enable Public Access.
-    8. Then click on create a bucket.
-    9. Go to  properties tab turn on static website hosting.
-    10. Go to permissions and paste in a coors configuration.
-    11. Go to the bucket policy inside permissions And select the policy generator.
-    12. Choose s3 bucket policy.
-    13. Allow all principals by using a star.
-    14. Choose action get_object.
-    15. Copy the ARN And paste it into the ARN box.
-    16. Click Add statement. Then generate policy, copy this policy to bucket policy editor, star onto the end of the Resource Key, and save.
-    18.  Go to the access control list tab and set the list objects permission for everyone
-    19. Go back to the services menu and open Iam.
-    20. Click groups, then create a new group.
-    21. Click policies and then create policy.
-    22. go to the JSON tab and then select import managed policy.
-    23. Search for s3 and then import the s3 full access policy.
-    24. Get the bucket ARN from the bucket policy page in s3 and pasted twice to Resouces in JSON table and add slash star to the second pasted ARN.
-    25. Click review policy and give it a name and a description.
-    26. click create policy.
-    27. Go to groups, click the group you created, then click attach policy. Search for the policy you just created, select it, and click attach policy.
-    28. Go to the users page by clicking users on the left-hand side tab.
-    29. Click add user. Then click create a user.
-    30. check programmatic access box on Access type and select next.
-    31. Click create a user.
-    32. Download the CSV file, which contains this user's access key and secret access key.
-    33. Go to Django App.
-    34. Install boto3 by writing in your terminal pip3 install botot3.
-    35. Install django-storages by writing in your terminal pip3 install django-storages.
-    36. Add the list of requirements by writing in the terminal "pip3 freeze --local > requirements.txt"
-    37. Add storages to install apps in setting.py
-    38. Add in settingd.py an if statement  **if USE_AWS in os.environ** to check if there's an environment variable called USE_AWS and inside the if statement:
-        1. Define AWS_STORAGE_BUCKET_NAME = Your bucket name.
-        2. Define  AWS region by adding **AWS_S3_REGION_NAME = AWS Region where you want the bucket to reside**.
-        4. Define  AWS Access Key Id  by adding **AWS_ACCSEES_KEY_ID = os.environ.get(AWS_ACCSEES_KEY_ID)**.
-        4. Define  AWS access key  by adding **AWS_ACCSEES_KEY = os.environ.get(AWS_ACCSEES_KEY)**.
+1. Before creating a bucket, ensure that you have access to s3 services. It takes up to 24h after completing the registration.
+2. Open the Amazon S3 console at https://console.aws.amazon.com/s3/.
+3. Choose Create bucket.
+4. In Bucket name, enter a DNS-compliant name for your bucket.
+5. Choose the AWS Region where you want the bucket to reside.
+6. Under Object Ownership, enable ACLs and control ownership of objects uploaded in your bucket. Choose ACLs enabled and Bucket owner preferred.
+7. In Bucket settings for Block Public Access, enable Public Access.
+8. Then click on create a bucket.
+9. Go to  properties tab turn on static website hosting.
+10. Go to permissions and paste in a coors configuration.
+11. Go to the bucket policy inside permissions And select the policy generator.
+12. Choose s3 bucket policy.
+13. Allow all principals by using a star.
+14. Choose action get_object.
+15. Copy the ARN And paste it into the ARN box.
+16. Click Add statement. Then generate policy, copy this policy to bucket policy editor, star onto the end of the Resource Key, and save.
+18.  Go to the access control list tab and set the list objects permission for everyone
+19. Go back to the services menu and open Iam.
+20. Click groups, then create a new group.
+21. Click policies and then create policy.
+22. go to the JSON tab and then select import managed policy.
+23. Search for s3 and then import the s3 full access policy.
+24. Get the bucket ARN from the bucket policy page in s3 and pasted twice to Resouces in JSON table and add slash star to the second pasted ARN.
+25. Click review policy and give it a name and a description.
+26. click create policy.
+27. Go to groups, click the group you created, then click attach policy. Search for the policy you just created, select it, and click attach policy.
+28. Go to the users page by clicking users on the left-hand side tab.
+29. Click add user. Then click create a user.
+30. check programmatic access box on Access type and select next.
+31. Click create a user.
+32. Download the CSV file, which contains this user's access key and secret access key.
+33. Go to Django App.
+34. Install boto3 by writing in your terminal pip3 install botot3.
+35. Install django-storages by writing in your terminal pip3 install django-storages.
+36. Add the list of requirements by writing in the terminal "pip3 freeze --local > requirements.txt"
+37. Add storages to install apps in setting.py
+38. Add in settingd.py an if statement  **if USE_AWS in os.environ** to check if there's an environment variable called USE_AWS and inside the if statement:
+    1. Define AWS_STORAGE_BUCKET_NAME = Your bucket name.
+    2. Define  AWS region by adding **AWS_S3_REGION_NAME = AWS Region where you want the bucket to reside**.
+    4. Define  AWS Access Key Id  by adding **AWS_ACCSEES_KEY_ID = os.environ.get(AWS_ACCSEES_KEY_ID)**.
+    4. Define  AWS access key  by adding **AWS_ACCSEES_KEY = os.environ.get(AWS_ACCSEES_KEY)**.
     
-- ### Connecting strip to Heroku.
+- ### Connecting Strip to Heroku.
 
-    1. Login into Stripe.
-    2. Go to the dashboard and click on the developers Button.
-    3. On the left-hand side, click on webhooks.
-    4. Click add endpoint.
-    5. Add endpoint URL.
-    6. Click select events.
-    7. Select all events. 
-    8. Click add Events.
-    9. Send a response to your Heroku App to check if Stripe is connected to your Heroku App.
+1. Login into Stripe.
+2. Go to the dashboard and click on the developers Button.
+3. On the left-hand side, click on webhooks.
+4. Click add endpoint.
+5. Add endpoint URL.
+6. Click select events.
+7. Select all events. 
+8. Click add Events.
+9. Send a response to your Heroku App to check if Stripe is connected to your Heroku App.
 
 
 
