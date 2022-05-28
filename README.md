@@ -186,8 +186,18 @@ Auction_detail page on diffrent divices<br>
     - django_filters was used to allows users to filter down a queryset based on a Car model’s fields, displaying the    form to let them do this.
 1. [django-crispy-forms==1.14.0](https://pypi.org/project/django-crispy-forms/)
     - Crispy foms was used to Styles forms.
+1. [Postgres:](https://aws.amazon.com/rds/postgresql/what-is-postgresql/)
+-  Postgres was used as the primary data store for Heroku app.
+1. [django-storages:](https://django-storages.readthedocs.io/en/latest/)
+- Django-storages was used  custom storage backends for Django.
 1. [bootstrap_datepicker_plus 4.0.0:](https://django-bootstrap-datepicker-plus.readthedocs.io/en/latest/index.html)
-    - bootstrap_datepicker_plus was used to create the DateTime picker inside the forms.
+- bootstrap_datepicker_plus was used to create the DateTime picker inside the forms.
+1. [bootstrap_datepicker_plus 4.0.0:](https://django-bootstrap-datepicker-plus.readthedocs.io/en/latest/index.html)
+- bootstrap_datepicker_plus was used to create the DateTime picker inside the forms.
+1. [bootstrap_datepicker_plus 4.0.0:](https://django-bootstrap-datepicker-plus.readthedocs.io/en/latest/index.html)
+- bootstrap_datepicker_plus was used to create the DateTime picker inside the forms.
+1. [bootstrap_datepicker_plus 4.0.0:](https://django-bootstrap-datepicker-plus.readthedocs.io/en/latest/index.html)
+- bootstrap_datepicker_plus was used to create the DateTime picker inside the forms.
 
 
 ## Testing
@@ -389,7 +399,7 @@ Deployment of the project required the creation of an AWS account and the creati
     4. Define  AWS Access Key Id  by adding **AWS_ACCSEES_KEY_ID = os.environ.get(AWS_ACCSEES_KEY_ID)**.
     4. Define  AWS access key  by adding **AWS_ACCSEES_KEY = os.environ.get(AWS_ACCSEES_KEY)**.
     
-- ### Connecting Strip to Heroku.
+### Connecting Strip to Heroku.
 
 1. Login into Stripe.
 2. Go to the dashboard and click on the developers Button.
