@@ -239,40 +239,40 @@ The PEP8 online Python  Validator a was used to validate every Python file of th
             Make, Fuel type, Min Age, Max Age, Min Reserved Price, Max Reserved Price, and based on keyword.
 
 -   #### Frequent User Goals
--   ##### As a Customer
+    -   ##### As a Customer
 
-    1. As a Returning Visitor, I want to understand the process I should undergo during the auctions.
+        1. As a Returning Visitor, I want to understand the process I should undergo during the auctions.
 
-        1. The first place the user will start the search for any informations is the home page, where there is a section dedicated to informing the user about how auctions works on Classic Cars auctions.
+            1. The first place the user will start the search for any informations is the home page, where there is a section dedicated to informing the user about how auctions works on Classic Cars auctions.
 
-    2. As a Frequent User, I want to be able to register and update my details and view the history of my activities on my profile page.
+        2. As a Frequent User, I want to be able to register and update my details and view the history of my activities on my profile page.
 
-        1. Upon landing on any page of our website, allowing access for unregistered users, the user will find a link to the Signup page on the navigation. By clicking on the link, the user is redirected to the Signup page, and by filling and submitting the form, the user will receive an email with a confirmation link.
+            1. Upon landing on any page of our website, allowing access for unregistered users, the user will find a link to the Signup page on the navigation. By clicking on the link, the user is redirected to the Signup page, and by filling and submitting the form, the user will receive an email with a confirmation link.
 
-        2. Once the user is registered, he can access his profile page by clicking on the profile link on navigation. When landing on the profile page, there is a form to update personal details and a link to reset the password, and the history of all previews activities displayed. 
+            2. Once the user is registered, he can access his profile page by clicking on the profile link on navigation. When landing on the profile page, there is a form to update personal details and a link to reset the password, and the history of all previews activities displayed. 
 
-    3. As a Frequent User, I want to be greeted with instant messages and alerts about the activity I do if there when using the website.
-        1. Once the user logs in, he's greeted with a message  "Successfully signed in" and for every action the user takes, a message is displayed until the user logs out.
+        3. As a Frequent User, I want to be greeted with instant messages and alerts about the activity I do if there when using the website.
+            1. Once the user logs in, he's greeted with a message  "Successfully signed in" and for every action the user takes, a message is displayed until the user logs out.
 
-    4. As a Frequent User, I want to Know how auctions end, the final prices, and the bidding history for every auction.
+        4. As a Frequent User, I want to Know how auctions end, the final prices, and the bidding history for every auction.
 
-        1. Registered users can view any car's bidding history and final price on the website on the Auction_detail page devoted to a particular vehicle. Even there are not taking part in the auction.
-       
-    5. As a Frequent User, I want to receive updates by email about the auctions where I'm bidding.
+            1. Registered users can view any car's bidding history and final price on the website on the Auction_detail page devoted to a particular vehicle. Even there are not taking part in the auction.
+        
+        5. As a Frequent User, I want to receive updates by email about the auctions where I'm bidding.
 
-        1. Every time a bid is placed, the user gets a message if the bid was successful or not. Once the bid is successful, the user receives a confirmation email.
-        2. Every time a bid is placed for a car, all of the bidding users for the same car receive an email to inform them.
+            1. Every time a bid is placed, the user gets a message if the bid was successful or not. Once the bid is successful, the user receives a confirmation email.
+            2. Every time a bid is placed for a car, all of the bidding users for the same car receive an email to inform them.
 
-    6.  As a Frequent User, I want to be able to pay the deposit to secure the car once I win the auction.
-        1. Once a user won an auction. He is informed by email. And A Secure Payment link shows up on the Auction_detail page, which he won. Then the user is redirected to the payment page by clicking on the link. Once he completes the payment successfully, he is again redirected to the Payment success page containing payment confirmation. 
+        6.  As a Frequent User, I want to be able to pay the deposit to secure the car once I win the auction.
+            1. Once a user won an auction. He is informed by email. And A Secure Payment link shows up on the Auction_detail page, which he won. Then the user is redirected to the payment page by clicking on the link. Once he completes the payment successfully, he is again redirected to the Payment success page containing payment confirmation. 
 
-    7. As a Frequent User, I want to be sure that the payment is secure and that  I won't have any problems with payment.
-        1. The website uses Stripe payment, and it does not keep the card details. If something goes wrong with payment and the due amount was taken from the user's card, the website uses Stripe Webhooks to create the payment in the database. 
+        7. As a Frequent User, I want to be sure that the payment is secure and that  I won't have any problems with payment.
+            1. The website uses Stripe payment, and it does not keep the card details. If something goes wrong with payment and the due amount was taken from the user's card, the website uses Stripe Webhooks to create the payment in the database. 
 
--   ##### As a Admin or staff member
-    1. As an Admin, I want to have easy access to all the pieces of information I need.
-        1. Once the user is logged in as admin at the navigation, there is a link to the admin page where the admin can view the payment add bids, add, update, and delete auctions.
-        2. Admin can update and delete page directly from auction Detail_page.
+    -   ##### As a Admin or staff member
+        1. As an Admin, I want to have easy access to all the pieces of information I need.
+            1. Once the user is logged in as admin at the navigation, there is a link to the admin page where the admin can view the payment add bids, add, update, and delete auctions.
+            2. Admin can update and delete page directly from auction Detail_page.
 
 
 
@@ -290,19 +290,118 @@ The PEP8 online Python  Validator a was used to validate every Python file of th
 ## Problems Encountered During The Development Process
 
 -   The workspace didn't recognize the command " python3 manage.py runserver."  when I did run the command pip3 freeze requirements.txt,  many installed apps were missing. To solve this problem, I copied requiremnt.txt from Github, ran the command pip3 install -r requirements.txt, migrated all data again, and created a superuser.
--  During the deployment to Heroku, I accidentally pushed the secret Postgres key to GitHub respiratory(**commit hash: 5195ef10f95d45d6bbb2b30cb33a82701fdd8fde**). I tried to undo the commit to remove the secret key by running the command git revert, then pushed the changes, but it didn't work the secret key was not removed, and I got an extra commit (**commit hash: 1eb52d80de69417e9845e05acfd2662de32fcc41**). I dropped the secret key and created a new one to fix the issue.
+- During the deployment to Heroku, I accidentally pushed the secret Postgres key to GitHub respiratory **(commit hash: 5195ef10f95d45d6bbb2b30cb33a82701fdd8fde)**. I ran the git revert command to solve this, then pushed the changes. Instead of removing, the secret key I got an extra  commit **(commit hash: 1eb52d80de69417e9845e05acfd2662de32fcc41)**. In the end, I dropped the secret key and created a new one to fix the issue, but the old secret key stayed in the Git repository.
 
 ## Deployment
 
-### Heroku
+### Heroku 
 
-1. Log in to GitHub and locate the [GitHub Repository](https://github.com/)
-2. At the top of the Repository (not top of page), locate the "Settings" Button on the menu.
-    - Alternatively Click [Here](https://raw.githubusercontent.com/) for a GIF demonstrating the process starting from Step 2.
-3. Scroll down the Settings page until you locate the "GitHub Pages" Section.
-4. Under "Source", click the dropdown called "None" and select "Master Branch".
-5. The page will automatically refresh.
-6. Scroll back down through the page to locate the now published site [link](https://github.com) in the "GitHub Pages" section.
+I had to push everything manually to Heroku during the deployment because automatic pushes from GitHub to Heroku were disabled due to a security breach.
+
+1. Log into Heroku or create a new account and log in.
+2. top right-hand corner click "New" and choose the option Create new app. If you are a new user, then "Create new app" button will appear in the middle of the screen.
+3. Write the app name - it has to be unique. It cannot be the same as this app.
+4. Choose Region 
+5. Click "Create App"
+6. Go to Resources Tab, Add-ons, search and add Heroku Postgres.
+7. Go to Django:
+8.  app Install dj_data_base_url and psycopg2-binary then  Freeze requirements.txt
+9. In settings.py, add import dj_data_base_url.
+10. Then down in the databases setting. Comment out the default configuration. And replace the default database with a call to dj_database_url. Parse And give it the database URL from Heroku, Which you can either get from your config variables in your app settings tab.
+11. Run the migrations
+12. Create a superuser.
+13. Remove the Heroku Database Config and uncomment the original, then commit.
+14. Add an if statement in settings.py to define the database URL environment variable if the app runs on Heroku Postgres or sequel light.
+15. Install gunicorn and Freeze requirements.txt.
+16. Create a Procfile to run gunicorn.
+17. Login to Heroku from the terminal.
+18. disable collect static by using Heroku config:set disable collect static equals 1.
+19. Add the hostname of your Heroku app to allow hosts in settings.py and localhost.
+20. Commit and push to Github.
+21. Push to Heroku.
+22. Add a New secret key as a Gitpod variable and unset disable collect static.
+23. Replace the secret key setting with the call to get it from the environment and use an empty string as a default. 
+24. Set debug to be True only if there's a variable called development in the environment.
+25. Commit and push to git.
+26. Push to Heroku.
+27. Create AWS Account and s3 bucket **(You can see below how to create an AWS account and bucket)**.
+28. Go To heroku Dashbord and click on settings.
+29. Go to section "Config Vars" and click button "Reveal Config Vars".
+30. Add  Heroku secret key.
+32. Add AWS_ACCESS_KEY_ID.
+32. Add AWS_SECRET_ACCESS_KEY
+33. Add USE_AWS True.
+34. STRIPE_PUBLIC_KEY.
+35. STRIPE_SECRET_KEY.
+36. STRIPE_WH_SECRET.
+
+### AWS Amazon Web Sevices
+
+Deployment of the project required the creation of an AWS account and the creation of a bucket within AWS s3 services to store static files including CSS and images.
+-   #### Create an AWS account
+
+    1. Navigate to https://aws.amazon.com/console/.
+    2. Click on the orange Button Sign up In to the Console.
+    3. Fill in All the required information and confirm your email.
+    4. Set payment method And pay  1$ (The AWS state this is not a fee but a payment and identity confirmation method).
+
+-  #### Create a bucket using the s3 console
+
+    1. Before creating a bucket, ensure that you have access to s3 services. It takes up to 24h after completing the registration.
+    2. Open the Amazon S3 console at https://console.aws.amazon.com/s3/.
+    3. Choose Create bucket.
+    4. In Bucket name, enter a DNS-compliant name for your bucket.
+    5. Choose the AWS Region where you want the bucket to reside.
+    6. Under Object Ownership, enable ACLs and control ownership of objects uploaded in your bucket. Choose ACLs enabled and Bucket owner preferred.
+    7. In Bucket settings for Block Public Access, enable Public Access.
+    8. Then click on create a bucket.
+    9. Go to  properties tab turn on static website hosting.
+    10. Go to permissions and paste in a coors configuration.
+    11. Go to the bucket policy inside permissions And select the policy generator.
+    12. Choose s3 bucket policy.
+    13. Allow all principals by using a star.
+    14. Choose action get_object.
+    15. Copy the ARN And paste it into the ARN box.
+    16. Click Add statement. Then generate policy, copy this policy to bucket policy editor, star onto the end of the Resource Key, and save.
+    18.  Go to the access control list tab and set the list objects permission for everyone
+    19. Go back to the services menu and open Iam.
+    20. Click groups, then create a new group.
+    21. Click policies and then create policy.
+    22. go to the JSON tab and then select import managed policy.
+    23. Search for s3 and then import the s3 full access policy.
+    24. Get the bucket ARN from the bucket policy page in s3 and pasted twice to Resouces in JSON table and add slash star to the second pasted ARN.
+    25. Click review policy and give it a name and a description.
+    26. click create policy.
+    27. Go to groups, click the group you created, then click attach policy. Search for the policy you just created, select it, and click attach policy.
+    28. Go to the users page by clicking users on the left-hand side tab.
+    29. Click add user. Then click create a user.
+    30. check programmatic access box on Access type and select next.
+    31. Click create a user.
+    32. Download the CSV file, which contains this user's access key and secret access key.
+    33. Go to Django App.
+    34. Install boto3 by writing in your terminal pip3 install botot3.
+    35. Install django-storages by writing in your terminal pip3 install django-storages.
+    36. Add the list of requirements by writing in the terminal "pip3 freeze --local > requirements.txt"
+    37. Add storages to install apps in setting.py
+    38. Add in settingd.py an if statement  **if USE_AWS in os.environ** to check if there's an environment variable called USE_AWS and inside the if statement:
+        1. Define AWS_STORAGE_BUCKET_NAME = Your bucket name.
+        2. Define  AWS region by adding **AWS_S3_REGION_NAME = AWS Region where you want the bucket to reside**.
+        4. Define  AWS Access Key Id  by adding **AWS_ACCSEES_KEY_ID = os.environ.get(AWS_ACCSEES_KEY_ID)**.
+        4. Define  AWS access key  by adding **AWS_ACCSEES_KEY = os.environ.get(AWS_ACCSEES_KEY)**.
+    
+- ### Connecting strip to Heroku.
+
+    1. Login into Stripe.
+    2. Go to the dashboard and click on the developers Button.
+    3. On the left-hand side, click on webhooks.
+    4. Click add endpoint.
+    5. Add endpoint URL.
+    6. Click select events.
+    7. Select all events. 
+    8. Click add Events.
+    9. Send a response to your Heroku App to check if Stripe is connected to your Heroku App.
+
+
 
 ### Forking the GitHub Repository
 
