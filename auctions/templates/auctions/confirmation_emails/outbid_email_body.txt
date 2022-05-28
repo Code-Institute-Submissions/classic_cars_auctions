@@ -1,12 +1,12 @@
 Hello {{ obj.user.username }}!
 
-New bid for {{ obj.car.make }}, {{ obj.car.model }}  was  added.
+We’d like to inform  you  that new  bid  for   {{ obj.car.make }}, {{ obj.car.model }}  was  added.
 
 Bid amount :  {{ new_amount }} €
 
 date : {{ obj.time }} 
 
-If you have any questions, feel free to contact us at 001 000177.
+Do not hesitate to contact us with further queries at 001 000177.
 
 Thank you!
 

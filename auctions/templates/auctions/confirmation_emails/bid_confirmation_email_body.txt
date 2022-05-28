@@ -1,12 +1,13 @@
 Hello {{ obj.user.username }}!
 
-Your Bid for {{ obj.car.make}}, {{ obj.car.model }} was added succefully.
+We’d like to confirm that your bid was added successfully. 
+{{ obj.car.make}}, {{ obj.car.model }}.
 
 Bid Amount : {{ obj.amount }}
 
 date : {{ obj.time }} 
 
-If you have any questions, feel free to contact us at 001 000177.
+Do not hesitate to contact us with further queries. at 001 000177.
 
 Thank you!
 

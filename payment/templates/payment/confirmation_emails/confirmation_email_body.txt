@@ -1,6 +1,6 @@
 Hello {{ payment.full_name }}!
 
-This is a confirmation of deposit  payment for won auction for {{ payment.car.make}}, {{ payment.car.model}}.
+This is a confirmation of deposit  payment  for {{ payment.car.make}}, {{ payment.car.model}}.
 
 Date: {{ payment.date }}
 
@@ -8,7 +8,7 @@ Deposit : ${{ payment.deposit }}
 
 We've got your phone number on file as {{ payment.phone_number }}.
 
-If you have any questions, feel free to contact us at {{ contact_email }}.
+If you have any questions, feel free to contact us.
 
 Thank you !
 
