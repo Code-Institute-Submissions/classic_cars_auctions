@@ -5,7 +5,7 @@
 
 {% block content %}
 <section id="auction-detail">
-  <div id="car">
+  <div id="car" class="pb-4">
     <div class="row mx-0 px-0 mt-5 mb-0 car-card">
       <div class="row mx-0 px-0 mb-5 car-card">
         <h2 class="col col-12  mt-3 text-uppercase"> {{ car.make }} <span>{{ car.model }}</span></h2>
@@ -63,116 +63,114 @@
         </div>
       </div>
     </div>
-  
-    
+
     {% if highest_bid_obj.winnerBid %}
-    <div class="bidding-panel pb-4"> 
+
       {% include 'includes/auction_detail/sold.html' %}
 
       {% if user.is_authenticated and not existing_payment %}
 
         {% if request.user.id == highest_bid_obj.user.id %}
 
-        {% include 'includes/auction_detail/payment_link.html' %}
+          {% include 'includes/auction_detail/payment_link.html' %}
 
         {% endif %}
-      {% endif %}
-    </div>
-      {% else %}
+      {% endif %} 
+    {% endif %}
+
+    {% if not highest_bid_obj.winnerBid and auction_is_on %}
       <h3 class="header text-center text-info">Bidding Panel</h3>
-      <div class="row">
-        {% if  auction_is_on %}
-        <div class="col col-10 col-sm-6  offset-1 offset-sm-3  bg-light mb-1 border border-dark panel-item">
-          <p class="text-center">Closing Date: <span
-              class="text-danger font-weight-bold mx-1">{{ car.timeEnd|date:'G:i - d/M' }}</span></p>
-        </div>
-        {% if request.user.is_authenticated %}
+      <div class="col col-10 col-sm-6  offset-1 offset-sm-3  bg-light mb-1 border border-dark panel-item">
+        <p class="text-center">Closing Date: <span
+            class="text-danger font-weight-bold mx-1">{{ car.timeEnd|date:'G:i - d/M' }}</span></p>
+      </div>
+      {% if request.user.is_authenticated %}
         <div
-          class="col col-10 col-sm-6  offset-1 offset-sm-3  min-bid bg-light mb-1 border border-dark text-center panel-item">
-          <p> Minimum Bid<span class="text-danger font-weight-bold mx-1">{{ min_bid }}</span>€</p>
+        class="col col-10 col-sm-6  offset-1 offset-sm-3  min-bid bg-light mb-1 border border-dark text-center panel-item">
+        <p> Minimum Bid<span class="text-danger font-weight-bold mx-1">{{ min_bid }}</span>€</p>
         </div>
         <div class="col col-10 col-sm-6  offset-1 offset-sm-3 bg-light mb-1 border border-dark text-center">
           <h4 class="text-info font-weight-bold mt-3">Bidding History</h4>
-            {% if bids|length > 0 %}
-              <div class="col-12 col-lg-8  offset-lg-2 mb-4">
-                <div class="history table-responsive">
-                  <table class="table table-sm table-borderless  bg-grey-light">
-                    <thead>
-                      <tr>
-                        <th>Bid</th>
-                        <th>Date</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {% for bid in bids %}
-                      <tr>
-                        <td class="bid-amount-history">
-                          {{ bid.amount }}€
-                        </td>
-                        <td class="bid-date-history">{{bid.time|date:'G:i - d - M'}}</td>
-                      </tr>
-                      {% endfor %}
-                    </tbody>
-                  </table>
-                </div>
+          {% if bids|length > 0 %}
+            <div class="col-12 col-lg-8  offset-lg-2 mb-4">
+              <div class="history table-responsive">
+                <table class="table table-sm table-borderless  bg-grey-light">
+                  <thead>
+                    <tr>
+                      <th>Bid</th>
+                      <th>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for bid in bids %}
+                    <tr>
+                      <td class="bid-amount-history">
+                        {{ bid.amount }}€
+                      </td>
+                      <td class="bid-date-history">{{bid.time|date:'G:i - d - M'}}</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
               </div>
-            {% else %}
-              <p>No Bids yet for this item</p>
-            {% endif %}
-        </div>
-        <div class="col col-10 col-sm-6  offset-1 offset-sm-3 text-center my-3">
-          <button id="show-bidding-form" class="btn btn-lg red-background text-light border border-dark"> Place a
-            Bid</button>
-        </div>
-        {% else %}
+            </div>
+          {% else %}
+            <p>No Bids yet for this item</p>
+          {% endif %}
+          </div>
+          <div class="col col-10 col-sm-6  offset-1 offset-sm-3 text-center my-3">
+            <button id="show-bidding-form" class="btn btn-lg red-background text-light border border-dark"> Place a
+              Bid</button>
+          </div>
+      {% else %}
         <div class="col col-10 col-sm-6  offset-1 offset-sm-3  my-3">
           <h4 class="header bid-login-message text-center text-info"><a href="{% url 'account_login' %}"> Please Sign in to Bid</a></h4>
         </div>
-        {% endif %}
-        {% else %}
-        <div class="col col-10 col-sm-6  offset-1 offset-sm-3  bg-light mb-1 border border-dark panel-item">
-          <p class="text-center">Starting Date: <span
-              class="text-danger font-weight-bold mx-1">{{ car.timeStart|date:'G:i - d/M' }}</span></p>
-        </div>
-        <div class="col col-10 col-sm-6  mb-3 offset-1 offset-sm-3 bg-light mb-1 border border-dark panel-item">
-          <p class="text-center">Closing Date: <span
-              class="text-danger font-weight-bold mx-1">{{ car.timeEnd|date:'G:i - d/M' }}</span></p>
-        </div>
-        {% endif %}
+      {% endif %}
+    {% endif %}
 
+    {% if not highest_bid_obj.winnerBid  %}
+      {% if not  auction_is_on%}
+      <div class="col col-10 col-sm-6  offset-1 offset-sm-3  bg-light mb-1 border border-dark panel-item">
+        <p class="text-center">Starting Date: <span
+            class="text-danger font-weight-bold mx-1">{{ car.timeStart|date:'G:i - d/M' }}</span></p>
       </div>
-    </div> 
-    
- 
-  {% if request.user.is_authenticated and auction_is_on %}
-  <div id="add_bid" class="mt-5 mt-0">
-    <div id="cancel" class="ml-1">
-      <i class="fas fa-times-circle"></i>
-    </div>
-    <h1 class="header text-center pt-5 pb-0 mb-0">Place Your Bid</h1>
-    <div class="col col-10 offset-1 mt-3 legal-info">
-      <p class="text-justify"><span class="text-danger font-weight-bold mr-3">Please note:</span>If your bid is the
-        winning bid, you are legally committed to buying this item. Otherwise, you will be banned from <span
-          class="text-danger"> Classic Cars Auction</span>. A deposit of 10% of the total amount should be paid online
-        through our payment system within 24h of the auction's end.</p>
-    </div>
-    <div class="text-center font-weight-bold mt-4 text-info">The next
-      bid must be
-      at least €<span class="text-danger"> {{ min_bid }}</span>.
-    </div>
-
-    <div id="bidding-form" class="bid-form text-center">
-      <form action="{% url 'auction_detail' car.id %}" method="POST" class="mt-3">
-        {% csrf_token %}
-        {{ form }}
-        <button class="btn  text-light red-background border border-dark my-4" type="submit">Add</button>
-      </form>
-    </div>
+      <div class="col col-10 col-sm-6  mb-3 offset-1 offset-sm-3 bg-light mb-1 border border-dark panel-item">
+        <p class="text-center">Closing Date: <span
+            class="text-danger font-weight-bold mx-1">{{ car.timeEnd|date:'G:i - d/M' }}</span></p>
+      </div>
+      {% endif %}
+    {% endif %}
   </div>
+  {% if request.user.is_authenticated and auction_is_on %}
+    <div id="add_bid" class="mt-5 mt-0">
+      <div id="cancel" class="ml-1">
+        <i class="fas fa-times-circle"></i>
+      </div>
+      <h1 class="header text-center pt-5 pb-0 mb-0">Place Your Bid</h1>
+      <div class="col col-10 offset-1 mt-3 legal-info">
+        <p class="text-justify"><span class="text-danger font-weight-bold mr-3">Please note:</span>If your bid is the
+          winning bid, you are legally committed to buying this item. Otherwise, you will be banned from <span
+            class="text-danger"> Classic Cars Auction</span>. A deposit of 10% of the total amount should be paid online
+          through our payment system within 24h of the auction's end.</p>
+      </div>
+      <div class="text-center font-weight-bold mt-4 text-info">The next
+        bid must be
+        at least €<span class="text-danger"> {{ min_bid }}</span>.
+      </div>
+
+      <div id="bidding-form" class="bid-form text-center">
+        <form action="{% url 'auction_detail' car.id %}" method="POST" class="mt-3">
+          {% csrf_token %}
+          {{ form }}
+          <button class="btn  text-light red-background border border-dark my-4" type="submit">Add</button>
+        </form>
+      </div>
+    </div>
 
   {% endif %}
-  {% endif %}
-</div>
+  
+
 </section>
 <hr class="hor-line-home my-5">
 
@@ -195,8 +193,8 @@
   $("#show-bidding-form").click(function () {
   $("html, body").animate({
     scrollTop: 100
-  }, 500)
-})
+  }, 500);
+});
 
   $('#cancel').click(function () {
     $('#add_bid').css({
