@@ -329,6 +329,9 @@ and add these 2 lines instead:
     DEFAULT_FROM_EMAIL = 'classiccarsauctions@example.com'
     ```
 
+-  APScheduler is not running task as it was planned so when auction time finishes the results it's not showing straight away.
+-  not refreshing when the auction finishes so even when the auction time end the user can still add one bid.
+
 ## Problems Encountered During The Development Process
 
 -   The workspace didn't recognize the command " python3 manage.py runserver."  when I did run the command pip3 freeze requirements.txt,  many installed apps were missing. To solve this problem, I copied requiremnt.txt from Github, ran the command pip3 install -r requirements.txt, migrated all data again, and created a superuser.
