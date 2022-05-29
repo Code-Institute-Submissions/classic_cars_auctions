@@ -306,6 +306,28 @@ Lighthouse  was used  for performance audits of the website.h
 ### Known Bugs
 
 -   On some mobile devices, a white line appears between the main header and navbar.
+-  After deploying to Heroku Allauth was not sending Signup confirmation emails, and emails stopped working on Gitpod.
+The problem was the if statement at the end of sattings.py that states if the development is in os.environ to log email into the consol else to send emails.
+When checking the code on workespace to send emails please comment out the following
+
+    ```
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    ACCOUNT_EMAIL_SUBJECT_PREFIX = 'classiccarsauctions '
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASS')
+    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+    and add the following code at the end of settings.py
+    ```
+
+and add these 2 lines instead:
+
+    ```
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'classiccarsauctions@example.com'
+    ```
 
 ## Problems Encountered During The Development Process
 
