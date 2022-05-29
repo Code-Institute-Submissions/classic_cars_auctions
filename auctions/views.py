@@ -115,7 +115,7 @@ def auction_detail(request, car_id):
     if bids and request.user.is_authenticated:
         user_id = request.user.id
         if (highest_bid_obj.winnerBid and
-        highest_bid_obj.user.id == user_id):
+           highest_bid_obj.user.id == user_id):
 
             payment_info. append({
                 'car_id': car_id,
@@ -123,7 +123,6 @@ def auction_detail(request, car_id):
                 'car_price': highest_bid_obj.amount,
             })
             request.session['payment_info'] = payment_info
-
 
     context = {
         'car': car,
