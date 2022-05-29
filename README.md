@@ -440,7 +440,7 @@ Deployment of the project required the creation of an AWS account and the creati
 2. Go to the dashboard and click on the developers Button.
 3. On the left-hand side, click on webhooks.
 4. Click add endpoint.
-5. Add endpoint URL.
+5. Add endpoint URL of your heroku website followed by **wh/**.
 6. Click select events.
 7. Select all events. 
 8. Click add Events.
