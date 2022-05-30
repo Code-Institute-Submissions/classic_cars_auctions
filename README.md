@@ -158,7 +158,7 @@ Auction_detail page on diffrent divices<br>
     - Django was used as the main framework for the development of the websites.
 1. [allauth 3.2:](https://django-allauth.readthedocs.io/en/latest/installation.html)
     - Allauth was used for  authentication, registration, and account management.
-1. [AWS:](https://django-allauth.readthedocs.io/en/latest/installation.html)
+1. [AWS:](https://aws.amazon.com/console/)
     - Amazon Web Services were used to store data in the cloud for the deployed project in Heroku.
 1. [LibreOffice:](https://www.libreoffice.org/)
     - LibreOffice was used to create a schema demonstrating the database and the relationship between the Models shown in app structures and the database section in Readme.
